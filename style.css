@@ -85,6 +85,10 @@ body {
   background: rgba(255, 255, 255, 0.12);
 }
 
+a:visited {
+  color: #8c92b2; /* A subtle, muted grey-blue for visited links */
+}
+
 .hero-avatar img {
   width: 180px;
   height: 180px;
