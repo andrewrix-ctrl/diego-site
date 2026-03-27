@@ -31,6 +31,16 @@ body {
   justify-content: space-between;
 }
 
+.hero-text {
+  flex: 1 1 50%; /* Allows text to grow and shrink, minimum 50% width */
+  min-width: 300px; /* Prevent text from becoming too narrow before stacking */
+}
+
+.hero-avatar {
+  flex-shrink: 0; /* Prevent avatar from shrinking */
+  flex-grow: 0; /* Prevent avatar from growing */
+}
+
 .eyebrow {
   margin: 0 0 0.3rem;
   font-size: 0.85rem;
