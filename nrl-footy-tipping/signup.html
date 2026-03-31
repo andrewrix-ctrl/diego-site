@@ -117,60 +117,23 @@
 <body>
   <div class="card">
     <h1>NRL Footy Tipping – Sign Up</h1>
-    <p class="subtitle">Drop your details below and we&apos;ll send you the weekly tipping link and results.</p>
+    <p class="subtitle">This form feeds straight into my NRL tipping signup sheet so I can email you the weekly link and results.</p>
 
-    <form id="tipping-signup-form">
-      <div>
-        <label for="firstName">First name</label>
-        <input type="text" id="firstName" name="firstName" required />
-      </div>
+    <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdquQakH30dz0of6NFIrDGClOpf4Hs-FJneDn8RKTml9ayrlQ/viewform?embedded=1"
+      width="100%"
+      height="700"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      style="border: none;"
+    >
+      Loading NRL tipping signup form…
+    </iframe>
 
-      <div>
-        <label for="lastName">Last name</label>
-        <input type="text" id="lastName" name="lastName" required />
-      </div>
-
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
-        <div class="hint">We&apos;ll only use this for footy tipping updates.</div>
-      </div>
-
-      <div class="checkbox-row">
-        <input type="checkbox" id="emailConsent" name="emailConsent" required />
-        <label for="emailConsent">
-          I agree to receive up to 2 emails per week about the NRL footy tipping comp
-          (tipping link and results/ladder updates).
-        </label>
-      </div>
-
-      <button type="submit">
-        Join the tipping comp
-      </button>
-
-      <div class="success-message" id="successMessage">
-        Thanks for signing up! You&apos;re in the comp – check your inbox soon.
-      </div>
-
-      <p class="disclaimer">
-        By signing up, you confirm you&apos;re happy to receive NRL tipping emails only. No spam, no sneaky extras.
-      </p>
-    </form>
+    <p class="disclaimer">
+      Your details go only to Drew&apos;s NRL tipping list (first name, last name, email and your consent). Max two emails per week.
+    </p>
   </div>
-
-  <script>
-    // Placeholder client-side handler so the page feels responsive even before a backend is wired up.
-    document.getElementById("tipping-signup-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      var form = e.target;
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      var success = document.getElementById("successMessage");
-      success.style.display = "block";
-      form.reset();
-    });
-  </script>
 </body>
 </html>
