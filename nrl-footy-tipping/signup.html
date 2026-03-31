@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NRL Footy Tipping – Sign Up</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+      padding: 24px 28px;
+      max-width: 480px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+      color: #111827;
+    }
+    p.subtitle {
+      margin: 0 0 16px;
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    label {
+      font-size: 0.9rem;
+      color: #111827;
+      display: block;
+      margin-bottom: 4px;
+    }
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .checkbox-row input[type="checkbox"] {
+      margin-top: 3px;
+    }
+    .checkbox-row label {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #374151;
+    }
+    .hint {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+    button[type="submit"] {
+      margin-top: 12px;
+      background: #16a34a;
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    button[type="submit"]:hover {
+      background: #15803d;
+    }
+    .disclaimer {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+    .success-message {
+      display: none;
+      margin-top: 12px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: #ecfdf3;
+      color: #166534;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>NRL Footy Tipping – Sign Up</h1>
+    <p class="subtitle">Drop your details below and we&apos;ll send you the weekly tipping link and results.</p>
+
+    <form id="tipping-signup-form">
+      <div>
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" name="firstName" required />
+      </div>
+
+      <div>
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" name="lastName" required />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+        <div class="hint">We&apos;ll only use this for footy tipping updates.</div>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="emailConsent" name="emailConsent" required />
+        <label for="emailConsent">
+          I agree to receive up to 2 emails per week about the NRL footy tipping comp
+          (tipping link and results/ladder updates).
+        </label>
+      </div>
+
+      <button type="submit">
+        Join the tipping comp
+      </button>
+
+      <div class="success-message" id="successMessage">
+        Thanks for signing up! You&apos;re in the comp – check your inbox soon.
+      </div>
+
+      <p class="disclaimer">
+        By signing up, you confirm you&apos;re happy to receive NRL tipping emails only. No spam, no sneaky extras.
+      </p>
+    </form>
+  </div>
+
+  <script>
+    // Placeholder client-side handler so the page feels responsive even before a backend is wired up.
+    document.getElementById("tipping-signup-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var form = e.target;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      var success = document.getElementById("successMessage");
+      success.style.display = "block";
+      form.reset();
+    });
+  </script>
+</body>
+</html>
