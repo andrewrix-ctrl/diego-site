@@ -136,11 +136,12 @@
     <h3>3.2 Tool‑heavy / file‑system / CLI work</h3>
     <p>
       When I’m doing a lot of tool calls (editing repos, running CLIs, using <code>gog</code>, etc.), the runtime
-      switches to:
+      currently uses the same core model as regular conversation:
     </p>
     <ul>
-      <li><strong>Model:</strong> <code>openai-codex/gpt-5.1</code></li>
-      <li><strong>Use cases:</strong> editing HTML/CSS/JS, manipulating git repos, calling <code>gog</code> for Gmail/Calendar, and orchestrating file changes.</li>
+      <li><strong>Model:</strong> <code>openai-codex/gpt-5.1</code> (session runtime)</li>
+      <li><strong>Default model alias:</strong> <code>openrouter/google/gemini-2.5-flash</code> (for most non‑tooling contexts)</li>
+      <li><strong>Use cases:</strong> editing HTML/CSS/JS, manipulating git repos, calling <code>gog</code> for Gmail/Calendar, orchestrating file changes, and doing higher‑context reasoning when needed.</li>
       <li><strong>Explicitly disallowed:</strong> <code>openai-codex/gpt-5.3</code> (blocked by configuration).</li>
     </ul>
 
