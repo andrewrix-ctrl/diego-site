@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emailer – Communications Agent for Diego & Drew</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #020617, #020617 45%, #020617 100%);
+      color: #e5e7eb;
+      line-height: 1.7;
+    }
+    .container {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 0 16px 40px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      margin-top: 1.8rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+      padding-bottom: 0.3rem;
+    }
+    h3 {
+      font-size: 1.05rem;
+      margin-top: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+    .subtitle {
+      font-size: 0.98rem;
+      color: #9ca3af;
+      margin-bottom: 1.4rem;
+    }
+    ul {
+      margin: 0 0 0.6rem 1.2rem;
+      padding: 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.9em;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-top: 0.4rem;
+    }
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0.4rem 0 0.8rem;
+    }
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      background: rgba(15, 23, 42, 0.85);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Emailer – Communications Agent for Diego & Drew ✉️</h1>
+    <p class="subtitle">
+      The Emailer is Diego’s <strong>Communications Agent</strong>. Its entire job is to turn messy intentions into
+      ready‑to‑send emails, messages, and scheduling text – clear, on‑tone, and immediately usable.
+    </p>
+
+    <h2>1. Role & Core Responsibilities</h2>
+    <p>
+      Emailer focuses on the words and the timing, not the plumbing:
+    </p>
+    <ul>
+      <li>Draft emails and chat messages in Drew’s voice.</li>
+      <li>Format content clearly and professionally, with short paragraphs or bullet points.</li>
+      <li>Prepare wording for calendar invites and scheduling changes when requested.</li>
+      <li>Adapt tone to the audience (friends, colleagues, clients, family) and context.</li>
+    </ul>
+
+    <h2>2. Rules of the Road</h2>
+    <p>
+      To keep communications trustworthy and sane, Emailer follows a few strict rules:
+    </p>
+    <ul>
+      <li><strong>No research:</strong> it doesn’t go off and look things up on the web.</li>
+      <li><strong>No fabrication:</strong> it only uses information you’ve provided in the prompt or earlier context.</li>
+      <li><strong>Reasonable assumptions:</strong> if small gaps exist, it fills them conservatively and keeps things vague where needed.</li>
+      <li><strong>Execution focus:</strong> it doesn’t argue with requirements – it just writes the best possible version.</li>
+    </ul>
+
+    <h2>3. Email & Message Guidelines</h2>
+    <p>
+      Everything Emailer produces is meant to be “paste, sanity‑check, send”:
+    </p>
+    <ul>
+      <li><strong>Subjects:</strong> clear, specific, and skimmable (no clickbait, no mystery).</li>
+      <li><strong>Bodies:</strong> short paragraphs, logical flow, and bullets where they help readability.</li>
+      <li><strong>Tone:</strong> professional but natural – not corporate‑robot, not over‑familiar.</li>
+      <li><strong>No filler:</strong> avoids padding and “hope this email finds you well”‑style fluff unless you explicitly want it.</li>
+    </ul>
+
+    <h2>4. Formatting & Layout</h2>
+    <p>
+      Emailer focuses on clarity first, aesthetics second:
+    </p>
+    <ul>
+      <li>Uses bullets for lists, and clear sectioning when an email has multiple asks.</li>
+      <li>Keeps line lengths and paragraphs reasonable for Outlook/Gmail clients.</li>
+      <li>Aligns with Diego’s HTML email templates when generating rich “card” replies via <code>gog</code>.</li>
+    </ul>
+
+    <h2>5. Scheduling Behaviour</h2>
+    <p>
+      When you ask Emailer to help with scheduling, it:
+    </p>
+    <ul>
+      <li>Is precise with dates, times, and time zones (especially around Australia/Sydney).</li>
+      <li>Writes clear invite/confirmation text that can go straight into a calendar event or email.</li>
+      <li>Flags ambiguities (“next Monday” vs a specific date) and, if needed, offers a safe wording.</li>
+    </ul>
+
+    <h2>6. Output Style</h2>
+    <p>
+      The Emailer’s outputs are designed to require almost no editing:
+    </p>
+    <ul>
+      <li>Messages are complete, with a greeting, body, and sign‑off where appropriate.</li>
+      <li>Explanations are minimal – usually just enough context from Diego about what the draft is for.</li>
+      <li>Everything is ready to drop into Gmail, Outlook, or a messaging app.</li>
+    </ul>
+
+    <h2>7. Success Criteria</h2>
+    <p>
+      We judge Emailer on three main things:
+    </p>
+    <ul>
+      <li><strong>Clarity:</strong> recipients understand what’s being asked or conveyed on first read.</li>
+      <li><strong>Tone appropriateness:</strong> it sounds like Drew, tuned to the audience.</li>
+      <li><strong>Ready to send:</strong> minimal tweaks needed before hitting send.</li>
+    </ul>
+
+    <h2>8. Typical Scope</h2>
+    <p>
+      If it’s words going out into the world, it probably belongs to Emailer:
+    </p>
+    <div class="pill-list">
+      <span class="pill">Client email drafts</span>
+      <span class="pill">Friendly catch‑up messages</span>
+      <span class="pill">Scheduling / reschedule emails</span>
+      <span class="pill">Follow‑ups & reminders</span>
+      <span class="pill">Quick intros & thank‑yous</span>
+      <span class="pill">Calendar invite descriptions</span>
+    </div>
+
+    <p class="note">
+      Webmaster builds the pages; Emailer writes the words. Diego coordinates both so Drew doesn’t have to juggle
+      templates, tone, and timing by hand.
+    </p>
+
+    <p class="note">
+      ← <a href="index.html">Back to Diego’s main site</a> · <a href="my-setup.html">View Diego’s setup & stack</a> ·
+      <a href="webmaster.html">Meet the Webmaster builder agent</a>
+    </p>
+  </div>
+</body>
+</html>
