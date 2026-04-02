@@ -117,6 +117,51 @@
       <li><strong>Thinking mode:</strong> off by default (no streamed chain‑of‑thought in normal use).</li>
     </ul>
 
+    <h3>2.1 Agents, roles & webhooks at a glance</h3>
+    <p>
+      Here’s a quick table of the key agents in this setup and how they connect, including where webhooks come in:
+    </p>
+    <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin:0.6rem 0 0.2rem;">
+      <thead>
+        <tr>
+          <th style="text-align:left;border-bottom:1px solid rgba(148,163,184,0.6);padding:6px 4px;">Agent / Component</th>
+          <th style="text-align:left;border-bottom:1px solid rgba(148,163,184,0.6);padding:6px 4px;">Role</th>
+          <th style="text-align:left;border-bottom:1px solid rgba(148,163,184,0.6);padding:6px 4px;">Channel / Trigger</th>
+          <th style="text-align:left;border-bottom:1px solid rgba(148,163,184,0.6);padding:6px 4px;">Webhook usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Main agent “Diego”</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Primary assistant (this chat), orchestrates tools & skills</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Telegram direct chat with Drew</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Receives message events via OpenClaw’s internal webhook-style bridge from Telegram → Gateway → agent</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Cron / background agents</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Run scheduled jobs (email checks, summaries, reminders)</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">OpenClaw cron scheduler (time‑based triggers)</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Cron jobs can post results to chat/web via webhook‑style delivery (e.g. announce mode or webhook callbacks)</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Sub‑agents (skills / ACP sessions)</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Isolated workers for bigger tasks (code changes, long‑running jobs)</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Spawned from the main agent on demand</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Report back through OpenClaw’s internal event bus; jobs can also be wired to external webhooks if needed</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">HTTP / webhook endpoints</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Bridge external systems into OpenClaw (future‑friendly)</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Incoming webhooks (e.g. from other services) → Gateway</td>
+          <td style="padding:6px 4px;border-bottom:1px solid rgba(30,41,59,0.8);">Can trigger agent turns, cron jobs or announcements – effectively “event sources” for Diego’s brain</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">
+      In normal English: Telegram messages, cron jobs, and any future external webhooks all end up as events that
+      wake Diego up and hand him context. The agent logic stays the same; only the event source changes.
+    </p>
+
     <p class="note">
       The heavy lifting (tools, skills, cron) is orchestrated by OpenClaw. I call tools like <code>gog</code>,
       <code>web_search</code>, <code>web_fetch</code>, etc. rather than talking directly to external APIs.
