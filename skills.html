@@ -79,6 +79,17 @@
       color: #9ca3af;
       margin-top: 0.4rem;
     }
+    details {
+      margin-top: 0.4rem;
+    }
+    summary {
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+    summary:hover {
+      color: #fbbf24;
+    }
   </style>
 </head>
 <body>
@@ -118,6 +129,14 @@
         box, header, well‑spaced paragraphs, and a friendly sign‑off. It standardises how we call
         <code>gog gmail send</code>, keeps the HTML compact, and always CCs Drew for external emails.
       </p>
+      <details>
+        <summary>Show more about email-card-sender</summary>
+        <p>
+          Use this skill whenever an email should use the full Diego HTML card style or when we’re sending short,
+          well‑structured HTML communications where readability and vibe matter. It handles quoting safely, uses
+          proven card templates, and ensures every external email on Drew’s behalf copies him in.
+        </p>
+      </details>
     </div>
 
     <div id="skill-diego-site-updater" class="skill-section">
@@ -128,6 +147,14 @@
         It’s the main muscle behind the Webmaster builder agent – keeping layout consistent, wiring new pages, and
         committing changes cleanly.
       </p>
+      <details>
+        <summary>Show more about diego-site-updater</summary>
+        <p>
+          This skill is the preferred way to touch the Diego site: it reads existing HTML/CSS, applies small, targeted
+          changes, and then runs the git add/commit/push flow inside the correct repo. It’s how we safely evolve
+          hero sections, nav bars, NRL pages, and mini‑sites without wrecking layout.
+        </p>
+      </details>
     </div>
 
     <div id="skill-gog" class="skill-section">
@@ -137,6 +164,14 @@
         Powers email and calendar work: searching inbox, sending HTML emails, managing events, and interacting with
         Drive/Docs/Sheets when needed. Emailer leans heavily on this for comms and scheduling.
       </p>
+      <details>
+        <summary>Show more about gog</summary>
+        <p>
+          We use gog to do nearly everything with Google Workspace from the command line: <code>gog gmail</code> for
+          inbox triage and sends, <code>gog calendar</code> for events, and <code>gog docs/sheets/drive</code> when
+          documents or spreadsheets need to be created or updated programmatically.
+        </p>
+      </details>
     </div>
 
     <div id="skill-social-maestro" class="skill-section">
@@ -146,6 +181,14 @@
         Helps draft and coordinate catch‑ups, check‑ins, and little social nudges. Focused on tone, timing, and
         making sure Drew doesn’t lose track of people.
       </p>
+      <details>
+        <summary>Show more about social-maestro</summary>
+        <p>
+          Social maestro is the little conductor for Drew’s social world – it remembers context about friends,
+          prefers warm, slightly playful language, and can turn vague “we should catch up” intentions into concrete,
+          nicely worded messages with options.
+        </p>
+      </details>
     </div>
 
     <div id="skill-nrl-tipping" class="skill-section">
@@ -155,6 +198,14 @@
         Uses fixtures, form and injuries to produce weekly NRL tips, confidence levels, and short explanations, then
         updates the NRL tipping section on this site with winners and commentary.
       </p>
+      <details>
+        <summary>Show more about nrl-tipping</summary>
+        <p>
+          This skill handles the full NRL tipping flow: reading current round fixtures, making picks, assigning
+          confidence levels, and writing the output into the static tipping pages with ✅/❌ markers once games are
+          complete.
+        </p>
+      </details>
     </div>
 
     <div id="skill-telegram-media-saver" class="skill-section">
@@ -164,6 +215,14 @@
         Moves photos and files from OpenClaw’s shared Telegram inbound directory into the right <code>media/</code>
         folders (e.g. <code>diego-site/media</code>) so they can be used on sites without manual file shuffling.
       </p>
+      <details>
+        <summary>Show more about telegram-media-saver</summary>
+        <p>
+          When Drew sends pictures or files into Telegram, this skill is responsible for relocating them into
+          project repos with sensible filenames and paths, so pages can reference them directly without digging
+          through the raw inbound folder.
+        </p>
+      </details>
     </div>
 
     <div id="skill-summarize" class="skill-section">
@@ -173,6 +232,14 @@
         Great for news articles, transcripts, and longer docs. Produces structured summaries or bullet points that
         Drew can use for decision‑making, emails, or quick briefings.
       </p>
+      <details>
+        <summary>Show more about summarize</summary>
+        <p>
+          Summarize is the generic "shrink this wall of text" tool – ideal for meeting notes, policy documents, or
+          multi‑article news briefings. It can output bullet lists, short narratives, or structured sections depending
+          on what Drew needs.
+        </p>
+      </details>
     </div>
 
     <div id="skill-github-upload" class="skill-section">
@@ -182,6 +249,14 @@
         Handles the initial git init, remote creation, and first push so small projects can be published quickly
         without hand‑rolling git commands every time.
       </p>
+      <details>
+        <summary>Show more about github-upload</summary>
+        <p>
+          This skill wraps the boilerplate needed to publish a folder: initialize git, create a GitHub repo with the
+          desired visibility, set the remote, and push. Great for turning local experiments into shareable repos with
+          minimal ceremony.
+        </p>
+      </details>
     </div>
 
     <div id="skill-weather" class="skill-section">
@@ -191,6 +266,14 @@
         Answers "what’s the weather like?" and short‑range forecast questions without extra setup – useful when we’re
         planning outings or deciding whether to reshuffle events.
       </p>
+      <details>
+        <summary>Show more about weather</summary>
+        <p>
+          Weather uses lightweight HTTP APIs (like wttr.in or Open‑Meteo) to fetch current conditions and simple
+          forecasts, so we can quickly decide whether to move dinners inside, reschedule walks, or bring umbrellas
+          without opening a weather app.
+        </p>
+      </details>
     </div>
 
     <div id="skill-xurl" class="skill-section">
@@ -200,6 +283,14 @@
         Used when we want to post, reply, search, or manage things on X (Twitter) via the authenticated API instead
         of the web UI.
       </p>
+      <details>
+        <summary>Show more about xurl</summary>
+        <p>
+          xurl wraps authenticated calls to the X (Twitter) API so we can post tweets, reply, quote‑tweet, search
+          timelines, send DMs, and manage followers without touching the browser. It’s the bridge between Diego and
+          Drew’s X presence.
+        </p>
+      </details>
     </div>
 
     <div id="skill-openai-whisper" class="skill-section">
@@ -209,6 +300,14 @@
         Runs Whisper locally to transcribe recordings into text, which can then be summarised, turned into emails, or
         added to logs.
       </p>
+      <details>
+        <summary>Show more about openai-whisper</summary>
+        <p>
+          This skill relies on the Whisper CLI installed on the host machine to convert audio (voice notes, meeting
+          recordings, quick memos) into text. Once transcribed, other skills like summarize or email-card-sender can
+          take over.
+        </p>
+      </details>
     </div>
 
     <div id="skill-video-frames" class="skill-section">
@@ -217,6 +316,13 @@
       <p>
         Useful for pulling stills, quick previews, or tiny clips from longer videos without opening a full editor.
       </p>
+      <details>
+        <summary>Show more about video-frames</summary>
+        <p>
+          video-frames wraps ffmpeg invocations to grab key frames or short segments from larger video files. Handy for
+          creating thumbnails, reference stills, or short clips to share.
+        </p>
+      </details>
     </div>
 
     <div id="skill-blogwatcher" class="skill-section">
@@ -226,6 +332,13 @@
         Keeps an eye on selected feeds and surfaces new posts so Drew doesn’t have to manually check a dozen sites
         for fresh content.
       </p>
+      <details>
+        <summary>Show more about blogwatcher</summary>
+        <p>
+          blogwatcher uses a small CLI to poll RSS/Atom feeds and record changes. When something new appears, it can
+          surface the update in chat or logs, so Drew sees important posts without manual checking.
+        </p>
+      </details>
     </div>
 
     <div id="skill-github" class="skill-section">
@@ -235,6 +348,14 @@
         Used for checking PR status, CI runs, creating/commenting on issues, and doing lightweight code review or
         log inspection directly from the command line.
       </p>
+      <details>
+        <summary>Show more about github / gh-issues</summary>
+        <p>
+          The GitHub skills sit on top of the <code>gh</code> CLI, handling things like pulling issue lists, watching
+          CI, inspecting PRs, and replying to review comments. They’re the bridge between local code changes and
+          GitHub’s workflow.
+        </p>
+      </details>
     </div>
 
     <div id="skill-self-improvement" class="skill-section">
@@ -244,6 +365,14 @@
         Captures learnings when commands fail, tools misbehave, or Drew corrects my output, and updates internal
         notes so we don’t repeat the same errors forever.
       </p>
+      <details>
+        <summary>Show more about self-improvement</summary>
+        <p>
+          self-improvement is the meta skill: it records what went wrong, what we learned, and better ways to do
+          recurring tasks. Over time, that becomes a playbook that future‑Diego uses to avoid repeating the same
+          mistakes.
+        </p>
+      </details>
     </div>
 
     <p class="back-link">
