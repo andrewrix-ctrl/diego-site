@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Native Scaled Agile — Training Content Structure</title>
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top left, #020617, #0b1120 55%, #020617 100%);
+      --card: radial-gradient(circle at top left, #020617, #020617 35%, #0b1120 60%, #020617 100%);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #a5b4fc;
+      --border: rgba(148, 163, 184, 0.45);
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 14px 36px rgba(2, 6, 23, 0.65);
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 { margin-top: 0; }
+    h1 { color: var(--accent-2); font-size: 2rem; }
+    h2 { color: var(--accent); font-size: 1.35rem; margin-bottom: 10px; }
+    h3 { color: var(--accent-2); font-size: 1.05rem; margin-bottom: 8px; }
+    p, li { color: var(--text); }
+    .muted { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    ul { margin: 0; padding-left: 20px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.85rem;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <h1>AI-Native Scaled Agile — Training Content Structure</h1>
+      <p>
+        A practical training blueprint for teams adopting <strong>AI-native ways of working</strong>
+        inside <strong>Scaled Agile</strong> environments (for example SAFe-based organisations).
+      </p>
+      <p class="muted">
+        Last updated: 5 April 2026 (AEST). This is an implementation-ready structure that can be adapted for executives, product leaders, delivery leads, and engineering teams.
+      </p>
+      <span class="pill">AI-Native</span>
+      <span class="pill">Scaled Agile</span>
+      <span class="pill">SAFe-aligned</span>
+      <span class="pill">Training Design</span>
+    </section>
+
+    <section class="card">
+      <h2>Program Outcomes</h2>
+      <ul>
+        <li>Build shared AI fluency across leadership, product, delivery, and engineering.</li>
+        <li>Embed AI into planning, prioritisation, delivery, governance, and continuous improvement.</li>
+        <li>Shift from “AI as a side tool” to an AI-native operating model across value streams.</li>
+        <li>Improve throughput, decision quality, and time-to-value while managing risk responsibly.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Training Structure (6 Modules)</h2>
+      <div class="grid">
+        <article>
+          <h3>1) AI-Native Foundations & Mindset</h3>
+          <ul>
+            <li>What “AI-native” means in enterprise delivery.</li>
+            <li>Core AI concepts: ML, GenAI, LLMs, RAG, and agents.</li>
+            <li>Responsible AI: ethics, privacy, safety, and governance guardrails.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>2) Lean-Agile Leadership in the Age of AI</h3>
+          <ul>
+            <li>Leadership behaviours for AI-native transformation.</li>
+            <li>AI-informed strategy, OKRs, portfolio prioritisation, and funding signals.</li>
+            <li>Operating model updates for decision speed and transparency.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>3) Product & Program Planning with AI</h3>
+          <ul>
+            <li>AI-supported discovery, problem framing, and customer insight analysis.</li>
+            <li>Backlog refinement and prioritisation support (WSJF/RICE augmentation).</li>
+            <li>PI planning support: dependency detection, forecasting, and risk surfacing.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>4) Team Technical Agility + DevOps</h3>
+          <ul>
+            <li>AI-assisted coding, review, test generation, and defect detection.</li>
+            <li>AI in CI/CD: anomaly detection, release confidence, and rollback guidance.</li>
+            <li>Quality engineering and secure-by-design with human oversight.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>5) Inspect & Adapt with AI Analytics</h3>
+          <ul>
+            <li>AI-assisted retrospectives and improvement opportunity mining.</li>
+            <li>Flow metrics, bottleneck prediction, and scenario simulations.</li>
+            <li>Risk sensing and early warning indicators across ART/value stream level.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>6) Role-Based Application Labs</h3>
+          <ul>
+            <li>Executives: investment and governance decision labs.</li>
+            <li>Product/Delivery: planning and prioritisation workflow redesign labs.</li>
+            <li>Engineers: agentic coding, testing, and delivery accelerator labs.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Suggested Delivery Cadence</h2>
+      <ul>
+        <li><strong>Phase 1 (2 days):</strong> Modules 1–3 (mindset, leadership, planning).</li>
+        <li><strong>Phase 2 (2 days):</strong> Modules 4–6 (technical agility, metrics, role labs).</li>
+        <li><strong>Follow-up (30/60/90 days):</strong> Outcomes review, coaching, and adoption health checks.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Assessment & Evidence of Adoption</h2>
+      <ul>
+        <li>Capability baseline and post-training uplift check.</li>
+        <li>Role-based practical assessment (scenario + workflow redesign output).</li>
+        <li>Adoption indicators: cycle time, escaped defects, planning confidence, and value delivery consistency.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Reference Sources</h2>
+      <ul>
+        <li><a href="https://scaledagile.com/ai-native/" target="_blank">Scaled Agile — AI-Native overview</a></li>
+        <li><a href="https://scaledagile.com/certification/ai-native-foundations/" target="_blank">Scaled Agile — AI-Native Foundations certification</a></li>
+        <li><a href="https://www.pmi.org/shop/p-/elearning/ai-in-agile-delivery/el251" target="_blank">PMI — AI in Agile Delivery</a></li>
+        <li><a href="https://about.gitlab.com/the-source/ai/ai-transforms-agile-planning-for-modern-development-teams/" target="_blank">GitLab — AI transforms agile planning</a></li>
+      </ul>
+      <p class="muted">
+        Note: structure synthesised for practical enterprise rollout; validate against your internal governance, risk, and compliance requirements.
+      </p>
+    </section>
+
+    <section class="card">
+      <p>
+        <a href="https://andrewrix-ctrl.github.io/diego-site/">← Back to Diego site home</a>
+      </p>
+    </section>
+  </main>
+</body>
+</html>
