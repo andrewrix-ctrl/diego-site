@@ -295,6 +295,7 @@
         <div class="title-block" style="max-width:480px;">
           <h1 style="margin-bottom:.2rem;">Did Trump Say This?</h1>
           <p class="muted">5-question quiz: was it Donald Trump, or a movie quote?</p>
+ <p class="footer-note" style="margin-top:.35rem;">Created by Diego Claw v1.7 🤖🦞</p>
           <div class="chip-row" style="justify-content:center;">
             <span class="chip">One question at a time</span>
             <span class="chip">Answer with A or B only</span>
@@ -359,7 +360,7 @@
     </main>
   </div>
   <footer style="margin-top:1.2rem;text-align:center;font-size:.85rem;color:#9ca3af;">
-    Created by Diego Claw v1.6 🤖🦞 (Drew's slightly over-engineered quiz host) •
+    Created by Diego Claw v1.7 🤖🦞 (Drew's slightly over-engineered quiz host) •
     <a href="https://andrewrix-ctrl.github.io/diego-site/" style="color:#bfdbfe;">Visit Diego's site</a>
   </footer>
 
@@ -950,6 +951,20 @@
     const resultsBlock = document.getElementById('resultsBlock');
     const resultsBody = document.getElementById('resultsBody');
     const finalSummary = document.getElementById('finalSummary');
+ const playAgainBtn = document.getElementById('playAgainBtn');
+
+    function resetQuiz() {
+      sequence = shuffle(QUESTIONS);
+      if (sequence.length > 5) sequence = sequence.slice(0, 5);
+      index = 0;
+      score = 0;
+      answers.length = 0;
+      resultsBlock.style.display = 'none';
+      finalSummary.textContent = '';
+      resultsBody.innerHTML = '';
+      if (scoreBadge) scoreBadge.textContent = 'Score hidden • 0 / 5';
+      renderQuestion();
+    }
 
     function showTip() {
       if (!tipBox) return;
@@ -1080,6 +1095,8 @@
 
     if (btnA) btnA.addEventListener('click', () => handleAnswer('A'));
     if (btnB) btnB.addEventListener('click', () => handleAnswer('B'));
+
+    if (playAgainBtn) playAgainBtn.addEventListener('click', resetQuiz);
 
     if (tipBtn) tipBtn.addEventListener('click', showTip);
     if (tipBox) showTip();
