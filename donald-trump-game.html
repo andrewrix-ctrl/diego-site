@@ -211,11 +211,12 @@
     }
 
     .result-visual img {
-      width: 70px;
-      height: 70px;
+      width: 120px;
+      height: 120px;
       object-fit: cover;
-      border-radius: 16px;
-      border: 2px solid rgba(148, 163, 184, 0.9);
+      border-radius: 18px;
+      border: 3px solid rgba(148, 163, 184, 0.95);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.65);
     }
 
     .big-tick {
@@ -290,7 +291,7 @@
   <div class="shell">
     <header>
       <div class="title-block">
-        <h1>Did Trump Say This?</h1>
+        <h1>Did Trump Say This? <img src="media/trump-pointing.jpg" alt="Donald Trump" style="height:48px;width:auto;border-radius:10px;border:1px solid rgba(148,163,184,0.7);vertical-align:middle;margin-left:.4rem;object-fit:cover;" /></h1>
         <p class="muted">15-question quiz: was it Donald Trump, or a movie quote?</p>
         <div class="chip-row">
           <span class="chip">One question at a time</span>
@@ -306,7 +307,6 @@
 
     <main>
       <section class="card" id="quizCard">
-        <img src="media/trump-pointing.jpg" alt="Donald Trump pointing" style="width:100%;max-height:220px;object-fit:cover;border-radius:14px;border:1px solid rgba(148,163,184,0.7);margin-bottom:.7rem;" />
         <h2>Current question</h2>
         <p class="muted">Choose carefully. Answer with A (Donald Trump) or B (Movie quote).</p>
 
