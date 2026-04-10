@@ -340,6 +340,20 @@
         <div id="resultsBlock" style="display:none; width:100%; margin-top:.7rem;">
           <h2>Final results</h2>
           <div id="finalSummary" class="muted"></div>
+          <div class="summary-table" style="margin-top:.5rem;max-height:220px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Quote</th>
+                  <th>Your answer</th>
+                  <th>Correct</th>
+                  <th>Source details</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
         </div>
       </aside>
     </main>
@@ -935,7 +949,6 @@
     const tipBox = document.getElementById('tipBox');
     const tipBtn = document.getElementById('tipBtn');
     const resultsBlock = document.getElementById('resultsBlock');
-    const resultsTableShell = document.getElementById('resultsTableShell');
     const resultsBody = document.getElementById('resultsBody');
     const finalSummary = document.getElementById('finalSummary');
 
@@ -1028,7 +1041,6 @@
 
     function finishQuiz() {
       resultsBlock.style.display = 'block';
-      if (resultsTableShell) resultsTableShell.style.display = 'block';
       const pct = Math.round((score / 5) * 100);
       finalSummary.textContent = `Final score: ${score} out of 5 (${pct}%).`;
 
