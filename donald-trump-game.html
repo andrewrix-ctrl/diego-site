@@ -328,16 +328,12 @@
         </div>
 
         <div id="feedback" class="feedback" style="display:none"></div>
-        <div class="result-visual" id="resultVisual" style="display:none">
-          <span id="resultIcon" class="big-tick">✓</span>
-          <img id="resultImage" src="media/trump-happy.jpg" alt="Result image" />
-        </div>
         <div class="progress" id="progressText"></div>
       </section>
 
       <aside class="card" id="sideResultCard" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;min-height:220px;">
         <h2>Result visual</h2>
-        <div class="result-visual" id="sideResultVisual" style="display:flex;flex-direction:column;align-items:center;gap:.4rem;">
+        <div class="result-visual" id="sideResultVisual" style="display:none;flex-direction:column;align-items:center;gap:.4rem;">
           <img id="sideResultImage" src="media/trump-happy.jpg" alt="Result image" style="width:140px;height:140px;border-radius:50%;border:3px solid rgba(148,163,184,0.95);object-fit:cover;box-shadow:0 14px 30px rgba(0,0,0,0.7);" />
           <div id="sideResultText" class="muted" style="text-align:center;">Answer a question to see Trump react.</div>
         </div>
@@ -959,8 +955,6 @@
       qHint.textContent = "A = Trump, B = Movie";
       feedback.style.display = 'none';
       feedback.className = 'feedback';
-      const resultVisual = document.getElementById('resultVisual');
-      if (resultVisual) resultVisual.style.display = 'none';
       progressText.textContent = '';
       btnA.style.display = 'inline-block';
       btnB.style.display = 'inline-block';
@@ -986,25 +980,23 @@
       feedback.style.display = 'block';
       feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
 
-      const resultVisual = document.getElementById('resultVisual');
-      const resultImage = document.getElementById('resultImage');
-      const resultIcon = document.getElementById('resultIcon');
+      const sideResultVisual = document.getElementById('sideResultVisual');
       const sideResultImage = document.getElementById('sideResultImage');
       const sideResultText = document.getElementById('sideResultText');
+      if (sideResultVisual) sideResultVisual.style.display = 'flex';
       if (isCorrect) {
-        resultIcon.textContent = '✓';
-        resultIcon.className = 'big-tick';
-        resultImage.src = 'media/trump-happy.jpg';
-        if (sideResultImage) sideResultImage.src = 'media/trump-happy.jpg';
+        if (sideResultImage) {
+          sideResultImage.src = 'media/trump-happy.jpg';
+          sideResultImage.style.borderColor = '#4ade80';
+        }
         if (sideResultText) sideResultText.textContent = 'Correct – Trump is pleased.';
       } else {
-        resultIcon.textContent = '✕';
-        resultIcon.className = 'big-cross';
-        resultImage.src = 'media/trump-angry.jpg';
-        if (sideResultImage) sideResultImage.src = 'media/trump-angry.jpg';
+        if (sideResultImage) {
+          sideResultImage.src = 'media/trump-angry.jpg';
+          sideResultImage.style.borderColor = '#ff4d9d';
+        }
         if (sideResultText) sideResultText.textContent = 'Incorrect – Trump is not impressed.';
       }
-      resultVisual.style.display = 'flex';
 
       const answerLabel = ans === 'A' ? 'Donald Trump' : 'Movie quote';
       const correctLabel = correct === 'A' ? 'Donald Trump' : 'Movie quote';
