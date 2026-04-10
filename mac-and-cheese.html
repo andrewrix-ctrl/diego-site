@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mac & Cheese Heaven 🧀✨</title>
+  <title>Jack's Mac & Cheese Heaven 🧀✨</title>
   <style>
     :root {
       --cheese-yellow: #ffd54f;
@@ -55,15 +55,26 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      display: flex;
-      justify-content: space-around;
-      font-size: 2rem;
-      animation: floatConfetti 10s linear infinite;
+      font-size: 1.8rem;
+      overflow: hidden;
     }
 
     .confetti span {
+      position: absolute;
       animation: fall 6s linear infinite;
+      opacity: 0.9;
     }
+
+    .confetti span:nth-child(1) { left: 5%; animation-delay: 0s; }
+    .confetti span:nth-child(2) { left: 20%; animation-delay: 0.8s; }
+    .confetti span:nth-child(3) { left: 40%; animation-delay: 0.3s; }
+    .confetti span:nth-child(4) { left: 60%; animation-delay: 1.1s; }
+    .confetti span:nth-child(5) { left: 80%; animation-delay: 0.5s; }
+    .confetti span:nth-child(6) { left: 12%; animation-delay: 1.6s; }
+    .confetti span:nth-child(7) { left: 32%; animation-delay: 1.9s; }
+    .confetti span:nth-child(8) { left: 52%; animation-delay: 1.3s; }
+    .confetti span:nth-child(9) { left: 72%; animation-delay: 2.1s; }
+    .confetti span:nth-child(10) { left: 90%; animation-delay: 1.8s; }
 
     @keyframes fall {
       0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
@@ -273,10 +284,15 @@
     <span>✨</span>
     <span>🎊</span>
     <span>🍝</span>
+    <span>🎉</span>
+    <span>🧀</span>
+    <span>✨</span>
+    <span>🎊</span>
+    <span>🍝</span>
   </div>
   <main class="container">
     <section class="hero">
-      <h1 class="hero-title">Mac & Cheese Heaven 🧀✨</h1>
+      <h1 class="hero-title">Jack's Mac & Cheese Heaven 🧀✨</h1>
       <p class="hero-subtitle">A tiny corner of the internet dedicated to the bubbliest, crispiest, cheesiest pasta bakes known to humankind.</p>
       <div class="hero-tags">
         <span class="tag">Classic comfort 🍽️</span>
