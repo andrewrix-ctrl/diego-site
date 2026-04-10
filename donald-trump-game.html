@@ -290,21 +290,21 @@
 <body>
   <div class="shell">
     <header>
-      <div class="title-block">
-        <h1>Did Trump Say This?</h1>
-        <div style="margin-top:.6rem;max-width:420px;border-radius:18px;overflow:hidden;border:1px solid rgba(148,163,184,0.7);box-shadow:0 16px 40px rgba(0,0,0,0.6);">
-          <img src="media/trump-pointing.jpg" alt="Donald Trump" style="width:100%;height:auto;display:block;object-fit:cover;" />
+      <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:.7rem;width:100%;">
+        <img src="media/trump-pointing.jpg" alt="Donald Trump" style="width:96px;height:96px;border-radius:50%;border:2px solid rgba(148,163,184,0.85);object-fit:cover;box-shadow:0 10px 26px rgba(0,0,0,0.6);" />
+        <div class="title-block" style="max-width:480px;">
+          <h1 style="margin-bottom:.2rem;">Did Trump Say This?</h1>
+          <p class="muted">5-question quiz: was it Donald Trump, or a movie quote?</p>
+          <div class="chip-row" style="justify-content:center;">
+            <span class="chip">One question at a time</span>
+            <span class="chip">Answer with A or B only</span>
+            <span class="chip">Score hidden until the end</span>
+          </div>
         </div>
-        <p class="muted">5-question quiz: was it Donald Trump, or a movie quote?</p>
-        <div class="chip-row">
-          <span class="chip">One question at a time</span>
-          <span class="chip">Answer with A or B only</span>
-          <span class="chip">Score revealed at the end</span>
+        <div class="score-block" style="text-align:center;">
+          <div id="scoreBadge" class="pill-score">Score hidden • 0 / 5</div>
+          <div class="footer-note">Final score appears after Question 5.</div>
         </div>
-      </div>
-      <div class="score-block">
-        <div id="scoreBadge" class="pill-score">Score hidden • 0 / 5</div>
-        <div class="footer-note">Final score appears after Question 5.</div>
       </div>
     </header>
 
