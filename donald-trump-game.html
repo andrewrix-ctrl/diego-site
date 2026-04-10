@@ -328,6 +328,10 @@
         </div>
 
         <div id="feedback" class="feedback" style="display:none"></div>
+        <div class="result-visual" id="resultVisual" style="display:none">
+          <span id="resultIcon" class="big-tick">✓</span>
+          <img id="resultImage" src="media/trump-happy.jpg" alt="Result image" />
+        </div>
         <div class="progress" id="progressText"></div>
       </section>
 
@@ -964,6 +968,8 @@
       qHint.textContent = "A = Trump, B = Movie";
       feedback.style.display = 'none';
       feedback.className = 'feedback';
+      const resultVisual = document.getElementById('resultVisual');
+      if (resultVisual) resultVisual.style.display = 'none';
       progressText.textContent = '';
       btnA.style.display = 'inline-block';
       btnB.style.display = 'inline-block';
