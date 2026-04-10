@@ -371,32 +371,546 @@
     // quotes and movie lines.
     const QUESTIONS = [
       {
-        quote: "I have the best words.",
-        correct: "A",
-        sourceDetails: "Donald Trump, campaign speech, 2015.",
-        type: "trump"
+        quote: "I don't do it for the money. I've got enough, much more than I'll ever need. I do it to do it. Deals are my art form.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Trump: The Art of the Deal, 1987.',
+        type: 'trump'
       },
       {
-        quote: "May the Force be with you.",
-        correct: "B",
-        sourceDetails: "Star Wars, 1977 – spoken by multiple characters.",
-        type: "movie"
+        quote: 'I like thinking big. I always have.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Trump: The Art of the Deal, 1987.',
+        type: 'trump'
       },
       {
-        quote: "You talkin' to me?",
-        correct: "B",
-        sourceDetails: "Taxi Driver, 1976 – Travis Bickle (Robert De Niro).",
-        type: "movie"
+        quote: "You can't con people, at least not for long.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Trump: The Art of the Deal, 1987.',
+        type: 'trump'
       },
       {
-        quote: "Nobody builds walls better than me.",
-        correct: "A",
-        sourceDetails: "Donald Trump, campaign rally, 2015.",
-        type: "trump"
-      }
-      // Add more real, documented entries as needed to reach 30.
+        quote: "You can't be scared. You do your thing, you hold your ground, you stand up tall, and whatever happens, happens.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Trump: The Art of the Deal, 1987.',
+        type: 'trump'
+      },
+      {
+        quote: 'What separates the winners from the losers is how a person reacts to each new twist of fate.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Trump: Surviving at the Top, 1990.',
+        type: 'trump'
+      },
+      {
+        quote: "I'm very liberal when it comes to health care. I believe in universal health care.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Larry King interview, 1999.',
+        type: 'trump'
+      },
+      {
+        quote: 'I surround myself with the best people. I know the best people.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Interview, 1999.',
+        type: 'trump'
+      },
+      {
+        quote: 'Part of the beauty of me is that I am very rich.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Good Morning America interview, 2011.',
+        type: 'trump'
+      },
+      {
+        quote: "An 'extremely credible source' has called my office and told me that @BarackObama's birth certificate is a fraud.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2012.',
+        type: 'trump'
+      },
+      {
+        quote: 'I have never seen a thin person drinking Diet Coke.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2012.',
+        type: 'trump'
+      },
+      {
+        quote: "If you run for president, you shouldn't be allowed to use teleprompters.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Campaign rally, 2015.',
+        type: 'trump'
+      },
+      {
+        quote: 'Somebody said I’m the Ernest Hemingway of 140 characters.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Quoted remark, 2015.',
+        type: 'trump'
+      },
+      {
+        quote: 'Get him the hell out of here.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Campaign rally, 2015.',
+        type: 'trump'
+      },
+      {
+        quote: 'Watch and study the mosques, because a lot of talk is going on at the mosques.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Campaign remarks, 2015.',
+        type: 'trump'
+      },
+      {
+        quote: 'I know words. I have the best words.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Speech in South Carolina, 2015.',
+        type: 'trump'
+      },
+      {
+        quote: "I could stand in the middle of 5th Avenue and shoot somebody, and I wouldn't lose any voters.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Campaign rally in Iowa, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: 'Knock the crap out of them, would you? Seriously.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Campaign rally in Iowa, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: "It's the Harvard of Terrorists.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Interview, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: 'Torture works, okay folks?',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Campaign remarks, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: 'China is raping our country.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Campaign remarks, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: "He's a Mexican. We're building a wall between here and Mexico.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Campaign remarks, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: "I think I am actually humble. I think I'm much more humble than you would understand.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 60 Minutes interview, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: 'Nobody knows the system better than me, which is why I alone can fix it.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Republican National Convention, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: 'I AM YOUR VOICE.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Republican National Convention, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: 'There is no global anthem, no global currency, no certificate of global citizenship, we pledge allegiance to one flag and that flag is the American Flag!',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Thank You Tour, 2016.',
+        type: 'trump'
+      },
+      {
+        quote: "We're rounding 'em up in a very humane way, in a very nice way.",
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 60 Minutes interview, 2015.',
+        type: 'trump'
+      },
+      {
+        quote: 'We should have a contest as to which of the Networks, plus CNN and not including Fox, is the most dishonest, corrupt and/or distorted in its political coverage of your favorite President (me).',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2017.',
+        type: 'trump'
+      },
+      {
+        quote: 'Perhaps we could use a little bit of that good old Global Warming. Bundle up!',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2017.',
+        type: 'trump'
+      },
+      {
+        quote: 'North Korean Leader Kim Jong Un just stated that the "Nuclear Button is on his desk at all times."',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2018.',
+        type: 'trump'
+      },
+      {
+        quote: 'Throughout my life, my two greatest assets have been mental stability and being, like, really smart.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2018.',
+        type: 'trump'
+      },
+      {
+        quote: 'NEVER, EVER THREATEN THE UNITED STATES AGAIN OR YOU WILL SUFFER CONSEQUENCES THE LIKES OF WHICH FEW THROUGHOUT HISTORY HAVE EVER SUFFERED BEFORE.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2018.',
+        type: 'trump'
+      },
+      {
+        quote: 'My only question is, who is our bigger enemy, Jay Powell or Chairman Xi?',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2019.',
+        type: 'trump'
+      },
+      {
+        quote: 'PRESIDENTIAL HARASSMENT!',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2019.',
+        type: 'trump'
+      },
+      {
+        quote: 'China has been working very hard to contain the Coronavirus.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2020.',
+        type: 'trump'
+      },
+      {
+        quote: 'WE CANNOT LET THE CURE BE WORSE THAN THE PROBLEM ITSELF.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Twitter, 2020.',
+        type: 'trump'
+      },
+      {
+        quote: 'If you count the legal votes, I easily win.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Remarks on the election, 2020.',
+        type: 'trump'
+      },
+      {
+        quote: 'Why are people so mean?',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Truth Social, 2022.',
+        type: 'trump'
+      },
+      {
+        quote: 'Illegal immigration is poisoning the blood of our nation.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Truth Social, 2023.',
+        type: 'trump'
+      },
+      {
+        quote: 'We, the citizens of America, are now joined in a great national effort to rebuild our country and to restore its promise for all of our people.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Inaugural Address, 2017.',
+        type: 'trump'
+      },
+      {
+        quote: 'This American carnage stops right here and stops right now.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Inaugural Address, 2017.',
+        type: 'trump'
+      },
+      {
+        quote: 'America was founded on liberty and independence, and not government coercion, domination, and control.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 State of the Union, 2019.',
+        type: 'trump'
+      },
+      {
+        quote: 'Tonight, we renew our resolve that America will never be a socialist country.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 State of the Union, 2019.',
+        type: 'trump'
+      },
+      {
+        quote: 'The future does not belong to globalists. The future belongs to patriots.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 UN General Assembly, 2019.',
+        type: 'trump'
+      },
+      {
+        quote: 'The golden age of America begins right now.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Inaugural Address, 2025.',
+        type: 'trump'
+      },
+      {
+        quote: 'We will drill, baby, drill.',
+        correct: 'A',
+        sourceDetails: 'Donald Trump \x13 Inaugural Address, 2025.',
+        type: 'trump'
+      },
+      {
+        quote: "Frankly, my dear, I don't give a damn.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Gone with the Wind (1939).',
+        type: 'movie'
+      },
+      {
+        quote: "I'm gonna make him an offer he can't refuse.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Godfather (1972).',
+        type: 'movie'
+      },
+      {
+        quote: "You don't understand! I coulda had class. I coulda been a contender. I could've been somebody, instead of a bum, which is what I am.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 On the Waterfront (1954).',
+        type: 'movie'
+      },
+      {
+        quote: "Toto, I've a feeling we're not in Kansas anymore.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Wizard of Oz (1939).',
+        type: 'movie'
+      },
+      {
+        quote: "Here's looking at you, kid.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Casablanca (1942).',
+        type: 'movie'
+      },
+      {
+        quote: 'Go ahead, make my day.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Sudden Impact (1983).',
+        type: 'movie'
+      },
+      {
+        quote: "All right, Mr. DeMille, I'm ready for my close-up.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Sunset Blvd. (1950).',
+        type: 'movie'
+      },
+      {
+        quote: 'May the Force be with you.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Star Wars (1977).',
+        type: 'movie'
+      },
+      {
+        quote: "Fasten your seatbelts. It's going to be a bumpy night.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 All About Eve (1950).',
+        type: 'movie'
+      },
+      {
+        quote: 'You talking to me?',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Taxi Driver (1976).',
+        type: 'movie'
+      },
+      {
+        quote: "What we've got here is failure to communicate.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Cool Hand Luke (1967).',
+        type: 'movie'
+      },
+      {
+        quote: 'I love the smell of napalm in the morning.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Apocalypse Now (1979).',
+        type: 'movie'
+      },
+      {
+        quote: "Love means never having to say you're sorry.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Love Story (1970).',
+        type: 'movie'
+      },
+      {
+        quote: 'The stuff that dreams are made of.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Maltese Falcon (1941).',
+        type: 'movie'
+      },
+      {
+        quote: 'E.T. phone home.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 E.T.: The Extra-Terrestrial (1982).',
+        type: 'movie'
+      },
+      {
+        quote: 'They call me Mister Tibbs!',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 In the Heat of the Night (1967).',
+        type: 'movie'
+      },
+      {
+        quote: 'Rosebud.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Citizen Kane (1941).',
+        type: 'movie'
+      },
+      {
+        quote: 'Made it, Ma! Top of the world!',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 White Heat (1949).',
+        type: 'movie'
+      },
+      {
+        quote: "I'm as mad as hell, and I'm not going to take this anymore!",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Network (1976).',
+        type: 'movie'
+      },
+      {
+        quote: 'Louis, I think this is the beginning of a beautiful friendship.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Casablanca (1942).',
+        type: 'movie'
+      },
+      {
+        quote: 'A census taker once tried to test me. I ate his liver with some fava beans and a nice Chianti.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Silence of the Lambs (1991).',
+        type: 'movie'
+      },
+      {
+        quote: 'Bond. James Bond.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Dr. No (1963).',
+        type: 'movie'
+      },
+      {
+        quote: "There's no place like home.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Wizard of Oz (1939).',
+        type: 'movie'
+      },
+      {
+        quote: "I am big! It's the pictures that got small.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Sunset Blvd. (1950).',
+        type: 'movie'
+      },
+      {
+        quote: 'Show me the money!',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Jerry Maguire (1996).',
+        type: 'movie'
+      },
+      {
+        quote: "Why don't you come up sometime and see me?",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 She Done Him Wrong (1933).',
+        type: 'movie'
+      },
+      {
+        quote: "I'm walking here! I'm walking here!",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Midnight Cowboy (1969).',
+        type: 'movie'
+      },
+      {
+        quote: 'Play it, Sam. Play "As Time Goes By."',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Casablanca (1942).',
+        type: 'movie'
+      },
+      {
+        quote: "You can't handle the truth!",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 A Few Good Men (1992).',
+        type: 'movie'
+      },
+      {
+        quote: 'I want to be alone.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Grand Hotel (1932).',
+        type: 'movie'
+      },
+      {
+        quote: 'After all, tomorrow is another day!',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Gone with the Wind (1939).',
+        type: 'movie'
+      },
+      {
+        quote: 'Round up the usual suspects.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Casablanca (1942).',
+        type: 'movie'
+      },
+      {
+        quote: "I'll have what she's having.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 When Harry Met Sally... (1989).',
+        type: 'movie'
+      },
+      {
+        quote: "You know how to whistle, don't you, Steve? You just put your lips together and blow.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 To Have and Have Not (1944).',
+        type: 'movie'
+      },
+      {
+        quote: "You're gonna need a bigger boat.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Jaws (1975).',
+        type: 'movie'
+      },
+      {
+        quote: "Badges? We ain't got no badges! We don't need no badges! I don't have to show you any stinking badges!",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Treasure of the Sierra Madre (1948).',
+        type: 'movie'
+      },
+      {
+        quote: "I'll be back.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Terminator (1984).',
+        type: 'movie'
+      },
+      {
+        quote: 'Today, I consider myself the luckiest man on the face of the earth.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Pride of the Yankees (1943).',
+        type: 'movie'
+      },
+      {
+        quote: 'If you build it, he will come.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Field of Dreams (1989).',
+        type: 'movie'
+      },
+      {
+        quote: "My mama always said life was like a box of chocolates. You never know what you're gonna get.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Forrest Gump (1994).',
+        type: 'movie'
+      },
+      {
+        quote: 'We rob banks.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Bonnie and Clyde (1967).',
+        type: 'movie'
+      },
+      {
+        quote: 'Plastics.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Graduate (1967).',
+        type: 'movie'
+      },
+      {
+        quote: "We'll always have Paris.",
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 Casablanca (1942).',
+        type: 'movie'
+      },
+      {
+        quote: 'I see dead people.',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 The Sixth Sense (1999).',
+        type: 'movie'
+      },
+      {
+        quote: 'Stella! Hey, Stella!',
+        correct: 'B',
+        sourceDetails: 'Movie quote \x13 A Streetcar Named Desire (1951).',
+        type: 'movie'
+      },
     ];
-
     const tips = [
       "Stay neutral: you are judging quotes, not people.",
       "If it sounds cinematic, consider the movie option.",
