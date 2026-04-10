@@ -331,12 +331,8 @@
         <div class="progress" id="progressText"></div>
       </section>
 
-      <aside class="card" id="sideResultCard" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;min-height:220px;">
+      <aside class="card" id="sideResultCard" style="min-height:220px;">
         <h2>Result visual</h2>
-        <div class="result-visual" id="sideResultVisual" style="display:none;flex-direction:column;align-items:center;gap:.4rem;">
-          <img id="sideResultImage" src="media/trump-happy.jpg" alt="Result image" style="width:140px;height:140px;border-radius:50%;border:3px solid rgba(148,163,184,0.95);object-fit:cover;box-shadow:0 14px 30px rgba(0,0,0,0.7);" />
-          <div id="sideResultText" class="muted" style="text-align:center;">Answer a question to see Trump react.</div>
-        </div>
         <div id="resultsBlock" style="display:none; width:100%; margin-top:.7rem;">
           <h2>Final results</h2>
           <div id="finalSummary" class="muted"></div>
@@ -993,23 +989,6 @@
       feedback.style.display = 'block';
       feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
 
-      const sideResultVisual = document.getElementById('sideResultVisual');
-      const sideResultImage = document.getElementById('sideResultImage');
-      const sideResultText = document.getElementById('sideResultText');
-      if (sideResultVisual) sideResultVisual.style.display = 'flex';
-      if (isCorrect) {
-        if (sideResultImage) {
-          sideResultImage.src = 'media/trump-happy.jpg';
-          sideResultImage.style.borderColor = '#4ade80';
-        }
-        if (sideResultText) sideResultText.textContent = 'Correct – Trump is pleased.';
-      } else {
-        if (sideResultImage) {
-          sideResultImage.src = 'media/trump-angry.jpg';
-          sideResultImage.style.borderColor = '#ff4d9d';
-        }
-        if (sideResultText) sideResultText.textContent = 'Incorrect – Trump is not impressed.';
-      }
 
       const answerLabel = ans === 'A' ? 'Donald Trump' : 'Movie quote';
       const correctLabel = correct === 'A' ? 'Donald Trump' : 'Movie quote';
@@ -1042,7 +1021,10 @@
     function finishQuiz() {
       resultsBlock.style.display = 'block';
       const pct = Math.round((score / 5) * 100);
-      finalSummary.textContent = `Final score: ${score} out of 5 (${pct}%).`;
+      let emoji = '😐';
+      if (score >= 4) emoji = '🎉';
+      else if (score <= 2) emoji = '🤔';
+      finalSummary.textContent = `Final score: ${score} out of 5 (${pct}%). ${emoji}`;
 
       resultsBody.innerHTML = '';
       for (const row of answers) {
