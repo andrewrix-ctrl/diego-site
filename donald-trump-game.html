@@ -952,6 +952,7 @@
     const finalSummary = document.getElementById('finalSummary');
 
     function showTip() {
+      if (!tipBox) return;
       const t = tips[Math.floor(Math.random() * tips.length)];
       tipBox.textContent = t;
     }
@@ -1078,8 +1079,8 @@
     btnA.addEventListener('click', () => handleAnswer('A'));
     btnB.addEventListener('click', () => handleAnswer('B'));
 
-    tipBtn.addEventListener('click', showTip);
-    showTip();
+    if (tipBtn) tipBtn.addEventListener('click', showTip);
+    if (tipBox) showTip();
     updateScoreBadge();
   </script>
 </body>
