@@ -291,7 +291,10 @@
   <div class="shell">
     <header>
       <div class="title-block">
-        <h1>Did Trump Say This? <img src="media/trump-pointing.jpg" alt="Donald Trump" style="height:48px;width:auto;border-radius:10px;border:1px solid rgba(148,163,184,0.7);vertical-align:middle;margin-left:.4rem;object-fit:cover;" /></h1>
+        <h1>Did Trump Say This?</h1>
+        <div style="margin-top:.6rem;max-width:420px;border-radius:18px;overflow:hidden;border:1px solid rgba(148,163,184,0.7);box-shadow:0 16px 40px rgba(0,0,0,0.6);">
+          <img src="media/trump-pointing.jpg" alt="Donald Trump" style="width:100%;height:auto;display:block;object-fit:cover;" />
+        </div>
         <p class="muted">15-question quiz: was it Donald Trump, or a movie quote?</p>
         <div class="chip-row">
           <span class="chip">One question at a time</span>
@@ -347,20 +350,6 @@
         <div id="resultsBlock" style="display:none; margin-top:1rem">
           <h2>Final results</h2>
           <div id="finalSummary" class="muted"></div>
-          <div class="summary-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Quote</th>
-                  <th>Your answer</th>
-                  <th>Correct</th>
-                  <th>Source details</th>
-                </tr>
-              </thead>
-              <tbody id="resultsBody"></tbody>
-            </table>
-          </div>
         </div>
       </aside>
     </main>
@@ -952,6 +941,7 @@
     const tipBox = document.getElementById('tipBox');
     const tipBtn = document.getElementById('tipBtn');
     const resultsBlock = document.getElementById('resultsBlock');
+    const resultsTableShell = document.getElementById('resultsTableShell');
     const resultsBody = document.getElementById('resultsBody');
     const finalSummary = document.getElementById('finalSummary');
 
@@ -1042,6 +1032,7 @@
 
     function finishQuiz() {
       resultsBlock.style.display = 'block';
+      if (resultsTableShell) resultsTableShell.style.display = 'block';
       const pct = Math.round((score / 15) * 100);
       finalSummary.textContent = `Final score: ${score} out of 15 (${pct}%).`;
 
