@@ -335,19 +335,13 @@
         <div class="progress" id="progressText"></div>
       </section>
 
-      <aside class="card">
-        <h2>Session notes & tips</h2>
-        <p class="muted">Here are a few guidelines while you play:</p>
-        <ul class="muted">
-          <li>Only answers A or B are accepted.</li>
-          <li>Each question reveals the source details immediately.</li>
-          <li>Your running score stays hidden until the end.</li>
-        </ul>
-
-        <div class="tip-card" id="tipBox">Press the button below for a new tip.</div>
-        <button class="btn" id="tipBtn" style="margin-top:.6rem">Give me a new tip</button>
-
-        <div id="resultsBlock" style="display:none; margin-top:1rem">
+      <aside class="card" id="sideResultCard" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;min-height:220px;">
+        <h2>Result visual</h2>
+        <div class="result-visual" id="sideResultVisual" style="display:flex;flex-direction:column;align-items:center;gap:.4rem;">
+          <img id="sideResultImage" src="media/trump-happy.jpg" alt="Result image" style="width:140px;height:140px;border-radius:50%;border:3px solid rgba(148,163,184,0.95);object-fit:cover;box-shadow:0 14px 30px rgba(0,0,0,0.7);" />
+          <div id="sideResultText" class="muted" style="text-align:center;">Answer a question to see Trump react.</div>
+        </div>
+        <div id="resultsBlock" style="display:none; width:100%; margin-top:.7rem;">
           <h2>Final results</h2>
           <div id="finalSummary" class="muted"></div>
         </div>
@@ -995,14 +989,20 @@
       const resultVisual = document.getElementById('resultVisual');
       const resultImage = document.getElementById('resultImage');
       const resultIcon = document.getElementById('resultIcon');
+      const sideResultImage = document.getElementById('sideResultImage');
+      const sideResultText = document.getElementById('sideResultText');
       if (isCorrect) {
         resultIcon.textContent = '✓';
         resultIcon.className = 'big-tick';
         resultImage.src = 'media/trump-happy.jpg';
+        if (sideResultImage) sideResultImage.src = 'media/trump-happy.jpg';
+        if (sideResultText) sideResultText.textContent = 'Correct – Trump is pleased.';
       } else {
         resultIcon.textContent = '✕';
         resultIcon.className = 'big-cross';
         resultImage.src = 'media/trump-angry.jpg';
+        if (sideResultImage) sideResultImage.src = 'media/trump-angry.jpg';
+        if (sideResultText) sideResultText.textContent = 'Incorrect – Trump is not impressed.';
       }
       resultVisual.style.display = 'flex';
 
