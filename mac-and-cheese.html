@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mac & Cheese Heaven 🧀✨</title>
+  <style>
+    :root {
+      --cheese-yellow: #ffd54f;
+      --cheese-deep: #ffb300;
+      --cheese-orange: #ff8f00;
+      --pasta-cream: #fff8e1;
+      --bg-purple: #4a148c;
+      --bg-pink: #ad1457;
+      --bg-teal: #00897b;
+      --ink-dark: #1f2933;
+      --card: rgba(255, 255, 255, 0.9);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink-dark);
+      background: radial-gradient(circle at 0% 0%, var(--bg-purple), #000),
+                  radial-gradient(circle at 100% 100%, var(--bg-pink), var(--bg-teal));
+      background-size: 160% 160%;
+      animation: bgShift 20s ease-in-out infinite;
+      overflow-x: hidden;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 0%, 100% 100%; }
+      50% { background-position: 100% 0%, 0% 100%; }
+      100% { background-position: 0% 0%, 100% 100%; }
+    }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.7) 1px, transparent 2px),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.5) 1px, transparent 2px),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,0.6) 1px, transparent 2px);
+      background-size: 180px 180px;
+      animation: twinkle 8s linear infinite;
+    }
+
+    @keyframes twinkle {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 2.5rem auto 3.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--cheese-yellow), var(--cheese-deep));
+      border-radius: 26px;
+      padding: 1.8rem 1.9rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      color: #3b1f00;
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      letter-spacing: 0.02em;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-subtitle {
+      margin: 0.5rem 0 0;
+      font-size: 1.02rem;
+    }
+
+    .hero-tags {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #5c2a00;
+      border: 1px solid rgba(255,255,255,0.9);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.1rem;
+      margin-top: 1.9rem;
+    }
+
+    .card {
+      grid-column: span 12;
+      background: var(--card);
+      border-radius: 20px;
+      padding: 1.2rem 1.3rem;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .card.half { grid-column: span 12; }
+    @media (min-width: 880px) {
+      .card.half { grid-column: span 6; }
+    }
+
+    .card-title {
+      margin: 0 0 0.6rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .variety-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.2rem 0 0;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .variety-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, #fff7e6, #fff3cd);
+      padding: 0.7rem 0.8rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 193, 7, 0.35);
+    }
+
+    .variety-emoji {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .variety-body strong { color: #8d4b00; }
+
+    .fun-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 0.55rem 0.95rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: #3b1f00;
+      background: linear-gradient(135deg, var(--cheese-deep), var(--cheese-orange));
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.22);
+    }
+
+    .btn.ghost {
+      background: rgba(255,255,255,0.3);
+      color: #452001;
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: none;
+    }
+
+    .output {
+      margin-top: 0.7rem;
+      min-height: 2.1rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(255, 248, 225, 0.9);
+      border: 1px dashed rgba(255, 193, 7, 0.7);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      color: #4a2600;
+    }
+
+    .emoji-burst {
+      position: fixed;
+      font-size: 1.8rem;
+      pointer-events: none;
+      animation: pop 1.4s ease forwards;
+      z-index: 1000;
+    }
+
+    @keyframes pop {
+      0% { transform: translateY(0) scale(0.7); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-90px) scale(1.2); opacity: 0; }
+    }
+
+    footer {
+      margin-top: 1.6rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(249, 250, 251, 0.88);
+    }
+
+    footer a {
+      color: #ffe082;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles"></div>
+  <main class="container">
+    <section class="hero">
+      <h1 class="hero-title">Mac & Cheese Heaven 🧀✨</h1>
+      <p class="hero-subtitle">A tiny corner of the internet dedicated to the bubbliest, crispiest, cheesiest pasta bakes known to humankind.</p>
+      <div class="hero-tags">
+        <span class="tag">Classic comfort 🍽️</span>
+        <span class="tag">Fancy bake 🥂</span>
+        <span class="tag">Late-night snack 🌙</span>
+        <span class="tag">Inner West cheese energy ⚡</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card half">
+        <h2 class="card-title">Cheesy Classics 🧀</h2>
+        <ul class="variety-list">
+          <li class="variety-item">
+            <span class="variety-emoji">🍯</span>
+            <div class="variety-body">
+              <strong>Stovetop Silky Mac</strong><br />
+              Ultra-smooth sauce, elbow pasta, no bake — perfect for weeknights when you want cheesy happiness in 12 minutes.
+            </div>
+          </li>
+          <li class="variety-item">
+            <span class="variety-emoji">🔥</span>
+            <div class="variety-body">
+              <strong>Three-Cheese Oven Bake</strong><br />
+              A crispy top, gooey middle combination with cheddar, gruyère and parmesan for maximum depth and crunch.
+            </div>
+          </li>
+          <li class="variety-item">
+            <span class="variety-emoji">🌿</span>
+            <div class="variety-body">
+              <strong>Garlic & Herb Sheet-Pan Mac</strong><br />
+              Spread thin on a tray for extra crispy edges with thyme, chives and roasted garlic folded through.
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card half">
+        <h2 class="card-title">Chaos Mac Experiments 🌈</h2>
+        <ul class="variety-list">
+          <li class="variety-item">
+            <span class="variety-emoji">🌶️</span>
+            <div class="variety-body">
+              <strong>Jalapeño Popper Mac</strong><br />
+              Pickled jalapeños, cream cheese pockets and a crushed tortilla chip topping. Not legally mild.
+            </div>
+          </li>
+          <li class="variety-item">
+            <span class="variety-emoji">🥓</span>
+            <div class="variety-body">
+              <strong>Midnight Bacon Mac</strong><br />
+              Smoky bacon bits, a hint of maple and extra black pepper — perfect after a night at the pub.
+            </div>
+          </li>
+          <li class="variety-item">
+            <span class="variety-emoji">🥦</span>
+            <div class="variety-body">
+              <strong>Secret Veggie Mac</strong><br />
+              Puréed pumpkin & cauliflower blended into the cheese sauce so it still feels like comfort food, not homework.
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card half">
+        <h2 class="card-title">Cheese Vibe Check Button 🎛️</h2>
+        <p>Not sure which Mac & Cheese energy you are tonight? Press a button, embrace your destiny.</p>
+        <div class="fun-btn-row">
+          <button class="btn" id="vibeBtn">Pick My Mac & Cheese</button>
+          <button class="btn ghost" id="burstBtn">Cheese Emoji Burst</button>
+        </div>
+        <div class="output" id="vibeOutput">Press a button and I&apos;ll tell you what kind of Mac &amp; Cheese your evening deserves.</div>
+      </article>
+
+      <article class="card half">
+        <h2 class="card-title">Mac & Cheese Pairing Tips 🥂</h2>
+        <p style="margin-top:0;">Some extremely serious, totally scientific pairings for your bowl:</p>
+        <ul class="variety-list">
+          <li class="variety-item">
+            <span class="variety-emoji">🍷</span>
+            <div class="variety-body">
+              <strong>Gouda-heavy bakes</strong> love a crisp white wine or a bright non-alc spritz with citrus.
+            </div>
+          </li>
+          <li class="variety-item">
+            <span class="variety-emoji">🍺</span>
+            <div class="variety-body">
+              <strong>Spicy mac</strong> wants something cold and bubbly (lager, ginger beer, or a hop-free soda).
+            </div>
+          </li>
+          <li class="variety-item">
+            <span class="variety-emoji">📺</span>
+            <div class="variety-body">
+              <strong>Weeknight stovetop mac</strong> pairs best with comfy clothes and a low-stakes TV show.
+            </div>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <footer>
+      Crafted by <a href="https://andrewrix-ctrl.github.io/diego-site/">Diego</a> as a tiny ode to Mac &amp; Cheese 🧀💫
+    </footer>
+  </main>
+
+  <script>
+    const vibes = [
+      "You are: Crispy-top three-cheese oven bake with a side of smugness.",
+      "You are: Stovetop silky mac in a giant mug, eaten over the sink.",
+      "You are: Jalapeño popper mac that slightly regrets nothing.",
+      "You are: Midnight bacon mac after one too many good decisions.",
+      "You are: Secret veggie mac pretending to be responsible." 
+    ];
+
+    function burstEmoji(x = window.innerWidth / 2, y = window.innerHeight / 2) {
+      const emojis = ["🧀", "🍝", "✨", "🌶️", "🥓", "💫"];
+      for (let i = 0; i < 12; i++) {
+        const node = document.createElement("div");
+        node.className = "emoji-burst";
+        node.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        node.style.left = `${x + (Math.random() * 120 - 60)}px`;
+        node.style.top = `${y + (Math.random() * 80 - 40)}px`;
+        node.style.animationDelay = `${Math.random() * 0.15}s`;
+        document.body.appendChild(node);
+        setTimeout(() => node.remove(), 1400);
+      }
+    }
+
+    document.getElementById("vibeBtn").addEventListener("click", (e) => {
+      const out = document.getElementById("vibeOutput");
+      out.textContent = vibes[Math.floor(Math.random() * vibes.length)];
+      burstEmoji(e.clientX, e.clientY);
+    });
+
+    document.getElementById("burstBtn").addEventListener("click", (e) => {
+      burstEmoji(e.clientX, e.clientY);
+      document.getElementById("vibeOutput").textContent = "Cheese emoji burst deployed successfully ✅";
+    });
+  </script>
+</body>
+</html>
