@@ -995,6 +995,17 @@
       feedback.style.display = 'block';
       feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
 
+      const resultVisual = document.getElementById('resultVisual');
+      const resultImage = document.getElementById('resultImage');
+      const resultIcon = document.getElementById('resultIcon');
+      if (resultVisual) resultVisual.style.display = 'flex';
+      if (isCorrect) {
+        if (resultIcon) { resultIcon.textContent = '✓'; resultIcon.className = 'big-tick'; }
+        if (resultImage) resultImage.src = 'media/trump-happy.jpg';
+      } else {
+        if (resultIcon) { resultIcon.textContent = '✕'; resultIcon.className = 'big-cross'; }
+        if (resultImage) resultImage.src = 'media/trump-angry.jpg';
+      }
 
       const answerLabel = ans === 'A' ? 'Donald Trump' : 'Movie quote';
       const correctLabel = correct === 'A' ? 'Donald Trump' : 'Movie quote';
