@@ -306,6 +306,7 @@
 
     <main>
       <section class="card" id="quizCard">
+        <img src="media/trump-pointing.jpg" alt="Donald Trump pointing" style="width:100%;max-height:220px;object-fit:cover;border-radius:14px;border:1px solid rgba(148,163,184,0.7);margin-bottom:.7rem;" />
         <h2>Current question</h2>
         <p class="muted">Choose carefully. Answer with A (Donald Trump) or B (Movie quote).</p>
 
@@ -319,8 +320,8 @@
 
         <div class="answers">
           <button class="btn" id="startBtn">Start quiz</button>
-          <button class="btn primary" id="btnA" disabled>A • Donald Trump</button>
-          <button class="btn primary" id="btnB" disabled>B • Movie quote</button>
+          <button class="btn primary" id="btnA" disabled style="display:none">A • Donald Trump</button>
+          <button class="btn primary" id="btnB" disabled style="display:none">B • Movie quote</button>
         </div>
 
         <div id="feedback" class="feedback" style="display:none"></div>
@@ -973,6 +974,8 @@
       const resultVisual = document.getElementById('resultVisual');
       if (resultVisual) resultVisual.style.display = 'none';
       progressText.textContent = '';
+      btnA.style.display = 'inline-block';
+      btnB.style.display = 'inline-block';
       btnA.disabled = false;
       btnB.disabled = false;
     }
@@ -1071,8 +1074,7 @@
       if (index === -1) {
         index = 0;
         renderQuestion();
-        startBtn.disabled = true;
-        startBtn.textContent = 'Quiz running';
+        startBtn.style.display = 'none';
       }
     });
 
