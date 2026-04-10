@@ -203,6 +203,31 @@
     .feedback.correct { border-color: var(--ok); color: #bbf7d0; }
     .feedback.incorrect { border-color: var(--danger); color: #fecaca; }
 
+    .result-visual {
+      margin-top: .7rem;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+
+    .result-visual img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 2px solid rgba(148, 163, 184, 0.9);
+    }
+
+    .big-tick {
+      font-size: 2.2rem;
+      color: var(--ok);
+    }
+
+    .big-cross {
+      font-size: 2.2rem;
+      color: var(--danger);
+    }
+
     .progress {
       margin-top: .4rem;
       font-size: .9rem;
@@ -266,7 +291,7 @@
     <header>
       <div class="title-block">
         <h1>Did Trump Say This?</h1>
-        <p class="muted">30-question quiz: was it Donald Trump, or a movie quote?</p>
+        <p class="muted">15-question quiz: was it Donald Trump, or a movie quote?</p>
         <div class="chip-row">
           <span class="chip">One question at a time</span>
           <span class="chip">Answer with A or B only</span>
@@ -274,8 +299,8 @@
         </div>
       </div>
       <div class="score-block">
-        <div id="scoreBadge" class="pill-score">Score hidden • 0 / 30</div>
-        <div class="footer-note">Final score appears after Question 30.</div>
+        <div id="scoreBadge" class="pill-score">Score hidden • 0 / 15</div>
+        <div class="footer-note">Final score appears after Question 15.</div>
       </div>
     </header>
 
@@ -288,7 +313,7 @@
           <blockquote id="quoteText">Press "Start quiz" to begin.</blockquote>
         </div>
         <div class="meta-row">
-          <span id="qCounter">Question 0 of 30</span>
+          <span id="qCounter">Question 0 of 15</span>
           <span id="qHint"></span>
         </div>
 
@@ -299,6 +324,10 @@
         </div>
 
         <div id="feedback" class="feedback" style="display:none"></div>
+        <div class="result-visual" id="resultVisual" style="display:none">
+          <span id="resultIcon" class="big-tick">✓</span>
+          <img id="resultImage" src="media/trump-happy.jpg" alt="Result image" />
+        </div>
         <div class="progress" id="progressText"></div>
       </section>
 
@@ -387,10 +416,10 @@
 
     let sequence = shuffle(QUESTIONS);
     // If fewer than 30 local entries exist, loop the set.
-    while (sequence.length < 30) {
+    while (sequence.length < 15) {
       sequence = sequence.concat(shuffle(QUESTIONS));
     }
-    sequence = sequence.slice(0, 30);
+    sequence = sequence.slice(0, 15);
 
     let index = -1;
     let score = 0;
@@ -417,16 +446,18 @@
     }
 
     function updateScoreBadge() {
-      scoreBadge.textContent = `Score hidden • ${score} / 30`;
+      scoreBadge.textContent = `Score hidden • ${score} / 15`;
     }
 
     function renderQuestion() {
       const q = sequence[index];
       quoteText.textContent = q.quote;
-      qCounter.textContent = `Question ${index + 1} of 30`;
+      qCounter.textContent = `Question ${index + 1} of 15`;
       qHint.textContent = "A = Trump, B = Movie";
       feedback.style.display = 'none';
       feedback.className = 'feedback';
+      const resultVisual = document.getElementById('resultVisual');
+      if (resultVisual) resultVisual.style.display = 'none';
       progressText.textContent = '';
       btnA.disabled = false;
       btnB.disabled = false;
@@ -450,6 +481,20 @@
       feedback.style.display = 'block';
       feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
 
+      const resultVisual = document.getElementById('resultVisual');
+      const resultImage = document.getElementById('resultImage');
+      const resultIcon = document.getElementById('resultIcon');
+      if (isCorrect) {
+        resultIcon.textContent = '✓';
+        resultIcon.className = 'big-tick';
+        resultImage.src = 'media/trump-happy.jpg';
+      } else {
+        resultIcon.textContent = '✕';
+        resultIcon.className = 'big-cross';
+        resultImage.src = 'media/trump-angry.jpg';
+      }
+      resultVisual.style.display = 'flex';
+
       const answerLabel = ans === 'A' ? 'Donald Trump' : 'Movie quote';
       const correctLabel = correct === 'A' ? 'Donald Trump' : 'Movie quote';
 
@@ -467,21 +512,21 @@
 
       updateScoreBadge();
 
-      if (index + 1 >= 30) {
+      if (index + 1 >= 15) {
         finishQuiz();
       } else {
         progressText.textContent = 'Press A or B for the next question when you are ready.';
         setTimeout(() => {
           index += 1;
           renderQuestion();
-        }, 1200);
+        }, 2200);
       }
     }
 
     function finishQuiz() {
       resultsBlock.style.display = 'block';
-      const pct = Math.round((score / 30) * 100);
-      finalSummary.textContent = `Final score: ${score} out of 30 (${pct}%).`;
+      const pct = Math.round((score / 15) * 100);
+      finalSummary.textContent = `Final score: ${score} out of 15 (${pct}%).`;
 
       resultsBody.innerHTML = '';
       for (const row of answers) {
@@ -497,8 +542,8 @@
       }
 
       let strengths = '';
-      if (score >= 24) strengths = 'Excellent recall and discrimination between real and cinematic lines.';
-      else if (score >= 16) strengths = 'Solid pattern recognition with some room to tighten judgement on edge cases.';
+      if (score >= 12) strengths = 'Excellent recall and discrimination between real and cinematic lines.';
+      else if (score >= 8) strengths = 'Solid pattern recognition with some room to tighten judgement on edge cases.';
       else strengths = 'Plenty of room to improve; many quotes are trickier than they first appear.';
 
       const analysis = document.createElement('p');
