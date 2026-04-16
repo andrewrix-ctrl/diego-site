@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy Test: Technical Specialist / Engineer</title>
+    <link rel="stylesheet" href="../style.css"> <!-- Link to the main style.css in diego-site -->
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+        h1, h2 {
+            color: #2196F3; /* Blue primary color for technical */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Question Specific Styling */
+        .question-container {
+            display: none;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .question-container.active {
+            display: block;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .options label:hover {
+            background-color: #eef;
+            border-color: #c9ccd5;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .feedback-icons {
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        .correct-feedback {
+            color: #4CAF50;
+        }
+        .incorrect-feedback {
+            color: #f44336;
+        }
+        .correct-option-after-check {
+            background-color: #e6ffe6;
+            border-color: #4CAF50;
+        }
+        .wrong-selected-option-after-check {
+            background-color: #ffe6e6;
+            border-color: #f44336;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .nav-buttons button {
+            padding: 12px 25px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-buttons button:hover {
+            background-color: #1976D2;
+        }
+        .nav-buttons button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Results Section Styling */
+        .results-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            display: none;
+        }
+        .results-section h2 {
+            color: #2c3e50;
+        }
+        .score-display {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .grade-level {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Summary Table Styling */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .summary-table th, .summary-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .summary-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+        .summary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .summary-table .correct-row {
+            background-color: #e6ffe6;
+        }
+        .summary-table .incorrect-row {
+            background-color: #ffe6e6;
+        }
+        .summary-table .feedback-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .summary-table .correct-icon { color: #4CAF50; }
+        .summary-table .incorrect-icon { color: #f44336; }
+
+        /* Level specific colors (for summary) */
+        .level-beginner { color: #f44336; }
+        .level-intermediate { color: #ffc107; }
+        .level-advanced { color: #4CAF50; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Literacy Test: Technical Specialist / Engineer 🧑‍💻🧪</h1>
+        <p style="text-align: center; color: #555;">Test your technical understanding of AI concepts relevant to your role in infrastructure, software, and data!</p>
+
+        <div id="quiz-area">
+            <!-- Questions will be injected here by JavaScript -->
+        </div>
+
+        <div class="nav-buttons">
+            <button id="submit-answer-btn">Submit Answer</button>
+            <button id="next-question-btn" style="display: none;">Next Question</button>
+            <button id="show-results-btn" style="display: none;">Show Results</button>
+        </div>
+
+        <div id="results" class="results-section">
+            <h2>Your Results</h2>
+            <p class="score-display">You got <span id="score">0</span> out of 20 correct!</p>
+            <p class="grade-level">Your AI Literacy Level: <span id="level"></span></p>
+
+            <h3>Detailed Summary:</h3>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Q#</th>
+                        <th>Question</th>
+                        <th>Your Answer</th>
+                        <th>Correct Answer</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Confetti.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script>
+        const questionsData = [
+            {
+                qNum: 1, text: "What is the primary function of an API (Application Programming Interface) when integrating an AI service into an application?",
+                options: {
+                    a: "To physically store the AI model.",
+                    b: "To allow different software components to communicate and interact.",
+                    c: "To encrypt the data being processed by AI.",
+                    d: "To display the AI&apos;s user interface."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 2, text: "Which of these is a fundamental concept in data engineering for AI?",
+                options: {
+                    a: "Designing user interfaces for mobile apps.",
+                    b: "Creating 3D models for virtual reality.",
+                    c: "Collecting, cleaning, and transforming data for model training.",
+                    d: "Writing marketing copy for AI products."
+                },
+                ans: "c"
+            },
+            {
+                qNum: 3, text: "In a software development context, what role might an AI model play in \"code completion\" tools?",
+                options: {
+                    a: "It generates entire new software programs independently.",
+                    b: "It suggests syntactically correct code snippets based on context.",
+                    c: "It automatically debugs and fixes all code errors.",
+                    d: "It compiles the code faster."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 4, text: "What is the main concern when deploying an AI model into a production environment?",
+                options: {
+                    a: "Ensuring the model can play video games.",
+                    b: "Verifying its compatibility with social media platforms.",
+                    c: "Scalability, latency, reliability, and security of the model&apos;s performance.",
+                    d: "The aesthetic design of the AI&apos;s output."
+                },
+                ans: "c"
+            },
+            {
+                qNum: 5, text: "Which term best describes the process of systematically organizing and maintaining the data used to train AI models?",
+                options: {
+                    a: "Agile development.",
+                    b: "Data governance.",
+                    c: "Cloud computing.",
+                    d: "Version control for code."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 6, text: "When considering cybersecurity for AI systems, what is a primary threat?",
+                options: {
+                    a: "Users requesting too much information from the AI.",
+                    b: "Algorithmic bias affecting AI decisions.",
+                    c: "Data poisoning or adversarial attacks on model inputs.",
+                    d: "The AI becoming too intelligent and taking over."
+                },
+                ans: "c"
+            },
+            {
+                qNum: 7, text: "What is a \"Docker container\" useful for in AI/ML development?",
+                options: {
+                    a: "A type of database for storing large datasets.",
+                    b: "A lightweight, portable, self-sufficient package that includes an application and its dependencies.",
+                    c: "A machine learning algorithm for classification.",
+                    d: "A hardware component for improving AI performance."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 8, text: "What is \"MLOps\"?",
+                options: {
+                    a: "A new type of machine learning algorithm for optimization.",
+                    b: "A practice that combines Machine Learning, DevOps, and Data Engineering to standardize and streamline the ML lifecycle.",
+                    c: "A software framework for designing neural networks.",
+                    d: "A security protocol for protecting AI models."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 9, text: "When integrating an AI model, what is a \"webhook\" commonly used for?",
+                options: {
+                    a: "To create a graphical user interface (GUI) for the AI.",
+                    b: "To enable real-time communication between systems, often triggered by events.",
+                    c: "To convert spoken language into text.",
+                    d: "To train an AI model on new datasets."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 10, text: "What is an \"observability stack\" in the context of AI systems?",
+                options: {
+                    a: "A collection of AI models stacked on top of each other.",
+                    b: "Tools and processes for monitoring, logging, and tracing AI model performance and behavior in production.",
+                    c: "A method for stacking data layers in a neural network.",
+                    d: "A physical rack for servers hosting AI models."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 11, text: "Why is \"model versioning\" important in MLOps?",
+                options: {
+                    a: "To ensure AI models are always up to date with the latest software.",
+                    b: "To track changes to models, enable rollback, and reproduce training results.",
+                    c: "To make AI models run faster.",
+                    d: "To protect models from cyberattacks."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 12, text: "What is \"data leakage\" in machine learning?",
+                options: {
+                    a: "When sensitive data is accidentally exposed to the public.",
+                    b: "When the training data contains information about the target variable that would not be available at prediction time.",
+                    c: "When a database storing AI data is compromised.",
+                    d: "When AI models share data between each other without permission."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 13, text: "What is a \"feature store\" in an AI/ML platform?",
+                options: {
+                    a: "A library for purchasing pre-trained AI models.",
+                    b: "A centralized repository for managing and sharing machine learning features across different models and teams.",
+                    c: "A software component that converts data into a specific format for AI.",
+                    d: "A physical location where AI hardware is sold."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 14, text: "In the context of cloud infrastructure for AI, what is a \"GPU instance\" primarily used for?",
+                options: {
+                    a: "General purpose data storage.",
+                    b: "High-performance computing, especially for training deep learning models.",
+                    c: "Running web servers for AI applications.",
+                    d: "Managing network security for AI services."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 15, text: "Which of these best describes \"federated learning\"?",
+                options: {
+                    a: "Training a single AI model on a centralized dataset collected from many sources.",
+                    b: "A machine learning approach where models are trained locally on decentralized datasets and only model updates (not raw data) are aggregated centrally.",
+                    c: "A method for combining multiple small AI models into one large model.",
+                    d: "A technique for speeding up AI model training by running it on federated servers."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 16, text: "What is \"adversarial robustness\" in AI?",
+                options: {
+                    a: "The ability of an AI model to detect and resist malicious inputs designed to cause misclassification.",
+                    b: "The ability of an AI model to operate reliably despite hardware failures.",
+                    c: "The speed at which an AI model can process adversarial data.",
+                    d: "The strength of an AI model&apos;s encryption."
+                },
+                ans: "a"
+            },
+            {
+                qNum: 17, text: "When designing an AI system, what is the significance of a \"service mesh\" like Istio or Linkerd?",
+                options: {
+                    a: "To manage model weights during deep learning training.",
+                    b: "To provide advanced traffic management, observability, and security features for microservices, including AI endpoints.",
+                    c: "To create a mesh network for inter-AI communication.",
+                    d: "To deploy AI models to edge devices more efficiently."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 18, text: "In the context of data pipelines for AI, what is a \"data lakehouse\" architecture?",
+                options: {
+                    a: "A specific type of database designed solely for AI model storage.",
+                    b: "A hybrid data architecture that combines the flexibility of data lakes with the data management features of data warehouses.",
+                    c: "A system for real-time streaming of data from IoT devices.",
+                    d: "A graphical interface for visualizing large datasets."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 19, text: "What is \"model quantization\" in AI deployment?",
+                options: {
+                    a: "The process of splitting a large AI model into smaller, more manageable parts.",
+                    b: "A technique to reduce the precision of numerical representations (e.g., from 32-bit to 8-bit floats) in AI models to optimize for inference speed and memory.",
+                    c: "A method for securing AI models against unauthorized access.",
+                    d: "The process of adding more layers to a neural network."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 20, text: "Which of these is a common strategy to mitigate \"model drift\" in production AI systems?",
+                options: {
+                    a: "Always using the same dataset for training, regardless of new data.",
+                    b: "Regularly retraining and updating models with fresh data and monitoring performance metrics.",
+                    c: "Deploying only very small AI models to avoid drift.",
+                    d: "Changing the AI algorithm daily."
+                },
+                ans: "b"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const userAnswers = [];
+
+        const quizArea = document.getElementById('quiz-area');
+        const submitAnswerBtn = document.getElementById('submit-answer-btn');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const showResultsBtn = document.getElementById('show-results-btn');
+        const resultsSection = document.getElementById('results');
+        const summaryTbody = document.getElementById('summary-tbody');
+
+        function loadQuestion() {
+            const qData = questionsData[currentQuestionIndex];
+            quizArea.innerHTML = `
+                <div class="question-container active" id="question-${qData.qNum}">
+                    <p class="question-text">${qData.qNum}. ${qData.text}</p>
+                    <div class="options">
+                        ${Object.keys(qData.options).map(key => `
+                            <label>
+                                <input type="radio" name="q${qData.qNum}" value="${key}">
+                                ${key.toUpperCase()}) ${qData.options[key]}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="feedback-message"></div>
+                </div>
+            `;
+            submitAnswerBtn.style.display = 'block';
+            nextQuestionBtn.style.display = 'none';
+            showResultsBtn.style.display = 'none';
+        }
+
+        function submitAnswer() {
+            const qData = questionsData[currentQuestionIndex];
+            const selectedOption = document.querySelector(`input[name="q${qData.qNum}"]:checked`);
+            const feedbackMessage = document.querySelector(`#question-${qData.qNum} .feedback-message`);
+            const labels = document.querySelectorAll(`#question-${qData.qNum} .options label`);
+
+            labels.forEach(label => {
+                const input = label.querySelector('input');
+                if (input.value === qData.ans) {
+                    label.classList.add('correct-option-after-check');
+                }
+                input.disabled = true; // Disable all options after submission
+            });
+
+            if (selectedOption) {
+                const userAnswer = selectedOption.value;
+                userAnswers[currentQuestionIndex] = userAnswer;
+
+                if (userAnswer === qData.ans) {
+                    score++;
+                    feedbackMessage.innerHTML = '<span class="feedback-icons correct-feedback">✅ Correct!</span>';
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                } else {
+                    feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Incorrect.</span>';
+                    selectedOption.parentElement.classList.add('wrong-selected-option-after-check');
+                }
+            } else {
+                userAnswers[currentQuestionIndex] = 'unanswered';
+                feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Unanswered.</span>';
+            }
+            
+            submitAnswerBtn.style.display = 'none';
+            if (currentQuestionIndex < questionsData.length - 1) {
+                nextQuestionBtn.style.display = 'block';
+            } else {
+                showResultsBtn.style.display = 'block';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questionsData.length) {
+                loadQuestion();
+            } else {
+                displayResults();
+            }
+        }
+
+        function displayResults() {
+            quizArea.style.display = 'none';
+            submitAnswerBtn.style.display = 'none';
+            nextQuestionBtn.style.display = 'none';
+            showResultsBtn.style.display = 'none';
+
+            document.getElementById('score').textContent = score;
+
+            let level = '';
+            let levelColorClass = '';
+            if (score <= 7) {
+                level = 'Beginner 🐣';
+                levelColorClass = 'level-beginner';
+            } else if (score <= 14) {
+                level = 'Intermediate 🧠';
+                levelColorClass = 'level-intermediate';
+            } else {
+                level = 'Advanced 🚀';
+                levelColorClass = 'level-advanced';
+            }
+            document.getElementById('level').textContent = level;
+            document.getElementById('level').className = 'grade-level ' + levelColorClass;
+
+            summaryTbody.innerHTML = '';
+            questionsData.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = (userAnswer === q.ans);
+                const rowClass = isCorrect ? 'correct-row' : 'incorrect-row';
+                const statusIcon = isCorrect ? '<span class="feedback-icon correct-icon">✅</span>' : '<span class="feedback-icon incorrect-icon">❌</span>';
+
+                const tr = document.createElement('tr');
+                tr.className = rowClass;
+                tr.innerHTML = `
+                    <td>${q.qNum}</td>
+                    <td>${q.text}</td>
+                    <td>${userAnswer !== 'unanswered' ? q.options[userAnswer] : '-'}</td>
+                    <td>${q.options[q.ans]}</td>
+                    <td>${statusIcon}</td>
+                `;
+                summaryTbody.appendChild(tr);
+            });
+
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        submitAnswerBtn.addEventListener('click', submitAnswer);
+        nextQuestionBtn.addEventListener('click', nextQuestion);
+        showResultsBtn.addEventListener('click', displayResults);
+
+        loadQuestion(); // Load the first question when the page loads
+    </script>
+</body>
+</html>
