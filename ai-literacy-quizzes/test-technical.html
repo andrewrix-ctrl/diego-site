@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Literacy Test: Technical Specialist / Engineer</title>
-    <link rel="stylesheet" href="../style.css"> <!-- Link to the main style.css in diego-site -->
+    <title>AI Literacy Test: Architect / Designer</title>
+    <link rel="stylesheet" href="/diego-site/style.css"> <!-- Corrected absolute link to the main style.css in diego-site -->
     <style>
         /* General Styling */
         body {
@@ -25,7 +25,7 @@
             border: 1px solid #ddd;
         }
         h1, h2 {
-            color: #2196F3; /* Blue primary color for technical */
+            color: #9C27B0; /* Deep Purple for architect/designer */
             text-align: center;
             margin-bottom: 20px;
         }
@@ -172,8 +172,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>AI Literacy Test: Technical Specialist / Engineer 🧑‍💻🧪</h1>
-        <p style="text-align: center; color: #555;">Test your technical understanding of AI concepts relevant to your role in infrastructure, software, and data!</p>
+        <h1>AI Literacy Test: Architect / Designer 🏛️✨</h1>
+        <p style="text-align: center; color: #555;">Test your architectural and design understanding of AI, focusing on system strategy, integration, and ethical considerations!</p>
 
         <div id="quiz-area">
             <!-- Questions will be injected here by JavaScript -->
@@ -211,164 +211,164 @@
     <script>
         const questionsData = [
             {
-                qNum: 1, text: "What is the primary function of an API (Application Programming Interface) when integrating an AI service into an application?",
+                qNum: 1, text: "When designing a system that uses AI, what is \"technical debt\" typically referring to?",
                 options: {
-                    a: "To physically store the AI model.",
-                    b: "To allow different software components to communicate and interact.",
-                    c: "To encrypt the data being processed by AI.",
-                    d: "To display the AI&apos;s user interface."
+                    a: "The cost of purchasing AI software licenses.",
+                    b: "Design or implementation choices that are expedient in the short term but create future rework or quality issues.",
+                    c: "Loans taken out to fund AI research.",
+                    d: "The process of training an AI model."
                 },
                 ans: "b"
             },
             {
-                qNum: 2, text: "Which of these is a fundamental concept in data engineering for AI?",
+                qNum: 2, text: "What is the role of a \"Proof of Concept\" (PoC) in an AI project&apos;s design phase?",
                 options: {
-                    a: "Designing user interfaces for mobile apps.",
-                    b: "Creating 3D models for virtual reality.",
-                    c: "Collecting, cleaning, and transforming data for model training.",
-                    d: "Writing marketing copy for AI products."
-                },
-                ans: "c"
-            },
-            {
-                qNum: 3, text: "In a software development context, what role might an AI model play in \"code completion\" tools?",
-                options: {
-                    a: "It generates entire new software programs independently.",
-                    b: "It suggests syntactically correct code snippets based on context.",
-                    c: "It automatically debugs and fixes all code errors.",
-                    d: "It compiles the code faster."
+                    a: "To fully deploy the AI solution to production users.",
+                    b: "To demonstrate the feasibility and potential of a specific AI idea or technology on a small scale.",
+                    c: "To write all the documentation for the AI system.",
+                    d: "To secure funding for the entire AI project."
                 },
                 ans: "b"
             },
             {
-                qNum: 4, text: "What is the main concern when deploying an AI model into a production environment?",
+                qNum: 3, text: "In AI system design, what is \"scalability\"?",
                 options: {
-                    a: "Ensuring the model can play video games.",
-                    b: "Verifying its compatibility with social media platforms.",
-                    c: "Scalability, latency, reliability, and security of the model&apos;s performance.",
-                    d: "The aesthetic design of the AI&apos;s output."
-                },
-                ans: "c"
-            },
-            {
-                qNum: 5, text: "Which term best describes the process of systematically organizing and maintaining the data used to train AI models?",
-                options: {
-                    a: "Agile development.",
-                    b: "Data governance.",
-                    c: "Cloud computing.",
-                    d: "Version control for code."
+                    a: "The ability to measure the height of AI models.",
+                    b: "The capability of an AI system to handle increasing workloads or user demand effectively.",
+                    c: "The process of scanning AI models for security vulnerabilities.",
+                    d: "The ease with which an AI system can be visually designed."
                 },
                 ans: "b"
             },
             {
-                qNum: 6, text: "When considering cybersecurity for AI systems, what is a primary threat?",
+                qNum: 4, text: "What is a \"monolithic architecture\" versus a \"microservices architecture\" in the context of AI application deployment?",
                 options: {
-                    a: "Users requesting too much information from the AI.",
-                    b: "Algorithmic bias affecting AI decisions.",
-                    c: "Data poisoning or adversarial attacks on model inputs.",
-                    d: "The AI becoming too intelligent and taking over."
-                },
-                ans: "c"
-            },
-            {
-                qNum: 7, text: "What is a \"Docker container\" useful for in AI/ML development?",
-                options: {
-                    a: "A type of database for storing large datasets.",
-                    b: "A lightweight, portable, self-sufficient package that includes an application and its dependencies.",
-                    c: "A machine learning algorithm for classification.",
-                    d: "A hardware component for improving AI performance."
+                    a: "Monolithic is always better for AI; microservices are never used.",
+                    b: "Monolithic means a single, tightly coupled application; microservices means breaking it into smaller, independent services.",
+                    c: "Monolithic uses older AI models; microservices use newer ones.",
+                    d: "Monolithic is only for on-premise; microservices are only for cloud."
                 },
                 ans: "b"
             },
             {
-                qNum: 8, text: "What is \"MLOps\"?",
+                qNum: 5, text: "When designing an AI solution, what is \"interoperability\"?",
                 options: {
-                    a: "A new type of machine learning algorithm for optimization.",
-                    b: "A practice that combines Machine Learning, DevOps, and Data Engineering to standardize and streamline the ML lifecycle.",
-                    c: "A software framework for designing neural networks.",
-                    d: "A security protocol for protecting AI models."
+                    a: "The ability of the AI system to only work with proprietary software.",
+                    b: "The capability of different AI components or systems to work together and exchange information effectively.",
+                    c: "The speed at which an AI model can respond to user queries.",
+                    d: "The process of designing the AI&apos;s internal algorithms."
                 },
                 ans: "b"
             },
             {
-                qNum: 9, text: "When integrating an AI model, what is a \"webhook\" commonly used for?",
+                qNum: 6, text: "Which of these is a key consideration for a solution architect integrating a third-party AI service?",
                 options: {
-                    a: "To create a graphical user interface (GUI) for the AI.",
-                    b: "To enable real-time communication between systems, often triggered by events.",
-                    c: "To convert spoken language into text.",
-                    d: "To train an AI model on new datasets."
+                    a: "The brand color of the AI service provider.",
+                    b: "Data privacy, security, API documentation, and service reliability.",
+                    c: "The favorite food of the AI&apos;s developers.",
+                    d: "The number of human developers working on the AI."
                 },
                 ans: "b"
             },
             {
-                qNum: 10, text: "What is an \"observability stack\" in the context of AI systems?",
+                qNum: 7, text: "What is a \"design pattern\" in software engineering, and why might it be relevant for AI solution design?",
                 options: {
-                    a: "A collection of AI models stacked on top of each other.",
-                    b: "Tools and processes for monitoring, logging, and tracing AI model performance and behavior in production.",
-                    c: "A method for stacking data layers in a neural network.",
-                    d: "A physical rack for servers hosting AI models."
+                    a: "A specific AI algorithm for design tasks.",
+                    b: "A reusable solution to commonly occurring problems in software design, which can offer proven AI integration strategies.",
+                    c: "A visual tool for designing AI models.",
+                    d: "A mandatory template for all AI project documentation."
                 },
                 ans: "b"
             },
             {
-                qNum: 11, text: "Why is \"model versioning\" important in MLOps?",
+                qNum: 8, text: "When designing an AI application, what is a \"data contract\" (or data schema agreement) between systems?",
                 options: {
-                    a: "To ensure AI models are always up to date with the latest software.",
-                    b: "To track changes to models, enable rollback, and reproduce training results.",
-                    c: "To make AI models run faster.",
-                    d: "To protect models from cyberattacks."
+                    a: "A legal agreement for data sharing between companies.",
+                    b: "A formal agreement defining the structure, format, and meaning of data exchanged between different components or services.",
+                    c: "A system for securely encrypting AI data.",
+                    d: "A document outlining the visual design of a database."
                 },
                 ans: "b"
             },
             {
-                qNum: 12, text: "What is \"data leakage\" in machine learning?",
+                qNum: 9, text: "What is the difference between \"model inference\" and \"model training\" from an architectural perspective?",
                 options: {
-                    a: "When sensitive data is accidentally exposed to the public.",
-                    b: "When the training data contains information about the target variable that would not be available at prediction time.",
-                    c: "When a database storing AI data is compromised.",
-                    d: "When AI models share data between each other without permission."
+                    a: "Inference is always done on GPUs; training is always done on CPUs.",
+                    b: "Inference is using a trained model to make predictions; training is the process of teaching the model from data. These often have different hardware/scalability needs.",
+                    c: "Inference is for small AI models; training is for large ones.",
+                    d: "Inference happens before deployment; training happens after deployment."
                 },
                 ans: "b"
             },
             {
-                qNum: 13, text: "What is a \"feature store\" in an AI/ML platform?",
+                qNum: 10, text: "In the context of AI governance design, what is a \"model card\"?",
                 options: {
-                    a: "A library for purchasing pre-trained AI models.",
-                    b: "A centralized repository for managing and sharing machine learning features across different models and teams.",
-                    c: "A software component that converts data into a specific format for AI.",
-                    d: "A physical location where AI hardware is sold."
+                    a: "A credit card used to pay for AI services.",
+                    b: "A short document accompanying an AI model, providing details on its performance, usage, limitations, and ethical considerations.",
+                    c: "A physical card showing the AI model&apos;s version number.",
+                    d: "A component that stores AI model weights."
                 },
                 ans: "b"
             },
             {
-                qNum: 14, text: "In the context of cloud infrastructure for AI, what is a \"GPU instance\" primarily used for?",
+                qNum: 11, text: "When designing an AI deployment strategy, what is the role of a \"feature store\"?",
                 options: {
-                    a: "General purpose data storage.",
-                    b: "High-performance computing, especially for training deep learning models.",
-                    c: "Running web servers for AI applications.",
-                    d: "Managing network security for AI services."
+                    a: "A marketplace for selling AI models.",
+                    b: "A centralized system for managing, serving, and sharing engineered features consistently across model training and inference.",
+                    c: "A database specifically for storing raw data.",
+                    d: "A tool for visualizing feature importance."
                 },
                 ans: "b"
             },
             {
-                qNum: 15, text: "Which of these best describes \"federated learning\"?",
+                qNum: 12, text: "What does \"container orchestration\" (e.g., Kubernetes) provide for deploying AI models?",
                 options: {
-                    a: "Training a single AI model on a centralized dataset collected from many sources.",
-                    b: "A machine learning approach where models are trained locally on decentralized datasets and only model updates (not raw data) are aggregated centrally.",
-                    c: "A method for combining multiple small AI models into one large model.",
-                    d: "A technique for speeding up AI model training by running it on federated servers."
+                    a: "A musical score for AI-generated music.",
+                    b: "Automation for deploying, scaling, and managing containerized applications (including AI models) across clusters of machines.",
+                    c: "A method for encrypting data within containers.",
+                    d: "A tool for designing graphical user interfaces for AI."
                 },
                 ans: "b"
             },
             {
-                qNum: 16, text: "What is \"adversarial robustness\" in AI?",
+                qNum: 13, text: "In the design of an AI-powered product, what is a \"feedback loop\"?",
                 options: {
-                    a: "The ability of an AI model to detect and resist malicious inputs designed to cause misclassification.",
-                    b: "The ability of an AI model to operate reliably despite hardware failures.",
-                    c: "The speed at which an AI model can process adversarial data.",
-                    d: "The strength of an AI model&apos;s encryption."
+                    a: "A repeating error in the AI&apos;s code.",
+                    b: "A mechanism to capture user interactions or real-world outcomes to continuously improve the AI model over time.",
+                    c: "A system for AI models to communicate with each other.",
+                    d: "A component that causes the AI to endlessly repeat a task."
                 },
-                ans: "a"
+                ans: "b"
+            },
+            {
+                qNum: 14, text: "What is \"data lineage\" and why is it important in complex AI data architectures?",
+                options: {
+                    a: "Tracking the genealogy of AI model developers.",
+                    b: "Tracing the flow of data from its source through various transformations to its use in AI models, crucial for data governance and debugging.",
+                    c: "A method for speeding up AI model training.",
+                    d: "A way to categorize different types of datasets."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 15, text: "Which architectural pattern is often preferred for highly scalable and responsive AI inference services?",
+                options: {
+                    a: "Batch processing with nightly job runs.",
+                    b: "Real-time, event-driven microservices with serverless functions or containerized endpoints.",
+                    c: "A single monolithic application running on an on-premise server.",
+                    d: "Manual deployment and scaling by human operators."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 16, text: "Why are \"adversarial examples\" a significant concern for security architects when designing AI systems?",
+                options: {
+                    a: "They make AI models run slower.",
+                    b: "They are subtly manipulated inputs that cause AI models to make incorrect predictions, posing security risks in critical systems.",
+                    c: "They are examples of AI models that become adversarial to their users.",
+                    d: "They are errors caused by poor data quality during training."
+                },
+                ans: "b"
             },
             {
                 qNum: 17, text: "When designing an AI system, what is the significance of a \"service mesh\" like Istio or Linkerd?",
@@ -401,12 +401,12 @@
                 ans: "b"
             },
             {
-                qNum: 20, text: "Which of these is a common strategy to mitigate \"model drift\" in production AI systems?",
+                qNum: 20, text: "Which of these is a core responsibility of an Enterprise Architect in driving AI adoption across an organization?",
                 options: {
-                    a: "Always using the same dataset for training, regardless of new data.",
-                    b: "Regularly retraining and updating models with fresh data and monitoring performance metrics.",
-                    c: "Deploying only very small AI models to avoid drift.",
-                    d: "Changing the AI algorithm daily."
+                    a: "Building individual AI models for every business unit.",
+                    b: "Defining AI strategy, establishing architectural principles, identifying common platforms, and ensuring alignment with overall enterprise objectives.",
+                    c: "Manually cleaning all data for AI model training.",
+                    d: "Personally managing all AI project budgets."
                 },
                 ans: "b"
             }

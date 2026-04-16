@@ -1,1 +1,552 @@
-<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>AI Literacy Test: Leader / Manager</title>\n    <link rel=\"stylesheet\" href=\"../../style.css\"> <!-- Link to the main style.css in diego-site -->\n    <style>\n        /* General Styling */\n        body {\n            font-family: Arial, sans-serif;\n            background-color: #f4f7f6;\n            color: #333;\n            line-height: 1.6;\n            margin: 0;\n            padding: 20px;\n        }\n        .container {\n            max-width: 800px;\n            margin: 20px auto;\n            background-color: #fff;\n            padding: 30px;\n            border-radius: 8px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);\n            border: 1px solid #ddd;\n        }\n        h1, h2 {\n            color: #673AB7; /* Deep Purple for Leader/Manager */\n            text-align: center;\n            margin-bottom: 20px;\n        }\n\n        /* Question Specific Styling */\n        .question-container {\n            display: none;\n            margin-bottom: 30px;\n            border-bottom: 1px solid #eee;\n            padding-bottom: 20px;\n        }\n        .question-container.active {\n            display: block;\n        }\n        .question-text {\n            font-weight: bold;\n            margin-bottom: 15px;\n            font-size: 1.1em;\n            color: #2c3e50;\n        }\n        .options label {\n            display: block;\n            margin-bottom: 10px;\n            cursor: pointer;\n            padding: 10px;\n            border: 1px solid #e0e0e0;\n            border-radius: 5px;\n            transition: background-color 0.3s ease, border-color 0.3s ease;\n        }\n        .options label:hover {\n            background-color: #eef;\n            border-color: #c9ccd5;\n        }\n        .options input[type=\"radio\"] {\n            margin-right: 10px;\n            transform: scale(1.2);\n        }\n        .feedback-icons {\n            margin-left: 10px;\n            font-size: 1.2em;\n            vertical-align: middle;\n        }\n        .correct-feedback {\n            color: #4CAF50;\n        }\n        .incorrect-feedback {\n            color: #f44336;\n        }\n        .correct-option-after-check {\n            background-color: #e6ffe6;\n            border-color: #4CAF50;\n        }\n        .wrong-selected-option-after-check {\n            background-color: #ffe6e6;\n            border-color: #f44336;\n        }\n\n        /* Navigation Buttons */\n        .nav-buttons {\n            margin-top: 30px;\n            text-align: center;\n        }\n        .nav-buttons button {\n            padding: 12px 25px;\n            background-color: #2196F3;\n            color: white;\n            border: none;\n            border-radius: 5px;\n            font-size: 1.1em;\n            cursor: pointer;\n            margin: 0 10px;\n            transition: background-color 0.3s ease;\n        }\n        .nav-buttons button:hover {\n            background-color: #1976D2;\n        }\n        .nav-buttons button:disabled {\n            background-color: #ccc;\n            cursor: not-allowed;\n        }\n\n        /* Results Section Styling */\n        .results-section {\n            margin-top: 40px;\n            padding-top: 20px;\n            border-top: 2px solid #ddd;\n            display: none;\n        }\n        .results-section h2 {\n            color: #2c3e50;\n        }\n        .score-display {\n            font-size: 1.5em;\n            font-weight: bold;\n            text-align: center;\n            margin-bottom: 20px;\n        }\n        .grade-level {\n            font-size: 1.3em;\n            font-weight: bold;\n            text-align: center;\n            margin-bottom: 30px;\n        }\n\n        /* Summary Table Styling */\n        .summary-table {\n            width: 100%;\n            border-collapse: collapse;\n            margin-top: 20px;\n        }\n        .summary-table th, .summary-table td {\n            border: 1px solid #ddd;\n            padding: 10px;\n            text-align: left;\n            vertical-align: top;\n        }\n        .summary-table th {\n            background-color: #f2f2f2;\n            font-weight: bold;\n            color: #333;\n        }\n        .summary-table tr:nth-child(even) {\n            background-color: #f9f9f9;\n        }\n        .summary-table .correct-row {\n            background-color: #e6ffe6;\n        }\n        .summary-table .incorrect-row {\n            background-color: #ffe6e6;\n        }\n        .summary-table .feedback-icon {\n            font-size: 1.2em;\n            font-weight: bold;\n            margin-left: 5px;\n        }\n        .summary-table .correct-icon { color: #4CAF50; }\n        .summary-table .incorrect-icon { color: #f44336; }\n\n        /* Level specific colors (for summary) */\n        .level-beginner { color: #f44336; }\n        .level-intermediate { color: #ffc107; }\n        .level-advanced { color: #4CAF50; }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>AI Literacy Test: Leader / Manager 🧑‍💼🌟</h1>\n        <p style=\"text-align: center; color: #555;\">Test your strategic and leadership understanding of AI, focusing on adoption, team impact, and business value!</p>\n\n        <div id=\"quiz-area\">\n            <!-- Questions will be injected here by JavaScript -->\n        </div>\n\n        <div class=\"nav-buttons\">\n            <button id=\"submit-answer-btn\">Submit Answer</button>\n            <button id=\"next-question-btn\" style=\"display: none;\">Next Question</button>\n            <button id=\"show-results-btn\" style=\"display: none;\">Show Results</button>\n        </div>\n\n        <div id=\"results\" class=\"results-section\">\n            <h2>Your Results</h2>\n            <p class=\"score-display\">You got <span id=\"score\">0</span> out of 20 correct!</p>\n            <p class=\"grade-level\">Your AI Literacy Level: <span id=\"level\"></span></p>\n\n            <h3>Detailed Summary:</h3>\n            <table class=\"summary-table\">\n                <thead>\n                    <tr>\n                        <th>Q#</th>\n                        <th>Question</th>\n                        <th>Your Answer</th>\n                        <th>Correct Answer</th>\n                        <th>Status</th>\n                    </tr>\n                </thead>\n                <tbody id=\"summary-tbody\"></tbody>\n            </table>\n        </div>\n    </div>\n\n    <!-- Confetti.js library -->\n    <script src=\"https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js\"></script>\n    <script>\n        const questionsData = [\n            {\n                qNum: 1, text: \"What is a primary consideration for a leader when evaluating an AI solution for their team?\",\n                options: {\n                    a: \"The favorite color of the AI&apos;s developers.\",\n                    b: \"The potential impact on team workflows, productivity, and ethical implications.\",\n                    c: \"The AI&apos;s ability to play chess.\",\n                    d: \"The total lines of code in the AI&apos;s programming.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 2, text: \"What is the main benefit of encouraging AI literacy among team members?\",\n                options: {\n                    a: \"It ensures everyone can code AI algorithms.\",\n                    b: \"It fosters better understanding, adoption, and ethical use of AI tools and strategies.\",\n                    c: \"It makes the team&apos;s computers run faster.\",\n                    d: \"It reduces the need for human managers.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 3, text: \"From a leadership perspective, what does \\\"AI adoption\\\" primarily refer to?\",\n                options: {\n                    a: \"The process of training an AI model.\",\n                    b: \"The successful integration and utilization of AI technologies within an organization&apos;s operations and strategies.\",\n                    c: \"Legally adopting an AI as a member of the team.\",\n                    d: \"Buying the cheapest AI available in the market.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 4, text: \"What is a common pitfall for leaders when first introducing AI tools to their teams?\",\n                options: {\n                    a: \"Over-communicating the benefits.\",\n                    b: \"Failing to address concerns about job displacement or lack of new skills.\",\n                    c: \"Investing too little in AI development.\",\n                    d: \"Not celebrating AI successes enough.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 5, text: \"What does \\\"AI-driven decision making\\\" mean for a manager?\",\n                options: {\n                    a: \"AI makes all decisions autonomously without human input.\",\n                    b: \"AI provides insights and recommendations that inform human decisions, augmenting human capabilities.\",\n                    c: \"Managers must always agree with the AI&apos;s suggestions.\",\n                    d: \"It replaces the need for human judgment entirely.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 6, text: \"Why is a clear \\\"AI strategy\\\" important for an organization&apos;s leadership?\",\n                options: {\n                    a: \"To ensure AI models can compete in online games.\",\n                    b: \"To align AI investments with business goals, manage risks, and guide responsible implementation.\",\n                    c: \"To exclusively focus on short-term AI wins.\",\n                    d: \"To outsource all AI development to external vendors.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 7, text: \"What is \\\"upskilling\\\" in the context of AI implementation?\",\n                options: {\n                    a: \"Promoting employees to higher positions automatically with AI.\",\n                    b: \"Providing training to employees to acquire new skills necessary to work effectively with AI technologies.\",\n                    c: \"Making AI models more powerful.\",\n                    d: \"Reducing the number of skills required for a job.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 8, text: \"When managing a project involving AI, what is \\\"risk mitigation\\\" primarily focused on?\",\n                options: {\n                    a: \"Eliminating all risks completely from the project.\",\n                    b: \"Identifying, assessing, and implementing strategies to reduce the likelihood or impact of potential negative outcomes.\",\n                    c: \"Ignoring risks to speed up AI development.\",\n                    d: \"Transferring all risks to the AI team.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 9, text: \"What is the concept of \\\"human-in-the-loop\\\" (HITL) AI, and why is it crucial for managers?\",\n                options: {\n                    a: \"AI systems that are designed to look like humans.\",\n                    b: \"An approach that integrates human oversight and intervention into AI decision-making processes, particularly for critical or sensitive tasks.\",\n                    c: \"AI models that can learn directly from human thought.\",\n                    d: \"AI software that is easy for humans to install.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 10, text: \"What are \\\"explainable AI\\\" (XAI) capabilities important for leaders in regulated industries?\",\n                options: {\n                    a: \"To help the AI explain complex technical concepts.\",\n                    b: \"To demonstrate transparency, auditability, and compliance by providing insight into how AI models arrive at their conclusions.\",\n                    c: \"To make AI systems run faster and more efficiently.\",\n                    d: \"To reduce the cost of AI model development.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 11, text: \"How might \\\"AI bias\\\" (e.g., in hiring algorithms) impact an organization from a leadership perspective?\",\n                options: {\n                    a: \"It can lead to more efficient decision-making.\",\n                    b: \"It can result in unfair outcomes, legal challenges, reputational damage, and a loss of trust.\",\n                    c: \"It always highlights the best candidates for a job.\",\n                    d: \"It speeds up the hiring process significantly without drawbacks.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 12, text: \"What is a \\\"Center of Excellence\\\" (CoE) for AI, and what value does it bring to an organization?\",\n                options: {\n                    a: \"A physical building where all AI developers work.\",\n                    b: \"A dedicated team or function that fosters best practices, shared resources, and expertise in AI across the organization to drive consistent adoption and innovation.\",\n                    c: \"A specialized AI model for optimizing organizational excellence.\",\n                    d: \"A certification program for AI professionals.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 13, text: \"When implementing AI, what is meant by \\\"organizational change management\\\"?\",\n                options: {\n                    a: \"Automatically changing organizational structures with AI.\",\n                    b: \"A structured approach to transitioning individuals, teams, and organizations from their current state to a future AI-enabled state.\",\n                    c: \"Changing AI algorithms to fit organizational needs.\",\n                    d: \"Managing the financial changes associated with AI investments.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 14, text: \"What is \\\"responsible AI\\\" as a strategic imperative for leaders?\",\n                options: {\n                    a: \"Ensuring AI only delivers positive business outcomes.\",\n                    b: \"Developing and deploying AI systems in a way that respects ethical principles, human rights, and societal well-being.\",\n                    c: \"Delegating all ethical decisions to the AI.\",\n                    d: \"Minimizing the cost of AI development at all costs.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 15, text: \"Which of these best describes \\\"AI ethics by design\\\" at a strategic level?\",\n                options: {\n                    a: \"A process where ethical considerations are only reviewed after AI models are built.\",\n                    b: \"Proactively embedding ethical principles, values, and safeguards into every stage of the AI system&apos;s lifecycle, from conception to deployment.\",\n                    c: \"Delegating ethical decision-making to the AI system itself.\",\n                    d: \"Designing AI systems to be visually appealing and user-friendly.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 16, text: \"How can leaders establish effective \\\"AI governance\\\" within their organization?\",\n                options: {\n                    a: \"By allowing individual teams to implement AI without central oversight.\",\n                    b: \"By creating clear policies, frameworks, and accountability structures that guide the ethical and compliant development and deployment of AI.\",\n                    c: \"By banning all AI implementations that carry any risk.\",\n                    d: \"By exclusively focusing on AI technical performance metrics.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 17, text: \"What is the concept of \\\"AI-augmented workforce\\\" versus \\\"AI-replaced workforce\\\"?\",\n                options: {\n                    a: \"AI-augmented means AI does all the work; AI-replaced means humans are still involved.\",\n                    b: \"AI-augmented means AI enhances human capabilities; AI-replaced means AI automates tasks entirely, potentially displacing human roles. Leaders manage this transition.\",\n                    c: \"AI-augmented is for junior roles; AI-replaced is for senior roles.\",\n                    d: \"AI-augmented is a temporary phase; AI-replaced is the final state.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 18, text: \"When setting AI project KPIs (Key Performance Indicators), what is a \\\"North Star Metric\\\" (NSM) and why is it relevant for strategic alignment?\",\n                options: {\n                    a: \"A metric that measures how many AI models are deployed.\",\n                    b: \"A single, critical metric that best captures the core value your AI solution delivers to customers and the business, guiding strategic priorities.\",\n                    c: \"A metric that tracks the performance of individual AI developers.\",\n                    d: \"A metric used only in the initial piloting phase.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 19, text: \"What is \\\"AI portfolio management\\\" from an executive perspective?\",\n                options: {\n                    a: \"Managing a portfolio of AI-generated art.\",\n                    b: \"Strategically evaluating, prioritizing, and allocating resources across multiple AI initiatives to ensure alignment with overall business objectives and risk tolerance.\",\n                    c: \"Outsourcing all AI projects to external companies.\",\n                    d: \"A financial strategy for investing in AI startups.\"\n                },\n                ans: \"b\"\n            },\n            {\n                qNum: 20, text: \"Why is \\\"change leadership\\\" particularly critical when introducing transformative AI in an organization?\",\n                options: {\n                    a: \"To ensure AI systems are not changed once deployed.\",\n                    b: \"To proactively guide stakeholders through the impact of AI adoption, manage resistance, and foster a culture of learning and adaptation.\",\n                    c: \"To automate the leadership role using AI.\",\n                    d: \"To implement AI purely for cost-cutting without considering human factors.\"\n                },\n                ans: \"b\"\n            }\n        ];\n\n        let currentQuestionIndex = 0;\n        let score = 0;\n        const userAnswers = [];\n\n        const quizArea = document.getElementById(\'quiz-area\');\n        const submitAnswerBtn = document.getElementById(\'submit-answer-btn\');\n        const nextQuestionBtn = document.getElementById(\'next-question-btn\');\n        const showResultsBtn = document.getElementById(\'show-results-btn\');\n        const resultsSection = document.getElementById(\'results\');\n        const summaryTbody = document.getElementById(\'summary-tbody\');\n\n        function loadQuestion() {\n            const qData = questionsData[currentQuestionIndex];\n            quizArea.innerHTML = `\n                <div class=\"question-container active\" id=\"question-${qData.qNum}\">\n                    <p class=\"question-text\">${qData.qNum}. ${qData.text}</p>\n                    <div class=\"options\">\n                        ${Object.keys(qData.options).map(key => `\n                            <label>\n                                <input type=\"radio\" name=\"q${qData.qNum}\" value=\"${key}\">\n                                ${key.toUpperCase()}) ${qData.options[key]}\n                            </label>\n                        `).join(\'\')}\n                    </div>\n                    <div class=\"feedback-message\"></div>\n                </div>\n            `;\n            submitAnswerBtn.style.display = \'block\';\n            nextQuestionBtn.style.display = \'none\';\n            showResultsBtn.style.display = \'none\';\n        }\n\n        function submitAnswer() {\n            const qData = questionsData[currentQuestionIndex];\n            const selectedOption = document.querySelector(`input[name=\"q${qData.qNum}\"]:checked`);\n            const feedbackMessage = document.querySelector(`#question-${qData.qNum} .feedback-message`);\n            const labels = document.querySelectorAll(`#question-${qData.qNum} .options label`);\n\n            labels.forEach(label => {\n                const input = label.querySelector(\'input\');\n                if (input.value === qData.ans) {\n                    label.classList.add(\'correct-option-after-check\');\n                }\n                input.disabled = true; // Disable all options after submission\n            });\n\n            if (selectedOption) {\n                const userAnswer = selectedOption.value;\n                userAnswers[currentQuestionIndex] = userAnswer;\n\n                if (userAnswer === qData.ans) {\n                    score++;\n                    feedbackMessage.innerHTML = \'<span class=\"feedback-icons correct-feedback\">✅ Correct!</span>\';\n                    confetti({\n                        particleCount: 100,\n                        spread: 70,\n                        origin: { y: 0.6 }\n                    });\n                } else {\n                    feedbackMessage.innerHTML = \'<span class=\"feedback-icons incorrect-feedback\">❌ Incorrect.</span>\';\n                    selectedOption.parentElement.classList.add(\'wrong-selected-option-after-check\');\n                }\n            } else {\n                userAnswers[currentQuestionIndex] = \'unanswered\';\n                feedbackMessage.innerHTML = \'<span class=\"feedback-icons incorrect-feedback\">❌ Unanswered.</span>\';\n            }\n            \n            submitAnswerBtn.style.display = \'none\';\n            if (currentQuestionIndex < questionsData.length - 1) {\n                nextQuestionBtn.style.display = \'block\';\n            }\n            else {\n                showResultsBtn.style.display = \'block\';\n            }\n        }\n\n        function nextQuestion() {\n            currentQuestionIndex++;\n            if (currentQuestionIndex < questionsData.length) {\n                loadQuestion();\n            } else {\n                displayResults();\n            }\n        }\n\n        function displayResults() {\n            quizArea.style.display = \'none\';\n            submitAnswerBtn.style.display = \'none\';\n            nextQuestionBtn.style.display = \'none\';\n            showResultsBtn.style.display = \'none\';\n\n            document.getElementById(\'score\').textContent = score;\n\n            let level = \'\';\n            let levelColorClass = \'\';\n            if (score <= 7) {\n                level = \'Beginner 🐣\';\n                levelColorClass = \'level-beginner\';\n            } else if (score <= 14) {\n                level = \'Intermediate 🧠\';\n                levelColorClass = \'level-intermediate\';\n            } else {\n                level = \'Advanced 🚀\';\n                levelColorClass = \'level-advanced\';\n            }\n            document.getElementById(\'level\').textContent = level;\n            document.getElementById(\'level\').className = \'grade-level \' + levelColorClass;\n\n            summaryTbody.innerHTML = \'\';\n            questionsData.forEach((q, index) => {\n                const userAnswer = userAnswers[index];\n                const isCorrect = (userAnswer === q.ans);\n                const rowClass = isCorrect ? \'correct-row\' : \'incorrect-row\';\n                const statusIcon = isCorrect ? \'<span class=\"feedback-icon correct-icon\">✅</span>\' : \'<span class=\"feedback-icon incorrect-icon\">❌</span>\';\n\n                const tr = document.createElement(\'tr\');\n                tr.className = rowClass;\n                tr.innerHTML = `\n                    <td>${q.qNum}</td>\n                    <td>${q.text}</td>\n                    <td>${userAnswer !== \'unanswered\' ? q.options[userAnswer] : \'-\'}</td>\n                    <td>${q.options[q.ans]}</td>\n                    <td>${statusIcon}</td>\n                `;\n                summaryTbody.appendChild(tr);\n            });\n\n            resultsSection.style.display = \'block\';\n            resultsSection.scrollIntoView({ behavior: \'smooth\' });\n        }\n\n        submitAnswerBtn.addEventListener(\'click\', submitAnswer);\n        nextQuestionBtn.addEventListener(\'click\', nextQuestion);\n        showResultsBtn.addEventListener(\'click\', displayResults);\n\n        loadQuestion(); // Load the first question when the page loads\n    </script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy Test: Leader / Manager</title>
+    <link rel="stylesheet" href="/diego-site/style.css"> <!-- Corrected absolute link to the main style.css in diego-site -->
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+        h1, h2 {
+            color: #673AB7; /* Deep Purple for Leader/Manager */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Question Specific Styling */
+        .question-container {
+            display: none;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .question-container.active {
+            display: block;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .options label:hover {
+            background-color: #eef;
+            border-color: #c9ccd5;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .feedback-icons {
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        .correct-feedback {
+            color: #4CAF50;
+        }
+        .incorrect-feedback {
+            color: #f44336;
+        }
+        .correct-option-after-check {
+            background-color: #e6ffe6;
+            border-color: #4CAF50;
+        }
+        .wrong-selected-option-after-check {
+            background-color: #ffe6e6;
+            border-color: #f44336;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .nav-buttons button {
+            padding: 12px 25px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-buttons button:hover {
+            background-color: #1976D2;
+        }
+        .nav-buttons button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Results Section Styling */
+        .results-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            display: none;
+        }
+        .results-section h2 {
+            color: #2c3e50;
+        }
+        .score-display {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .grade-level {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Summary Table Styling */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .summary-table th, .summary-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .summary-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+        .summary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .summary-table .correct-row {
+            background-color: #e6ffe6;
+        }
+        .summary-table .incorrect-row {
+            background-color: #ffe6e6;
+        }
+        .summary-table .feedback-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .summary-table .correct-icon { color: #4CAF50; }
+        .summary-table .incorrect-icon { color: #f44336; }
+
+        /* Level specific colors (for summary) */
+        .level-beginner { color: #f44336; }
+        .level-intermediate { color: #ffc107; }
+        .level-advanced { color: #4CAF50; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Literacy Test: Leader / Manager 🧑‍💼🌟</h1>
+        <p style="text-align: center; color: #555;">Test your strategic and leadership understanding of AI, focusing on adoption, team impact, and business value!</p>
+
+        <div id="quiz-area">
+            <!-- Questions will be injected here by JavaScript -->
+        </div>
+
+        <div class="nav-buttons">
+            <button id="submit-answer-btn">Submit Answer</button>
+            <button id="next-question-btn" style="display: none;">Next Question</button>
+            <button id="show-results-btn" style="display: none;">Show Results</button>
+        </div>
+
+        <div id="results" class="results-section">
+            <h2>Your Results</h2>
+            <p class="score-display">You got <span id="score">0</span> out of 20 correct!</p>
+            <p class="grade-level">Your AI Literacy Level: <span id="level"></span></p>
+
+            <h3>Detailed Summary:</h3>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Q#</th>
+                        <th>Question</th>
+                        <th>Your Answer</th>
+                        <th>Correct Answer</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Confetti.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script>
+        const questionsData = [
+            {
+                qNum: 1, text: "What is a primary consideration for a leader when evaluating an AI solution for their team?",
+                options: {
+                    a: "The favorite color of the AI&apos;s developers.",
+                    b: "The potential impact on team workflows, productivity, and ethical implications.",
+                    c: "The AI&apos;s ability to play chess.",
+                    d: "The total lines of code in the AI&apos;s programming."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 2, text: "What is the main benefit of encouraging AI literacy among team members?",
+                options: {
+                    a: "It ensures everyone can code AI algorithms.",
+                    b: "It fosters better understanding, adoption, and ethical use of AI tools and strategies.",
+                    c: "It makes the team&apos;s computers run faster.",
+                    d: "It reduces the need for human managers."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 3, text: "From a leadership perspective, what does \"AI adoption\" primarily refer to?",
+                options: {
+                    a: "The process of training an AI model.",
+                    b: "The successful integration and utilization of AI technologies within an organization&apos;s operations and strategies.",
+                    c: "Legally adopting an AI as a member of the team.",
+                    d: "Buying the cheapest AI available in the market."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 4, text: "What is a common pitfall for leaders when first introducing AI tools to their teams?",
+                options: {
+                    a: "Over-communicating the benefits.",
+                    b: "Failing to address concerns about job displacement or lack of new skills.",
+                    c: "Investing too little in AI development.",
+                    d: "Not celebrating AI successes enough."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 5, text: "What does \"AI-driven decision making\" mean for a manager?",
+                options: {
+                    a: "AI makes all decisions autonomously without human input.",
+                    b: "AI provides insights and recommendations that inform human decisions, augmenting human capabilities.",
+                    c: "Managers must always agree with the AI&apos;s suggestions.",
+                    d: "It replaces the need for human judgment entirely."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 6, text: "Why is a clear \"AI strategy\" important for an organization&apos;s leadership?",
+                options: {
+                    a: "To ensure AI models can compete in online games.",
+                    b: "To align AI investments with business goals, manage risks, and guide responsible implementation.",
+                    c: "To exclusively focus on short-term AI wins.",
+                    d: "To outsource all AI development to external vendors."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 7, text: "What is \"upskilling\" in the context of AI implementation?",
+                options: {
+                    a: "Promoting employees to higher positions automatically with AI.",
+                    b: "Providing training to employees to acquire new skills necessary to work effectively with AI technologies.",
+                    c: "Making AI models more powerful.",
+                    d: "Reducing the number of skills required for a job."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 8, text: "When managing a project involving AI, what is \"risk mitigation\" primarily focused on?",
+                options: {
+                    a: "Eliminating all risks completely from the project.",
+                    b: "Identifying, assessing, and implementing strategies to reduce the likelihood or impact of potential negative outcomes.",
+                    c: "Ignoring risks to speed up AI development.",
+                    d: "Transferring all risks to the AI team."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 9, text: "What is the concept of \"human-in-the-loop\" (HITL) AI, and why is it crucial for managers?",
+                options: {
+                    a: "AI systems that are designed to look like humans.",
+                    b: "An approach that integrates human oversight and intervention into AI decision-making processes, particularly for critical or sensitive tasks.",
+                    c: "AI models that can learn directly from human thought.",
+                    d: "AI software that is easy for humans to install."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 10, text: "What are \"explainable AI\" (XAI) capabilities important for leaders in regulated industries?",
+                options: {
+                    a: "To help the AI explain complex technical concepts.",
+                    b: "To demonstrate transparency, auditability, and compliance by providing insight into how AI models arrive at their conclusions.",
+                    c: "To make AI systems run faster and more efficiently.",
+                    d: "To reduce the cost of AI model development."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 11, text: "How might \"AI bias\" (e.g., in hiring algorithms) impact an organization from a leadership perspective?",
+                options: {
+                    a: "It can lead to more efficient decision-making.",
+                    b: "It can result in unfair outcomes, legal challenges, reputational damage, and a loss of trust.",
+                    c: "It always highlights the best candidates for a job.",
+                    d: "It speeds up the hiring process significantly without drawbacks."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 12, text: "What is a \"Center of Excellence\" (CoE) for AI, and what value does it bring to an organization?",
+                options: {
+                    a: "A physical building where all AI developers work.",
+                    b: "A dedicated team or function that fosters best practices, shared resources, and expertise in AI across the organization to drive consistent adoption and innovation.",
+                    c: "A specialized AI model for optimizing organizational excellence.",
+                    d: "A certification program for AI professionals."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 13, text: "When implementing AI, what is meant by \"organizational change management\"?",
+                options: {
+                    a: "Automatically changing organizational structures with AI.",
+                    b: "A structured approach to transitioning individuals, teams, and organizations from their current state to a future AI-enabled state.",
+                    c: "Changing AI algorithms to fit organizational needs.",
+                    d: "Managing the financial changes associated with AI investments."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 14, text: "What is \"responsible AI\" as a strategic imperative for leaders?",
+                options: {
+                    a: "Ensuring AI only delivers positive business outcomes.",
+                    b: "Developing and deploying AI systems in a way that respects ethical principles, human rights, and societal well-being.",
+                    c: "Delegating all ethical decisions to the AI.",
+                    d: "Minimizing the cost of AI development at all costs."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 15, text: "Which of these best describes \"AI ethics by design\" at a strategic level?",
+                options: {
+                    a: "A process where ethical considerations are only reviewed after AI models are built.",
+                    b: "Proactively embedding ethical principles, values, and safeguards into every stage of the AI system&apos;s lifecycle, from conception to deployment.",
+                    c: "Delegating ethical decision-making to the AI system itself.",
+                    d: "Designing AI systems to be visually appealing and user-friendly."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 16, text: "How can leaders establish effective \"AI governance\" within their organization?",
+                options: {
+                    a: "By allowing individual teams to implement AI without central oversight.",
+                    b: "By creating clear policies, frameworks, and accountability structures that guide the ethical and compliant development and deployment of AI.",
+                    c: "By banning all AI implementations that carry any risk.",
+                    d: "By exclusively focusing on AI technical performance metrics."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 17, text: "What is the concept of \"AI-augmented workforce\" versus \"AI-replaced workforce\"?",
+                options: {
+                    a: "AI-augmented means AI does all the work; AI-replaced means humans are still involved.",
+                    b: "AI-augmented means AI enhances human capabilities; AI-replaced means AI automates tasks entirely, potentially displacing human roles. Leaders manage this transition.",
+                    c: "AI-augmented is for junior roles; AI-replaced is for senior roles.",
+                    d: "AI-augmented is a temporary phase; AI-replaced is the final state."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 18, text: "When setting AI project KPIs (Key Performance Indicators), what is a \"North Star Metric\" (NSM) and why is it relevant for strategic alignment?",
+                options: {
+                    a: "A metric that measures how many AI models are deployed.",
+                    b: "A single, critical metric that best captures the core value your AI solution delivers to customers and the business, guiding strategic priorities.",
+                    c: "A metric that tracks the performance of individual AI developers.",
+                    d: "A metric used only in the initial piloting phase."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 19, text: "What is \"AI portfolio management\" from an executive perspective?",
+                options: {
+                    a: "Managing a portfolio of AI-generated art.",
+                    b: "Strategically evaluating, prioritizing, and allocating resources across multiple AI initiatives to ensure alignment with overall business objectives and risk tolerance.",
+                    c: "Outsourcing all AI projects to external companies.",
+                    d: "A financial strategy for investing in AI startups."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 20, text: "Why is \"change leadership\" particularly critical when introducing transformative AI in an organization?",
+                options: {
+                    a: "To ensure AI systems are not changed once deployed.",
+                    b: "To proactively guide stakeholders through the impact of AI adoption, manage resistance, and foster a culture of learning and adaptation.",
+                    c: "To automate the leadership role using AI.",
+                    d: "To implement AI purely for cost-cutting without considering human factors."
+                },
+                ans: "b"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const userAnswers = [];
+
+        const quizArea = document.getElementById('quiz-area');
+        const submitAnswerBtn = document.getElementById('submit-answer-btn');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const showResultsBtn = document.getElementById('show-results-btn');
+        const resultsSection = document.getElementById('results');
+        const summaryTbody = document.getElementById('summary-tbody');
+
+        function loadQuestion() {
+            const qData = questionsData[currentQuestionIndex];
+            quizArea.innerHTML = `
+                <div class="question-container active" id="question-${qData.qNum}">
+                    <p class="question-text">${qData.qNum}. ${qData.text}</p>
+                    <div class="options">
+                        ${Object.keys(qData.options).map(key => `
+                            <label>
+                                <input type="radio" name="q${qData.qNum}" value="${key}">
+                                ${key.toUpperCase()}) ${qData.options[key]}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="feedback-message"></div>
+                </div>
+            `;
+            submitAnswerBtn.style.display = 'block';
+            nextQuestionBtn.style.display = 'none';
+            showResultsBtn.style.display = 'none';
+        }
+
+        function submitAnswer() {
+            const qData = questionsData[currentQuestionIndex];
+            const selectedOption = document.querySelector(`input[name="q${qData.qNum}"]:checked`);
+            const feedbackMessage = document.querySelector(`#question-${qData.qNum} .feedback-message`);
+            const labels = document.querySelectorAll(`#question-${qData.qNum} .options label`);
+
+            labels.forEach(label => {
+                const input = label.querySelector('input');
+                if (input.value === qData.ans) {
+                    label.classList.add('correct-option-after-check');
+                }
+                input.disabled = true; // Disable all options after submission
+            });
+
+            if (selectedOption) {
+                const userAnswer = selectedOption.value;
+                userAnswers[currentQuestionIndex] = userAnswer;
+
+                if (userAnswer === qData.ans) {
+                    score++;
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                    feedbackMessage.innerHTML = '<span class="feedback-icons correct-feedback">✅ Correct!</span>';
+                } else {
+                    feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Incorrect.</span>';
+                    selectedOption.parentElement.classList.add('wrong-selected-option-after-check');
+                }
+            } else {
+                userAnswers[currentQuestionIndex] = 'unanswered';
+                feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Unanswered.</span>';
+            }
+            
+            submitAnswerBtn.style.display = 'none';
+            if (currentQuestionIndex < questionsData.length - 1) {
+                nextQuestionBtn.style.display = 'block';
+            } else {
+                showResultsBtn.style.display = 'block';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questionsData.length) {
+                loadQuestion();
+            } else {
+                displayResults();
+            }
+        }
+
+        function displayResults() {
+            quizArea.style.display = 'none';
+            submitAnswerBtn.style.display = 'none';
+            nextQuestionBtn.style.display = 'none';
+            showResultsBtn.style.display = 'none';
+
+            document.getElementById('score').textContent = score;
+
+            let level = '';
+            let levelColorClass = '';
+            if (score <= 7) {
+                level = 'Beginner 🐣';
+                levelColorClass = 'level-beginner';
+            } else if (score <= 14) {
+                level = 'Intermediate 🧠';
+                levelColorClass = 'level-intermediate';
+            } else {
+                level = 'Advanced 🚀';
+                levelColorClass = 'level-advanced';
+            }
+            document.getElementById('level').textContent = level;
+            document.getElementById('level').className = 'grade-level ' + levelColorClass;
+
+            summaryTbody.innerHTML = '';
+            questionsData.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = (userAnswer === q.ans);
+                const rowClass = isCorrect ? 'correct-row' : 'incorrect-row';
+                const statusIcon = isCorrect ? '<span class="feedback-icon correct-icon">✅</span>' : '<span class="feedback-icon incorrect-icon">❌</span>';
+
+                const tr = document.createElement('tr');
+                tr.className = rowClass;
+                tr.innerHTML = `
+                    <td>${q.qNum}</td>
+                    <td>${q.text}</td>
+                    <td>${userAnswer !== 'unanswered' ? q.options[userAnswer] : '-'}</td>
+                    <td>${q.options[q.ans]}</td>
+                    <td>${statusIcon}</td>
+                `;
+                summaryTbody.appendChild(tr);
+            });
+
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        submitAnswerBtn.addEventListener('click', submitAnswer);
+        nextQuestionBtn.addEventListener('click', nextQuestion);
+        showResultsBtn.addEventListener('click', displayResults);
+
+        loadQuestion(); // Load the first question when the page loads
+    </script>
+</body>
+</html>

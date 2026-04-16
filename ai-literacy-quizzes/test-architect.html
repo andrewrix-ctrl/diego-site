@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Literacy Test: Architect / Designer</title>
-    <link rel="stylesheet" href="../../style.css"> <!-- Link to the main style.css in diego-site -->
+    <link rel="stylesheet" href="/diego-site/style.css"> <!-- Corrected absolute link to the main style.css in diego-site -->
     <style>
         /* General Styling */
         body {
@@ -234,7 +234,6 @@
                 qNum: 3, text: "In AI system design, what is \"scalability\"?",
                 options: {
                     a: "The ability to measure the height of AI models.",
-                    b: "The capability of an AI system to handle increasing workloads or user demand effectively.",
                     c: "The process of scanning AI models for security vulnerabilities.",
                     d: "The ease with which an AI system can be visually designed."
                 },
@@ -464,12 +463,12 @@
 
                 if (userAnswer === qData.ans) {
                     score++;
-                    feedbackMessage.innerHTML = '<span class="feedback-icons correct-feedback">✅ Correct!</span>';
                     confetti({
                         particleCount: 100,
                         spread: 70,
                         origin: { y: 0.6 }
                     });
+                    feedbackMessage.innerHTML = '<span class="feedback-icons correct-feedback">✅ Correct!</span>';
                 } else {
                     feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Incorrect.</span>';
                     selectedOption.parentElement.classList.add('wrong-selected-option-after-check');
