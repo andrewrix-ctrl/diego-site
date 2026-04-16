@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy Test (Interactive)</title>
+    <link rel="stylesheet" href="../style.css"> <!-- Link to the main style.css in diego-site -->
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6; /* Light gray background */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+        h1, h2 {
+            color: #4CAF50; /* Green primary color */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Question Specific Styling */
+        .question-container {
+            display: none;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .question-container.active {
+            display: block;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #2c3e50; /* Darker text for questions */
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .options label:hover {
+            background-color: #eef;
+            border-color: #c9ccd5;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .feedback-icons {
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        .correct-feedback {
+            color: #4CAF50;
+        }
+        .incorrect-feedback {
+            color: #f44336;
+        }
+        .correct-option-after-check {
+            background-color: #e6ffe6; /* Light green for correct answers */
+            border-color: #4CAF50;
+        }
+        .wrong-selected-option-after-check {
+            background-color: #ffe6e6; /* Light red background for wrong selected */
+            border-color: #f44336;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            margin-top: 30px;
+            text-align: center; /* Center the buttons */
+        }
+        .nav-buttons button {
+            padding: 12px 25px;
+            background-color: #2196F3; /* Blue navigation buttons */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-buttons button:hover {
+            background-color: #1976D2;
+        }
+        .nav-buttons button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Results Section Styling */
+        .results-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            display: none; /* Hidden by default */
+        }
+        .results-section h2 {
+            color: #2c3e50;
+        }
+        .score-display {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .grade-level {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Summary Table Styling */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .summary-table th, .summary-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .summary-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+        .summary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .summary-table .correct-row {
+            background-color: #e6ffe6;
+        }
+        .summary-table .incorrect-row {
+            background-color: #ffe6e6;
+        }
+        .summary-table .feedback-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .summary-table .correct-icon { color: #4CAF50; }
+        .summary-table .incorrect-icon { color: #f44336; }
+
+        /* Level specific colors (for summary) */
+        .level-beginner { color: #f44336; } /* Red */
+        .level-intermediate { color: #ffc107; } /* Amber */
+        .level-advanced { color: #4CAF50; } /* Green */
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Literacy Test (Interactive) 🧠🚀</h1>
+        <p style="text-align: center; color: #555;">Answer one question at a time to test and improve your understanding of AI!</p>
+
+        <div id="quiz-area">
+            <!-- Questions will be injected here by JavaScript -->
+        </div>
+
+        <div class="nav-buttons">
+            <button id="submit-answer-btn">Submit Answer</button>
+            <button id="next-question-btn" style="display: none;">Next Question</button>
+            <button id="show-results-btn" style="display: none;">Show Results</button>
+        </div>
+
+        <div id="results" class="results-section">
+            <h2>Your Results</h2>
+            <p class="score-display">You got <span id="score">0</span> out of 20 correct!</p>
+            <p class="grade-level">Your AI Literacy Level: <span id="level"></span></p>
+
+            <h3>Detailed Summary:</h3>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Q#</th>
+                        <th>Question</th>
+                        <th>Your Answer</th>
+                        <th>Correct Answer</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Confetti.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script>
+        const questionsData = [
+            {
+                qNum: 1, text: "What does \"AI\" stand for?",
+                options: {
+                    a: "Automated Information",
+                    b: "Advanced Intelligence",
+                    c: "Artificial Intelligence",
+                    d: "Analytical Interface"
+                },
+                ans: "c"
+            },
+            {
+                qNum: 2, text: "Which of these is generally considered a basic example of AI in everyday life?",
+                options: {
+                    a: "A calculator performing arithmetic",
+                    b: "A self-driving car navigating roads",
+                    c: "A microwave heating food",
+                    d: "A flashlight turning on"
+                },
+                ans: "b"
+            },
+            {
+                qNum: 3, text: "What is a \"chatbot\"?",
+                options: {
+                    a: "A robot that only talks about boats",
+                    b: "A computer program designed to simulate human conversation",
+                    c: "Software that helps you chat with animals",
+                    d: "A small, smart device for texting"
+                },
+                ans: "b"
+            },
+            {
+                qNum: 4, text: "\"Machine Learning\" is a subfield of AI. What is its primary focus?",
+                options: {
+                    a: "Designing physical robots",
+                    b: "Enabling computers to learn from data without explicit programming",
+                    c: "Building faster computer hardware",
+                    d: "Creating virtual reality environments"
+                },
+                ans: "b"
+            },
+            {
+                qNum: 5, text: "Which of the following tasks would typically be performed by a \"natural language processing\" (NLP) system?",
+                options: {
+                    a: "Recognizing faces in a crowd",
+                    b: "Translating text from one language to another",
+                    c: "Controlling a robotic arm",
+                    d: "Predicting stock market trends"
+                },
+                ans: "b"
+            },
+            {
+                qNum: 6, text: "What is the core purpose of training an AI model?",
+                options: {
+                    a: "To make it physically stronger",
+                    b: "To teach it how to play games",
+                    c: "To enable it to identify patterns or make decisions based on data",
+                    d: "To give it a human-like personality"
+                },
+                ans: "c"
+            },
+            {
+                qNum: 7, text: "What is a common ethical concern associated with AI development and deployment?",
+                options: {
+                    a: "AI models becoming too friendly",
+                    b: "The cost of electricity to run AI systems",
+                    c: "Bias in AI decision-making leading to unfair outcomes",
+                    d: "AI making perfect predictions"
+                },
+                ans: "c"
+            },
+            {
+                qNum: 8, text: "In the context of Machine Learning, what is a \"dataset\"?",
+                options: {
+                    a: "A collection of physical machines used for AI",
+                    b: "A structured collection of information used to train an AI model",
+                    c: "A software program for database management",
+                    d: "The final output generated by an AI"
+                },
+                ans: "b"
+            },
+            {
+                qNum: 9, text: "What is the main difference between \"supervised learning\" and \"unsupervised learning\"?",
+                options: {
+                    a: "Supervised learning uses labeled data; unsupervised learning uses unlabeled data.",
+                    b: "Supervised learning is for robots; unsupervised learning is for software.",
+                    c: "Supervised learning is faster; unsupervised learning is slower.",
+                    d: "Supervised learning requires human interaction; unsupervised learning is fully autonomous."
+                },
+                ans: "a"
+            },
+            {
+                qNum: 10, text: "A \"neural network\" in AI is loosely inspired by what?",
+                options: {
+                    a: "The internet&apos;s structure",
+                    b: "The human brain&apos;s structure and function",
+                    c: "The flow of electricity in a circuit",
+                    d: "The growth patterns of plants"
+                },
+                ans: "b"
+            },
+            {
+                qNum: 11, text: "Which of these is a common application of \"Computer Vision\" in AI?",
+                options: {
+                    a: "Generating human-like text",
+                    b: "Identifying spam emails",
+                    c: "Object detection in images or video",
+                    d: "Predicting weather patterns"
+                },
+                ans: "c"
+            },
+            {
+                qNum: 12, text: "What does \"GPT\" often stand for in the context of large language models like ChatGPT?",
+                options: {
+                    a: "General Purpose Trainer",
+                    b: "Generative Pre-trained Transformer",
+                    c: "Global Processing Technology",
+                    d: "Giant Problem-solving Tool"
+                },
+                ans: "b"
+            },
+            {
+                qNum: 13, text: "What is \"reinforcement learning\" primarily used for?",
+                options: {
+                    a: "Training AI to generate music",
+                    b: "Teaching AI agents to make sequences of decisions to maximize a reward in an environment",
+                    c: "Classifying images into categories",
+                    d: "Summarizing long documents"
+                },
+                ans: "b"
+            },
+            {
+                qNum: 14, text: "When an AI model performs poorly on new, unseen data, even after performing well on training data, what is this often called?",
+                options: {
+                    a: "Overfitting",
+                    b: "Underfitting",
+                    c: "Bias",
+                    d: "Variance"
+                },
+                ans: "a"
+            },
+            {
+                qNum: 15, text: "Which of these best describes a \"transformer\" architecture in deep learning?",
+                options: {
+                    a: "A type of convolutional neural network (CNN) optimized for image recognition.",
+                    b: "A model architecture that utilizes self-attention mechanisms, particularly effective for sequence-to-sequence tasks like language translation and generation.",
+                    c: "A recurrent neural network (RNN) variant designed to handle long-term dependencies in time-series data.",
+                    d: "A generative adversarial network (GAN) used for creating realistic synthetic data."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 16, text: "Why is \"explainable AI\" (XAI) becoming increasingly important?",
+                options: {
+                    a: "To make AI systems faster and more efficient.",
+                    b: "To allow AI to explain jokes.",
+                    c: "To understand how AI models make decisions, especially in critical applications.",
+                    d: "To reduce the computational resources required for AI."
+                },
+                ans: "c"
+            },
+            {
+                qNum: 17, text: "What is a \"zero-shot learning\" capability in a large language model?",
+                options: {
+                    a: "The ability to respond to a prompt without any prior training on that specific task.",
+                    b: "The ability to learn a new task from a single example.",
+                    c: "The ability to perform a task perfectly on the first attempt without errors.",
+                    d: "The ability to ignore irrelevant information in a prompt."
+                },
+                ans: "a"
+            },
+            {
+                qNum: 18, text: "Which of the following best characterizes a \"Generative Adversarial Network\" (GAN)?",
+                options: {
+                    a: "A single neural network trained to classify data into multiple categories.",
+                    b: "A system composed of a generator and a discriminator network, competing to generate realistic data.",
+                    c: "A type of reinforcement learning where an agent learns through trial and error in a simulated environment.",
+                    d: "A network primarily used for compressing large datasets into smaller, manageable forms."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 19, text: "What is a \"model hallucination\" in the context of large language models (LLMs)?",
+                options: {
+                    a: "When an LLM generates images or multimedia content.",
+                    b: "When an LLM produces outputs that are factually incorrect or nonsensical, despite sounding plausible.",
+                    c: "When an LLM experiences a software bug or crash.",
+                    d: "When an LLM develops a conscious awareness."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 20, text: "In AI ethics, what does \"alignment\" primarily refer to?",
+                options: {
+                    a: "Ensuring AI models are physically aligned on a server rack.",
+                    b: "Making sure the AI&apos;s goals and behaviors are consistent with human values and intentions.",
+                    c: "The process of aligning multiple AI models to work on a single task.",
+                    d: "Optimizing AI models for speed and computational efficiency."
+                },
+                ans: "b"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const userAnswers = [];
+
+        const quizArea = document.getElementById('quiz-area');
+        const submitAnswerBtn = document.getElementById('submit-answer-btn');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const showResultsBtn = document.getElementById('show-results-btn');
+        const resultsSection = document.getElementById('results');
+        const summaryTbody = document.getElementById('summary-tbody');
+
+        function loadQuestion() {
+            const qData = questionsData[currentQuestionIndex];
+            quizArea.innerHTML = `
+                <div class="question-container active" id="question-${qData.qNum}">
+                    <p class="question-text">${qData.qNum}. ${qData.text}</p>
+                    <div class="options">
+                        ${Object.keys(qData.options).map(key => `
+                            <label>
+                                <input type="radio" name="q${qData.qNum}" value="${key}">
+                                ${key.toUpperCase()}) ${qData.options[key]}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="feedback-message"></div>
+                </div>
+            `;
+            submitAnswerBtn.style.display = 'block';
+            nextQuestionBtn.style.display = 'none';
+            showResultsBtn.style.display = 'none';
+        }
+
+        function submitAnswer() {
+            const qData = questionsData[currentQuestionIndex];
+            const selectedOption = document.querySelector(`input[name="q${qData.qNum}"]:checked`);
+            const feedbackMessage = document.querySelector(`#question-${qData.qNum} .feedback-message`);
+            const labels = document.querySelectorAll(`#question-${qData.qNum} .options label`);
+
+            labels.forEach(label => {
+                const input = label.querySelector('input');
+                if (input.value === qData.ans) {
+                    label.classList.add('correct-option-after-check');
+                }
+                input.disabled = true; // Disable all options after submission
+            });
+
+            if (selectedOption) {
+                const userAnswer = selectedOption.value;
+                userAnswers[currentQuestionIndex] = userAnswer;
+
+                if (userAnswer === qData.ans) {
+                    score++;
+                    feedbackMessage.innerHTML = '<span class="feedback-icons correct-feedback">✅ Correct!</span>';
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                } else {
+                    feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Incorrect.</span>';
+                    selectedOption.parentElement.classList.add('wrong-selected-option-after-check');
+                }
+            } else {
+                userAnswers[currentQuestionIndex] = 'unanswered';
+                feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Unanswered.</span>';
+            }
+            
+            submitAnswerBtn.style.display = 'none';
+            if (currentQuestionIndex < questionsData.length - 1) {
+                nextQuestionBtn.style.display = 'block';
+            } else {
+                showResultsBtn.style.display = 'block';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questionsData.length) {
+                loadQuestion();
+            } else {
+                displayResults();
+            }
+        }
+
+        function displayResults() {
+            quizArea.style.display = 'none';
+            submitAnswerBtn.style.display = 'none';
+            nextQuestionBtn.style.display = 'none';
+            showResultsBtn.style.display = 'none';
+
+            document.getElementById('score').textContent = score;
+
+            let level = '';
+            let levelColorClass = '';
+            if (score <= 7) {
+                level = 'Beginner 🐣';
+                levelColorClass = 'level-beginner';
+            } else if (score <= 14) {
+                level = 'Intermediate 🧠';
+                levelColorClass = 'level-intermediate';
+            } else {
+                level = 'Advanced 🚀';
+                levelColorClass = 'level-advanced';
+            }
+            document.getElementById('level').textContent = level;
+            document.getElementById('level').className = 'grade-level ' + levelColorClass;
+
+            summaryTbody.innerHTML = '';
+            questionsData.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = (userAnswer === q.ans);
+                const rowClass = isCorrect ? 'correct-row' : 'incorrect-row';
+                const statusIcon = isCorrect ? '<span class="feedback-icon correct-icon">✅</span>' : '<span class="feedback-icon incorrect-icon">❌</span>';
+
+                const tr = document.createElement('tr');
+                tr.className = rowClass;
+                tr.innerHTML = `
+                    <td>${q.qNum}</td>
+                    <td>${q.text}</td>
+                    <td>${userAnswer !== 'unanswered' ? q.options[userAnswer] : '-'}</td>
+                    <td>${q.options[q.ans]}</td>
+                    <td>${statusIcon}</td>
+                `;
+                summaryTbody.appendChild(tr);
+            });
+
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        submitAnswerBtn.addEventListener('click', submitAnswer);
+        nextQuestionBtn.addEventListener('click', nextQuestion);
+        showResultsBtn.addEventListener('click', displayResults);
+
+        loadQuestion(); // Load the first question when the page loads
+    </script>
+</body>
+</html>
