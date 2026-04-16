@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy Test</title>
+    <link rel="stylesheet" href="../style.css"> <!-- Link to the main style.css in diego-site -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6; /* Light gray background */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+        h1, h2 {
+            color: #4CAF50; /* Green primary color */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .question-section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #2c3e50; /* Darker text for questions */
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .options label:hover {
+            background-color: #eef;
+            border-color: #c9ccd5;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 25px;
+            background-color: #4CAF50; /* Green submit button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .results-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            display: none; /* Hidden by default */
+        }
+        .results-section h2 {
+            color: #2c3e50;
+        }
+        .score-display {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .grade-level {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #3f51b5; /* Indigo for grade level */
+        }
+        .correct-answer {
+            background-color: #e6ffe6; /* Light green for correct answers */
+            border: 1px solid #4CAF50;
+        }
+        .wrong-answer {
+            background-color: #ffe6e6; /* Light red for wrong answers */
+            border: 1px solid #f44336; /* Red for wrong answers */
+        }
+        .answer-explanation {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+            padding-left: 25px; /* Indent explanation */
+        }
+        .correct-option-after-check {
+            background-color: #a7d9a7; /* Deeper green for correct option after check */
+            font-weight: bold;
+        }
+        .wrong-selected-option-after-check {
+            background-color: #f7a7a7; /* Deeper red for wrong selected option after check */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Literacy Test 🤖💡</h1>
+        <p style="text-align: center; color: #555;">Test your knowledge of Artificial Intelligence, from beginner concepts to advanced topics. See if you're a Novice, Enthusiast, or Guru!</p>
+
+        <form id="aiTestForm">
+            <!-- Question 1 -->
+            <div class="question-section">
+                <p class="question-text">1. What does &quot;AI&quot; stand for?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> A) Automated Information</label>
+                    <label><input type="radio" name="q1" value="b"> B) Advanced Intelligence</label>
+                    <label><input type="radio" name="q1" value="c"> C) Artificial Intelligence</label>
+                    <label><input type="radio" name="q1" value="d"> D) Analytical Interface</label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-section">
+                <p class="question-text">2. Which of these is generally considered a basic example of AI in everyday life?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a"> A) A calculator performing arithmetic</label>
+                    <label><input type="radio" name="q2" value="b"> B) A self-driving car navigating roads</label>
+                    <label><input type="radio" name="q2" value="c"> C) A microwave heating food</label>
+                    <label><input type="radio" name="q2" value="d"> D) A flashlight turning on</label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-section">
+                <p class="question-text">3. What is a &quot;chatbot&quot;?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="a"> A) A robot that only talks about boats</label>
+                    <label><input type="radio" name="q3" value="b"> B) A computer program designed to simulate human conversation</label>
+                    <label><input type="radio" name="q3" value="c"> C) Software that helps you chat with animals</label>
+                    <label><input type="radio" name="q3" value="d"> D) A small, smart device for texting</label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-section">
+                <p class="question-text">4. &quot;Machine Learning&quot; is a subfield of AI. What is its primary focus?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="a"> A) Designing physical robots</label>
+                    <label><input type="radio" name="q4" value="b"> B) Enabling computers to learn from data without explicit programming</label>
+                    <label><input type="radio" name="q4" value="c"> C) Building faster computer hardware</label>
+                    <label><input type="radio" name="q4" value="d"> D) Creating virtual reality environments</label>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-section">
+                <p class="question-text">5. Which of the following tasks would typically be performed by a &quot;natural language processing&quot; (NLP) system?</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="a"> A) Recognizing faces in a crowd</label>
+                    <label><input type="radio" name="q5" value="b"> B) Translating text from one language to another</label>
+                    <label><input type="radio" name="q5" value="c"> C) Controlling a robotic arm</label>
+                    <label><input type="radio" name="q5" value="d"> D) Predicting stock market trends</label>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question-section">
+                <p class="question-text">6. What is the core purpose of training an AI model?</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="a"> A) To make it physically stronger</label>
+                    <label><input type="radio" name="q6" value="b"> B) To teach it how to play games</label>
+                    <label><input type="radio" name="q6" value="c"> C) To enable it to identify patterns or make decisions based on data</label>
+                    <label><input type="radio" name="q6" value="d"> D) To give it a human-like personality</label>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question-section">
+                <p class="question-text">7. What is a common ethical concern associated with AI development and deployment?</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="a"> A) AI models becoming too friendly</label>
+                    <label><input type="radio" name="q7" value="b"> B) The cost of electricity to run AI systems</label>
+                    <label><input type="radio" name="q7" value="c"> C) Bias in AI decision-making leading to unfair outcomes</label>
+                    <label><input type="radio" name="q7" value="d"> D) AI making perfect predictions</label>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question-section">
+                <p class="question-text">8. In the context of Machine Learning, what is a &quot;dataset&quot;?</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="a"> A) A collection of physical machines used for AI</label>
+                    <label><input type="radio" name="q8" value="b"> B) A structured collection of information used to train an AI model</label>
+                    <label><input type="radio" name="q8" value="c"> C) A software program for database management</label>
+                    <label><input type="radio" name="q8" value="d"> D) The final output generated by an AI</label>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question-section">
+                <p class="question-text">9. What is the main difference between &quot;supervised learning&quot; and &quot;unsupervised learning&quot;?</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="a"> A) Supervised learning uses labeled data; unsupervised learning uses unlabeled data.</label>
+                    <label><input type="radio" name="q9" value="b"> B) Supervised learning is for robots; unsupervised learning is for software.</label>
+                    <label><input type="radio" name="q9" value="c"> C) Supervised learning is faster; unsupervised learning is slower.</label>
+                    <label><input type="radio" name="q9" value="d"> D) Supervised learning requires human interaction; unsupervised learning is fully autonomous.</label>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question-section">
+                <p class="question-text">10. A &quot;neural network&quot; in AI is loosely inspired by what?</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="a"> A) The internet&apos;s structure</label>
+                    <label><input type="radio" name="q10" value="b"> B) The human brain&apos;s structure and function</label>
+                    <label><input type="radio" name="q10" value="c"> C) The flow of electricity in a circuit</label>
+                    <label><input type="radio" name="q10" value="d"> D) The growth patterns of plants</label>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question-section">
+                <p class="question-text">11. Which of these is a common application of &quot;Computer Vision&quot; in AI?</p>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="a"> A) Generating human-like text</label>
+                    <label><input type="radio" name="q11" value="b"> B) Identifying spam emails</label>
+                    <label><input type="radio" name="q11" value="c"> C) Object detection in images or video</label>
+                    <label><input type="radio" name="q11" value="d"> D) Predicting weather patterns</label>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question-section">
+                <p class="question-text">12. What does &quot;GPT&quot; often stand for in the context of large language models like ChatGPT?</p>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="a"> A) General Purpose Trainer</label>
+                    <label><input type="radio" name="q12" value="b"> B) Generative Pre-trained Transformer</label>
+                    <label><input type="radio" name="q12" value="c"> C) Global Processing Technology</label>
+                    <label><input type="radio" name="q12" value="d"> D) Giant Problem-solving Tool</label>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question-section">
+                <p class="question-text">13. What is &quot;reinforcement learning&quot; primarily used for?</p>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="a"> A) Training AI to generate music</label>
+                    <label><input type="radio" name="q13" value="b"> B) Teaching AI agents to make sequences of decisions to maximize a reward in an environment</label>
+                    <label><input type="radio" name="q13" value="c"> C) Classifying images into categories</label>
+                    <label><input type="radio" name="q13" value="d"> D) Summarizing long documents</label>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question-section">
+                <p class="question-text">14. When an AI model performs poorly on new, unseen data, even after performing well on training data, what is this often called?</p>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="a"> A) Overfitting</label>
+                    <label><input type="radio" name="q14" value="b"> B) Underfitting</label>
+                    <label><input type="radio" name="q14" value="c"> C) Bias</label>
+                    <label><input type="radio" name="q14" value="d"> D) Variance</label>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question-section">
+                <p class="question-text">15. Which of these best describes a &quot;transformer&quot; architecture in deep learning?</p>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="a"> A) A type of convolutional neural network (CNN) optimized for image recognition.</label>
+                    <label><input type="radio" name="q15" value="b"> B) A model architecture that utilizes self-attention mechanisms, particularly effective for sequence-to-sequence tasks like language translation and generation.</label>
+                    <label><input type="radio" name="q15" value="c"> C) A recurrent neural network (RNN) variant designed to handle long-term dependencies in time-series data.</label>
+                    <label><input type="radio" name="q15" value="d"> D) A generative adversarial network (GAN) used for creating realistic synthetic data.</label>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question-section">
+                <p class="question-text">16. Why is &quot;explainable AI&quot; (XAI) becoming increasingly important?</p>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="a"> A) To make AI systems faster and more efficient.</label>
+                    <label><input type="radio" name="q16" value="b"> B) To allow AI to explain jokes.</label>
+                    <label><input type="radio" name="q16" value="c"> C) To understand how AI models make decisions, especially in critical applications.</label>
+                    <label><input type="radio" name="q16" value="d"> D) To reduce the computational resources required for AI.</label>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question-section">
+                <p class="question-text">17. What is a &quot;zero-shot learning&quot; capability in a large language model?</p>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="a"> A) The ability to respond to a prompt without any prior training on that specific task.</label>
+                    <label><input type="radio" name="q17" value="b"> B) The ability to learn a new task from a single example.</label>
+                    <label><input type="radio" name="q17" value="c"> C) The ability to perform a task perfectly on the first attempt without errors.</label>
+                    <label><input type="radio" name="q17" value="d"> D) The ability to ignore irrelevant information in a prompt.</label>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question-section">
+                <p class="question-text">18. Which of the following best characterizes a &quot;Generative Adversarial Network&quot; (GAN)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="a"> A) A single neural network trained to classify data into multiple categories.</label>
+                    <label><input type="radio" name="q18" value="b"> B) A system composed of a generator and a discriminator network, competing to generate realistic data.</label>
+                    <label><input type="radio" name="q18" value="c"> C) A type of reinforcement learning where an agent learns through trial and error in a simulated environment.</label>
+                    <label><input type="radio" name="q18" value="d"> D) A network primarily used for compressing large datasets into smaller, manageable forms.</label>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question-section">
+                <p class="question-text">19. What is a &quot;model hallucination&quot; in the context of large language models (LLMs)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="a"> A) When an LLM generates images or multimedia content.</label>
+                    <label><input type="radio" name="q19" value="b"> B) When an LLM produces outputs that are factually incorrect or nonsensical, despite sounding plausible.</label>
+                    <label><input type="radio" name="q19" value="c"> C) When an LLM experiences a software bug or crash.</label>
+                    <label><input type="radio" name="q19" value="d"> D) When an LLM develops a conscious awareness.</label>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question-section">
+                <p class="question-text">20. In AI ethics, what does &quot;alignment&quot; primarily refer to?</p>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="a"> A) Ensuring AI models are physically aligned on a server rack.</label>
+                    <label><input type="radio" name="q20" value="b"> B) Making sure the AI&apos;s goals and behaviors are consistent with human values and intentions.</label>
+                    <label><input type="radio" name="q20" value="c"> C) The process of aligning multiple AI models to work on a single task.</label>
+                    <label><input type="radio" name="q20" value="d"> D) Optimizing AI models for speed and computational efficiency.</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Test</button>
+        </form>
+
+        <div id="results" class="results-section">
+            <h2>Your Results</h2>
+            <p class="score-display">You got <span id="score">0</span> out of 20 correct!</p>
+            <p class="grade-level">Your AI Literacy Level: <span id="level"></span></p>
+
+            <h3>Correct Answers:</h3>
+            <div id="answers-display"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'c',
+            q2: 'b',
+            q3: 'b',
+            q4: 'b',
+            q5: 'b',
+            q6: 'c',
+            q7: 'c',
+            q8: 'b',
+            q9: 'a',
+            q10: 'b',
+            q11: 'c',
+            q12: 'b',
+            q13: 'b',
+            q14: 'a',
+            q15: 'b',
+            q16: 'c',
+            q17: 'a',
+            q18: 'b',
+            q19: 'b',
+            q20: 'b'
+        };
+
+        const questions = [
+            { qNum: 1, text: "What does \"AI\" stand for?", ans: 'c', options: {a: "Automated Information", b: "Advanced Intelligence", c: "Artificial Intelligence", d: "Analytical Interface"} },
+            { qNum: 2, text: "Which of these is generally considered a basic example of AI in everyday life?", ans: 'b', options: {a: "A calculator performing arithmetic", b: "A self-driving car navigating roads", c: "A microwave heating food", d: "A flashlight turning on"} },
+            { qNum: 3, text: "What is a \"chatbot\"?", ans: 'b', options: {a: "A robot that only talks about boats", b: "A computer program designed to simulate human conversation", c: "Software that helps you chat with animals", d: "A small, smart device for texting"} },
+            { qNum: 4, text: "\"Machine Learning\" is a subfield of AI. What is its primary focus?", ans: 'b', options: {a: "Designing physical robots", b: "Enabling computers to learn from data without explicit programming", c: "Building faster computer hardware", d: "Creating virtual reality environments"} },
+            { qNum: 5, text: "Which of the following tasks would typically be performed by a \"natural language processing\" (NLP) system?", ans: 'b', options: {a: "Recognizing faces in a crowd", b: "Translating text from one language to another", c: "Controlling a robotic arm", d: "Predicting stock market trends"} },
+            { qNum: 6, text: "What is the core purpose of training an AI model?", ans: 'c', options: {a: "To make it physically stronger", b: "To teach it how to play games", c: "To enable it to identify patterns or make decisions based on data", d: "To give it a human-like personality"} },
+            { qNum: 7, text: "What is a common ethical concern associated with AI development and deployment?", ans: 'c', options: {a: "AI models becoming too friendly", b: "The cost of electricity to run AI systems", c: "Bias in AI decision-making leading to unfair outcomes", d: "AI making perfect predictions"} },
+            { qNum: 8, text: "In the context of Machine Learning, what is a \"dataset\"?", ans: 'b', options: {a: "A collection of physical machines used for AI", b: "A structured collection of information used to train an AI model", c: "A software program for database management", d: "The final output generated by an AI"} },
+            { qNum: 9, text: "What is the main difference between \"supervised learning\" and \"unsupervised learning\"?", ans: 'a', options: {a: "Supervised learning uses labeled data; unsupervised learning uses unlabeled data.", b: "Supervised learning is for robots; unsupervised learning is for software.", c: "Supervised learning is faster; unsupervised learning is slower.", d: "Supervised learning requires human interaction; unsupervised learning is fully autonomous."} },
+            { qNum: 10, text: "A \"neural network\" in AI is loosely inspired by what?", ans: 'b', options: {a: "The internet&apos;s structure", b: "The human brain&apos;s structure and function", c: "The flow of electricity in a circuit", d: "The growth patterns of plants"} },
+            { qNum: 11, text: "Which of these is a common application of \"Computer Vision\" in AI?", ans: 'c', options: {a: "Generating human-like text", b: "Identifying spam emails", c: "Object detection in images or video", d: "Predicting weather patterns"} },
+            { qNum: 12, text: "What does \"GPT\" often stand for in the context of large language models like ChatGPT?", ans: 'b', options: {a: "General Purpose Trainer", b: "Generative Pre-trained Transformer", c: "Global Processing Technology", d: "Giant Problem-solving Tool"} },
+            { qNum: 13, text: "What is \"reinforcement learning\" primarily used for?", ans: 'b', options: {a: "Training AI to generate music", b: "Teaching AI agents to make sequences of decisions to maximize a reward in an environment", c: "Classifying images into categories", d: "Summarizing long documents"} },
+            { qNum: 14, text: "When an AI model performs poorly on new, unseen data, even after performing well on training data, what is this often called?", ans: 'a', options: {a: "Overfitting", b: "Underfitting", c: "Bias", d: "Variance"} },
+            { qNum: 15, text: "Which of these best describes a \"transformer\" architecture in deep learning?", ans: 'b', options: {a: "A type of convolutional neural network (CNN) optimized for image recognition.", b: "A model architecture that utilizes self-attention mechanisms, particularly effective for sequence-to-sequence tasks like language translation and generation.", c: "A recurrent neural network (RNN) variant designed to handle long-term dependencies in time-series data.", d: "A generative adversarial network (GAN) used for creating realistic synthetic data."} },
+            { qNum: 16, text: "Why is \"explainable AI\" (XAI) becoming increasingly important?", ans: 'c', options: {a: "To make AI systems faster and more efficient.", b: "To allow AI to explain jokes.", c: "To understand how AI models make decisions, especially in critical applications.", d: "To reduce the computational resources required for AI."} },
+            { qNum: 17, text: "What is a \"zero-shot learning\" capability in a large language model?", ans: 'a', options: {a: "The ability to respond to a prompt without any prior training on that specific task.", b: "The ability to learn a new task from a single example.", c: "The ability to perform a task perfectly on the first attempt without errors.", d: "The ability to ignore irrelevant information in a prompt."} },
+            { qNum: 18, text: "Which of the following best characterizes a \"Generative Adversarial Network\" (GAN)?", ans: 'b', options: {a: "A single neural network trained to classify data into multiple categories.", b: "A system composed of a generator and a discriminator network, competing to generate realistic data.", c: "A type of reinforcement learning where an agent learns through trial and error in a simulated environment.", d: "A network primarily used for compressing large datasets into smaller, manageable forms."} },
+            { qNum: 19, text: "What is a \"model hallucination\" in the context of large language models (LLMs)?", ans: 'b', options: {a: "When an LLM generates images or multimedia content.", b: "When an LLM produces outputs that are factually incorrect or nonsensical, despite sounding plausible.", c: "When an LLM experiences a software bug or crash.", d: "When an LLM develops a conscious awareness."} },
+            { qNum: 20, text: "In AI ethics, what does \"alignment\" primarily refer to?", ans: 'b', options: {a: "Ensuring AI models are physically aligned on a server rack.", b: "Making sure the AI&apos;s goals and behaviors are consistent with human values and intentions.", c: "The process of aligning multiple AI models to work on a single task.", d: "Optimizing AI models for speed and computational efficiency."} }
+        ];
+
+        document.getElementById('aiTestForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let score = 0;
+            const answersDisplay = document.getElementById('answers-display');
+            answersDisplay.innerHTML = ''; // Clear previous answers
+
+            for (let i = 0; i < questions.length; i++) {
+                const q = questions[i];
+                const selectedOption = document.querySelector(`input[name="q${q.qNum}"]:checked`);
+                const questionSection = document.querySelector(`.question-section:nth-of-type(${q.qNum})`);
+                const labels = questionSection.querySelectorAll('label');
+
+                // Reset styles
+                labels.forEach(label => {
+                    label.classList.remove('correct-option-after-check', 'wrong-selected-option-after-check');
+                });
+
+                // Highlight correct answer
+                questionSection.querySelector(`input[value="${q.ans}"]`).parentElement.classList.add('correct-option-after-check');
+
+                if (selectedOption) {
+                    const userAnswer = selectedOption.value;
+                    if (userAnswer === q.ans) {
+                        score++;
+                    } else {
+                        // Highlight wrong selected answer
+                        selectedOption.parentElement.classList.add('wrong-selected-option-after-check');
+                    }
+                }
+
+                // Display correct answer and explanation
+                const correctAnswerText = `Correct: ${q.options[q.ans].substring(3)}`; // Remove 'A) ' etc.
+                const answerDiv = document.createElement('div');
+                answerDiv.innerHTML = `<p><strong>${q.qNum}. ${q.text}</strong><br> ${correctAnswerText}</p>`;
+                answersDisplay.appendChild(answerDiv);
+            }
+
+            document.getElementById('score').textContent = score;
+
+            let level = '';
+            let levelColor = '';
+            if (score <= 7) {
+                level = 'Beginner 🐣';
+                levelColor = '#f44336'; // Red
+            } else if (score <= 14) {
+                level = 'Intermediate 🧠';
+                levelColor = '#ffc107'; // Amber
+            } else {
+                level = 'Advanced 🚀';
+                levelColor = '#4CAF50'; // Green
+            }
+            document.getElementById('level').textContent = level;
+            document.getElementById('level').style.color = levelColor;
+
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
