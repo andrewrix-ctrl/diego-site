@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy Test: Delivery / Operations Professional</title>
+    <link rel="stylesheet" href="../../style.css"> <!-- Link to the main style.css in diego-site -->
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+        h1, h2 {
+            color: #FF5722; /* Deep Orange for delivery/ops */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Question Specific Styling */
+        .question-container {
+            display: none;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .question-container.active {
+            display: block;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .options label:hover {
+            background-color: #eef;
+            border-color: #c9ccd5;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .feedback-icons {
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        .correct-feedback {
+            color: #4CAF50;
+        }
+        .incorrect-feedback {
+            color: #f44336;
+        }
+        .correct-option-after-check {
+            background-color: #e6ffe6;
+            border-color: #4CAF50;
+        }
+        .wrong-selected-option-after-check {
+            background-color: #ffe6e6;
+            border-color: #f44336;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .nav-buttons button {
+            padding: 12px 25px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-buttons button:hover {
+            background-color: #1976D2;
+        }
+        .nav-buttons button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Results Section Styling */
+        .results-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            display: none;
+        }
+        .results-section h2 {
+            color: #2c3e50;
+        }
+        .score-display {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .grade-level {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Summary Table Styling */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .summary-table th, .summary-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .summary-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+        .summary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .summary-table .correct-row {
+            background-color: #e6ffe6;
+        }
+        .summary-table .incorrect-row {
+            background-color: #ffe6e6;
+        }
+        .summary-table .feedback-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .summary-table .correct-icon { color: #4CAF50; }
+        .summary-table .incorrect-icon { color: #f44336; }
+
+        /* Level specific colors (for summary) */
+        .level-beginner { color: #f44336; }
+        .level-intermediate { color: #ffc107; }
+        .level-advanced { color: #4CAF50; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Literacy Test: Delivery / Operations Professional 📈⚙️</h1>
+        <p style="text-align: center; color: #555;">Test your operational understanding of AI systems, focusing on deployment, monitoring, and service management!</p>
+
+        <div id="quiz-area">
+            <!-- Questions will be injected here by JavaScript -->
+        </div>
+
+        <div class="nav-buttons">
+            <button id="submit-answer-btn">Submit Answer</button>
+            <button id="next-question-btn" style="display: none;">Next Question</button>
+            <button id="show-results-btn" style="display: none;">Show Results</button>
+        </div>
+
+        <div id="results" class="results-section">
+            <h2>Your Results</h2>
+            <p class="score-display">You got <span id="score">0</span> out of 20 correct!</p>
+            <p class="grade-level">Your AI Literacy Level: <span id="level"></span></p>
+
+            <h3>Detailed Summary:</h3>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Q#</th>
+                        <th>Question</th>
+                        <th>Your Answer</th>
+                        <th>Correct Answer</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Confetti.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script>
+        const questionsData = [
+            {
+                qNum: 1, text: "What is the primary goal of \"AIOps\"?",
+                options: {
+                    a: "To replace all human IT staff with AI.",
+                    b: "To apply AI and Machine Learning to IT operations data to automate and improve operations.",
+                    c: "To develop new AI algorithms for operational tasks.",
+                    d: "To exclusively manage cloud infrastructure."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 2, text: "When an AI model is moved from development to actual use by customers, what phase is this commonly called?",
+                options: {
+                    a: "Data Annotation.",
+                    b: "Model Training.",
+                    c: "Deployment or Production.",
+                    d: "Algorithm Design."
+                },
+                ans: "c"
+            },
+            {
+                qNum: 3, text: "Why is \"monitoring\" an AI system in production important for a Delivery/Operations team?",
+                options: {
+                    a: "To ensure the AI is not creating art.",
+                    b: "To track its performance, detect failures, and identify degradation or unexpected behavior.",
+                    c: "To solely manage its energy consumption.",
+                    d: "To see if the AI is chatting with users."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 4, text: "What does \"model performance degradation\" in an AI system typically refer to?",
+                options: {
+                    a: "The AI model getting physically damaged.",
+                    b: "A decrease in the model&apos;s accuracy or effectiveness over time in a production environment.",
+                    c: "The model running slower due to hardware issues.",
+                    d: "The AI becoming less visually appealing."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 5, text: "Which of these is a key responsibility for an operations professional when managing an AI-powered service?",
+                options: {
+                    a: "Writing the underlying AI algorithms from scratch.",
+                    b: "Ensuring the AI model is regularly retrained with new data.",
+                    c: "Providing end-user technical support and incident management for the AI service.",
+                    d: "Designing the AI&apos;s internal architecture."
+                },
+                ans: "c"
+            },
+            {
+                qNum: 6, text: "What is an \"SLA\" (Service Level Agreement) in the context of an AI-driven service?",
+                options: {
+                    a: "A type of AI model for customer service.",
+                    b: "A contract defining the level of service expected from a provider, including uptime and performance.",
+                    c: "A programming language used to build AI.",
+                    d: "A system for collecting feedback on AI."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 7, text: "In AI operational management, what is a \"rollback\" strategy primarily used for?",
+                options: {
+                    a: "To teach the AI new tricks.",
+                    b: "To revert a deployed AI model to a previous stable version in case of issues.",
+                    c: "To automatically update the AI model daily.",
+                    d: "To transfer AI data to a different server."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 8, text: "What is \"model drift\" and why is it a concern for operations teams?",
+                options: {
+                    a: "When an AI model physically moves from one server to another.",
+                    b: "When the relationship between model inputs and the target output changes over time, causing decreased accuracy, requiring monitoring and potential retraining.",
+                    c: "The tendency of AI models to slow down during peak usage.",
+                    d: "A security vulnerability where AI models \"leak\" sensitive data."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 9, text: "When an AI system fails in production, what is \"post-mortem analysis\" intended to achieve?",
+                options: {
+                    a: "To celebrate the AI&apos;s eventual recovery.",
+                    b: "To determine the root cause of the failure and prevent recurrence, improving incident response.",
+                    c: "To redesign the entire AI system from scratch.",
+                    d: "To officially decommission the AI system."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 10, text: "What is a \"feature flag\" or \"toggle\" useful for in deploying AI features?",
+                options: {
+                    a: "To visually highlight parts of the AI&apos;s output.",
+                    b: "To enable or disable specific AI features or versions in a controlled manner, often for A/B testing or gradual rollout.",
+                    c: "To automatically train new AI models.",
+                    d: "To secure AI models from unauthorized access."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 11, text: "In the context of AI operations, what is \"dark launch\" or \"shadow mode\" deployment?",
+                options: {
+                    a: "Launching an AI model without telling anyone it&apos;s live.",
+                    b: "Deploying a new AI model in production alongside the existing one, running it on live data but not impacting user experience, to monitor its performance.",
+                    c: "Deploying an AI model only at night to save computational costs.",
+                    d: "A security measure to hide the AI model&apos;s internal workings."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 12, text: "What role does \"alerting\" play in managing production AI systems?",
+                options: {
+                    a: "To inform users about new AI features.",
+                    b: "To proactively notify operations teams about anomalies, performance degradation, or errors in AI models.",
+                    c: "To warn the AI about potential cybersecurity threats.",
+                    d: "To schedule routine maintenance for AI hardware."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 13, text: "Why is \"data pipeline monitoring\" crucial for AI systems?",
+                options: {
+                    a: "To ensure data is always stored in the most expensive cloud storage.",
+                    b: "To detect issues with data quality, freshness, and throughput that could negatively impact AI model performance.",
+                    c: "To monitor the physical location of data centers.",
+                    d: "To automatically generate new data for AI training."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 14, text: "What is the primary benefit of \"automated testing\" for AI features in a CI/CD pipeline?",
+                options: {
+                    a: "It makes AI models more ethical.",
+                    b: "It accelerates deployment cycles and reduces manual effort by verifying AI functionality and performance consistently.",
+                    c: "It automatically writes new AI models.",
+                    d: "It helps AI models understand human emotions better."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 15, text: "Which of these best describes \"Canary Releases\" for AI models?",
+                options: {
+                    a: "Releasing a new AI model to all users simultaneously.",
+                    b: "Gradually rolling out a new AI model to a small subset of users first, monitoring its performance, and then expanding the rollout if stable.",
+                    c: "Deploying an AI model only to users in specific geographical regions.",
+                    d: "A method for training AI models faster than usual."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 16, text: "What is \"A/B testing\" commonly used for in AI development and operations?",
+                options: {
+                    a: "To determine if an AI model can accurately predict two different outcomes.",
+                    b: "To compare the performance of two different AI models or feature versions with live users to identify the superior one.",
+                    c: "To train two AI models simultaneously on the same dataset.",
+                    d: "To measure the energy consumption of AI systems."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 17, text: "In the context of ITIL or IT Service Management, what would be a key \"problem management\" activity related to a recurring AI model error?",
+                options: {
+                    a: "Immediately restarting the AI system whenever an error occurs.",
+                    b: "Investigating the root cause of the recurring error and implementing a permanent solution to prevent future incidents.",
+                    c: "Notifying all users about the AI error via email.",
+                    d: "Redeploying the exact same AI model repeatedly."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 18, text: "What is the significance of a \"service level objective\" (SLO) for an AI-powered API?",
+                options: {
+                    a: "It&apos;s a marketing slogan for the AI service.",
+                    b: "It defines a target value for a service level indicator (SLI), specifying the desired performance or availability of the AI API.",
+                    c: "It describes the internal architecture of the AI API.",
+                    d: "It&apos;s a list of all features the AI API provides."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 19, text: "What is \"drift detection\" in ML monitoring, beyond just model output drift?",
+                options: {
+                    a: "Detecting when the physical AI hardware starts to drift apart.",
+                    b: "Monitoring changes in the input data distribution or target concept over time, which can indicate potential model degradation.",
+                    c: "Detecting when the AI model changes its internal algorithms without warning.",
+                    d: "Detecting server performance metrics like CPU or memory spikes."
+                },
+                ans: "b"
+            },
+            {
+                qNum: 20, text: "Which of these is a primary challenge in managing \"AI incident response\"?",
+                options: {
+                    a: "AI models generating too many creative ideas.",
+                    b: "Rapidly diagnosing and mitigating issues in complex, opaque AI systems, often requiring specialized ML expertise alongside traditional IT skills.",
+                    c: "The AI model being too fast for humans to keep up.",
+                    d: "Deciding on a fun name for each AI incident."
+                },
+                ans: "b"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const userAnswers = [];
+
+        const quizArea = document.getElementById('quiz-area');
+        const submitAnswerBtn = document.getElementById('submit-answer-btn');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const showResultsBtn = document.getElementById('show-results-btn');
+        const resultsSection = document.getElementById('results');
+        const summaryTbody = document.getElementById('summary-tbody');
+
+        function loadQuestion() {
+            const qData = questionsData[currentQuestionIndex];
+            quizArea.innerHTML = `
+                <div class="question-container active" id="question-${qData.qNum}">
+                    <p class="question-text">${qData.qNum}. ${qData.text}</p>
+                    <div class="options">
+                        ${Object.keys(qData.options).map(key => `
+                            <label>
+                                <input type="radio" name="q${qData.qNum}" value="${key}">
+                                ${key.toUpperCase()}) ${qData.options[key]}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="feedback-message"></div>
+                </div>
+            `;
+            submitAnswerBtn.style.display = 'block';
+            nextQuestionBtn.style.display = 'none';
+            showResultsBtn.style.display = 'none';
+        }
+
+        function submitAnswer() {
+            const qData = questionsData[currentQuestionIndex];
+            const selectedOption = document.querySelector(`input[name="q${qData.qNum}"]:checked`);
+            const feedbackMessage = document.querySelector(`#question-${qData.qNum} .feedback-message`);
+            const labels = document.querySelectorAll(`#question-${qData.qNum} .options label`);
+
+            labels.forEach(label => {
+                const input = label.querySelector('input');
+                if (input.value === qData.ans) {
+                    label.classList.add('correct-option-after-check');
+                }
+                input.disabled = true; // Disable all options after submission
+            });
+
+            if (selectedOption) {
+                const userAnswer = selectedOption.value;
+                userAnswers[currentQuestionIndex] = userAnswer;
+
+                if (userAnswer === qData.ans) {
+                    score++;
+                    feedbackMessage.innerHTML = '<span class="feedback-icons correct-feedback">✅ Correct!</span>';
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                } else {
+                    feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Incorrect.</span>';
+                    selectedOption.parentElement.classList.add('wrong-selected-option-after-check');
+                }
+            } else {
+                userAnswers[currentQuestionIndex] = 'unanswered';
+                feedbackMessage.innerHTML = '<span class="feedback-icons incorrect-feedback">❌ Unanswered.</span>';
+            }
+            
+            submitAnswerBtn.style.display = 'none';
+            if (currentQuestionIndex < questionsData.length - 1) {
+                nextQuestionBtn.style.display = 'block';
+            } else {
+                showResultsBtn.style.display = 'block';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questionsData.length) {
+                loadQuestion();
+            } else {
+                displayResults();
+            }
+        }
+
+        function displayResults() {
+            quizArea.style.display = 'none';
+            submitAnswerBtn.style.display = 'none';
+            nextQuestionBtn.style.display = 'none';
+            showResultsBtn.style.display = 'none';
+
+            document.getElementById('score').textContent = score;
+
+            let level = '';
+            let levelColorClass = '';
+            if (score <= 7) {
+                level = 'Beginner 🐣';
+                levelColorClass = 'level-beginner';
+            } else if (score <= 14) {
+                level = 'Intermediate 🧠';
+                levelColorClass = 'level-intermediate';
+            } else {
+                level = 'Advanced 🚀';
+                levelColorClass = 'level-advanced';
+            }
+            document.getElementById('level').textContent = level;
+            document.getElementById('level').className = 'grade-level ' + levelColorClass;
+
+            summaryTbody.innerHTML = '';
+            questionsData.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = (userAnswer === q.ans);
+                const rowClass = isCorrect ? 'correct-row' : 'incorrect-row';
+                const statusIcon = isCorrect ? '<span class="feedback-icon correct-icon">✅</span>' : '<span class="feedback-icon incorrect-icon">❌</span>';
+
+                const tr = document.createElement('tr');
+                tr.className = rowClass;
+                tr.innerHTML = `
+                    <td>${q.qNum}</td>
+                    <td>${q.text}</td>
+                    <td>${userAnswer !== 'unanswered' ? q.options[userAnswer] : '-'}</td>
+                    <td>${q.options[q.ans]}</td>
+                    <td>${statusIcon}</td>
+                `;
+                summaryTbody.appendChild(tr);
+            });
+
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        submitAnswerBtn.addEventListener('click', submitAnswer);
+        nextQuestionBtn.addEventListener('click', nextQuestion);
+        showResultsBtn.addEventListener('click', displayResults);
+
+        loadQuestion(); // Load the first question when the page loads
+    </script>
+</body>
+</html>
