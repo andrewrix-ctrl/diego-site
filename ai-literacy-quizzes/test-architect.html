@@ -234,6 +234,7 @@
                 qNum: 3, text: "In AI system design, what is \"scalability\"?",
                 options: {
                     a: "The ability to measure the height of AI models.",
+                    b: "The ability of an AI system to handle increasing workload by adding resources without major redesign.",
                     c: "The process of scanning AI models for security vulnerabilities.",
                     d: "The ease with which an AI system can be visually designed."
                 },
@@ -410,6 +411,32 @@
                 ans: "b"
             }
         ];
+
+        function shuffleArray(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // Randomize option positions so the correct answer is not always the same letter.
+        questionsData.forEach(q => {
+            const originalCorrectText = q.options[q.ans];
+            if (!originalCorrectText) return;
+
+            const shuffledOptionTexts = shuffleArray(Object.values(q.options));
+            const letters = ['a', 'b', 'c', 'd'];
+            const remappedOptions = {};
+
+            shuffledOptionTexts.forEach((text, idx) => {
+                remappedOptions[letters[idx]] = text;
+            });
+
+            q.options = remappedOptions;
+            q.ans = letters[shuffledOptionTexts.indexOf(originalCorrectText)];
+        });
 
         let currentQuestionIndex = 0;
         let score = 0;
