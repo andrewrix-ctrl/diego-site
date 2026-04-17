@@ -20,9 +20,9 @@ function renderList(id, items, mapFn) {
 }
 
 (async function init() {
-  const posts = await loadJSON('/diego-claw/data/blog.json');
-  const changes = await loadJSON('/diego-claw/data/changelog.json');
-  const events = await loadJSON('/diego-claw/data/events.json');
+  const posts = await loadJSON('/diego-site/diego-claw/data/blog.json');
+  const changes = await loadJSON('/diego-site/diego-claw/data/changelog.json');
+  const events = await loadJSON('/diego-site/diego-claw/data/events.json');
 
   renderList('latest-posts', posts.slice(0, 3), p => `<a href="${p.url}">${p.title}</a> <small>(${p.date})</small>`);
   renderList('recent-updates', changes.slice(0, 3), c => `<strong>${c.version}</strong> - ${c.note}`);
