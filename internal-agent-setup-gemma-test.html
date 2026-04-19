@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Setup Overview | Internal</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        header h1 {
+            color: #0056b3;
+            border-bottom: 3px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            border-left: 4px solid #007bff;
+            padding-left: 10px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        section {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            border: 1px solid #eee;
+        }
+        .agent-role {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .agent-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+            font-size: 1.1em;
+        }
+        /* SVG Container Styling */
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #e7f1ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+        }
+        .diagram-container svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .agent-role {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .agent-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🤖 Agent System Architecture Overview</h1>
+            <p>An internal reference page detailing the role coordination and operational flow of the OpenClaw agent setup.</p>
+        </header>
+
+        <section>
+            <h2>🧠 The Core Coordination Layer</h2>
+            <p>The system operates around a **Main Coordinator** (the primary agent/interface). This agent is responsible for context switching, task decomposition, and tool selection based on the user's input and overall system state. It reads the "SOUL" and "USER" context files to maintain persona and user needs.</p>
+        </section>
+
+        <div class="diagram-container">
+            <svg width="100%" height="200" viewBox="0 0 1000 200" xmlns="http://www.w3.org/2000/svg" style="background-color: #fff; border-radius: 8px; border: 2px solid #ccc;">
+                <!-- Nodes and Connections for a conceptual flow -->
+                <!-- Main Coordinator -->
+                <rect x="50" y="40" width="200" height="120" rx="10" fill="#d4edda" stroke="#c3e6cb" stroke-width="2"/>
+                <text x="150" y="70" text-anchor="middle" font-size="1.2em" font-weight="bold" fill="#155724">Main Coordinator</text>
+                <text x="150" y="100" text-anchor="middle" font-size="0.9em" fill="#155724">(Orchestration)</text>
+
+                <!-- Flow Arrow -->
+                <line x1="250" y1="100" x2="300" y2="100" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                <!-- Context/Memory Flow -->
+                <rect x="350" y="10" width="150" height="50" rx="5" fill="#fff3cd" stroke="#ffeeba" stroke-width="2"/>
+                <text x="425" y="35" text-anchor="middle" font-size="0.9em" fill="#856404">Context: SOUL.md / USER.md</text>
+                <line x1="300" y1="100" x2="350" y2="100" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                <!-- Specialist Agent Cluster -->
+                <g transform="translate(500, 0)">
+                    <rect x="0" y="20" width="400" height="150" rx="10" fill="#e2e3e5" stroke="#d6d8db" stroke-width="2"/>
+                    <text x="200" y="40" text-anchor="middle" font-size="1.1em" font-weight="bold" fill="#333">Specialist Agent Pool</text>
+                    
+                    <!-- Webmaster -->
+                    <rect x="30" y="50" width="120" height="50" rx="5" fill="#cce5ff" stroke="#b8daff" />
+                    <text x="90" y="70" text-anchor="middle" font-size="0.9em">@webmaster</text>
+                    <!-- Emailer -->
+                    <rect x="180" y="50" width="120" height="50" rx="5" fill="#d1ecf4" stroke="#bee5eb" />
+                    <text x="240" y="70" text-anchor="middle" font-size="0.9em">@emailer</text>
+                    <!-- Researcher -->
+                    <rect x="330" y="50" width="120" height="50" rx="5" fill="#f8d7da" stroke="#f5c6cb" />
+                    <text x="390" y="70" text-anchor="middle" font-size="0.9em">@researcher</text>
+                </g>
+                <line x1="500" y1="100" x2="500" y2="100" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowhead)"/>
+                
+                <!-- Heartbeat Loop -->
+                <circle cx="850" cy="100" r="40" fill="#ffc107" stroke="#ff9800" stroke-width="2"/>
+                <text x="850" y="105" text-anchor="middle" font-size="1em" font-weight="bold">🔄 Heartbeat/Automation</text>
+                <text x="850" y="125" text-anchor="middle" font-size="0.8em">(Memory Sync, Proactive Check)</text>
+
+                <!-- Definitions for Arrowhead Marker -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#6c757d" />
+                    </marker>
+                </defs>
+            </svg>
+            <p style="font-size: 0.9em; color: #555;">*The diagram illustrates data flow: Input $\\rightarrow$ Coordinator $\\rightarrow$ (Context/Tools) $\\rightarrow$ Specialist Agents $\\rightarrow$ Output/Status Updates. Background tasks are handled by the Heartbeat loop.</p>
+        </div>
+
+        <section>
+            <h2>🧩 Tool Orchestration Flow</h2>
+            <p>The system uses specialized tools, managed by the coordinator, to break down complex requests. Key workflows include:</p>
+            <ul>
+                <li><strong>Information Retrieval:</strong> Utilizing `memory_search` or `ollama_web_search` to gather external or historical data.</li>
+                <li><strong>File System Management:</strong> Employing `read`, `write`, or `edit` to manipulate project source code or local notes (e.g., in `TOOLS.md`).</li>
+                <li><strong>Output Generation:</strong> Using `message` or `message` tools to deliver final content or updates to the appropriate channel.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🕰️ Automation & Continuity</h2>
+            <p>The process is enhanced by background maintenance tasks:</p>
+            <ul>
+                <li><strong>Memory Maintenance:</strong> Periodically reviewing `memory/YYYY-MM-DD.md` files and consolidating key learnings into the long-term <code>MEMORY.md</code> to improve future performance.</li>
+                <li><strong>Heartbeats:</strong> Proactive checks for urgent emails or upcoming calendar events, ensuring the user is always aware of critical information without being intrusive.</li>
+            </ul>
+        </section>
+
+        <p style="margin-top: 40px; padding-top: 20px; border-top: 1px dashed #ccc; font-size: 0.85em; color: #777;">
+            <em>⚠️ This page is for internal review only and is not intended for external viewing or linking from the main navigation.</em>
+        </p>
+
+    </div>
+
+</body>
+</html>
