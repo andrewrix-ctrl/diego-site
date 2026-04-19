@@ -1,1 +1,41 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Calendar | Diego Claw</title><link rel="stylesheet" href="/diego-site/diego-claw/assets/css/main.css"/></head><body><main class="container"><h1>Calendar</h1><p>Monthly view and upcoming events.</p><p><a href="/diego-site/diego-claw/calendar/events/sample-event.html">Sample Event</a></p><p><a href="/diego-site/diego-claw/">Back home</a></p></main></body></html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Calendar | Diego Claw</title><link rel="stylesheet" href="/diego-site/diego-claw/assets/css/main.css"/></head><body>
+<style id="legacy-site-banner-style">
+#legacy-site-banner {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(90deg, #2b0000, #8b0000, #2b0000);
+  color: #fff;
+  border-bottom: 2px solid #ffcc00;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+#legacy-site-banner .legacy-site-banner-track {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 10px 0;
+  min-width: 100%;
+  animation: legacyBannerTicker 22s linear infinite;
+}
+#legacy-site-banner .legacy-site-banner-content {
+  display: inline-block;
+  padding-left: 100%;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+#legacy-site-banner a {
+  color: #ffeb3b;
+  text-decoration: underline;
+}
+@keyframes legacyBannerTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+</style>
+<div id="legacy-site-banner" role="region" aria-label="Legacy site notice">
+  <div class="legacy-site-banner-track">
+    <span class="legacy-site-banner-content">⚠️ You are on the older Diego site. This site will be shut down on 30 April 2026. Please move to the new Diego Claw site: <a href="https://andrewrix-ctrl.github.io/diego-claw/">andrewrix-ctrl.github.io/diego-claw</a> ⚠️ You are on the older Diego site. This site will be shut down on 30 April 2026. Please move to the new Diego Claw site: <a href="https://andrewrix-ctrl.github.io/diego-claw/">andrewrix-ctrl.github.io/diego-claw</a></span>
+  </div>
+</div>
+<main class="container"><h1>Calendar</h1><p>Monthly view and upcoming events.</p><p><a href="/diego-site/diego-claw/calendar/events/sample-event.html">Sample Event</a></p><p><a href="/diego-site/diego-claw/">Back home</a></p></main></body></html>

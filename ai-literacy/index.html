@@ -105,6 +105,46 @@
     </style>
 </head>
 <body>
+<style id="legacy-site-banner-style">
+#legacy-site-banner {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(90deg, #2b0000, #8b0000, #2b0000);
+  color: #fff;
+  border-bottom: 2px solid #ffcc00;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+#legacy-site-banner .legacy-site-banner-track {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 10px 0;
+  min-width: 100%;
+  animation: legacyBannerTicker 22s linear infinite;
+}
+#legacy-site-banner .legacy-site-banner-content {
+  display: inline-block;
+  padding-left: 100%;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+#legacy-site-banner a {
+  color: #ffeb3b;
+  text-decoration: underline;
+}
+@keyframes legacyBannerTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+</style>
+<div id="legacy-site-banner" role="region" aria-label="Legacy site notice">
+  <div class="legacy-site-banner-track">
+    <span class="legacy-site-banner-content">⚠️ You are on the older Diego site. This site will be shut down on 30 April 2026. Please move to the new Diego Claw site: <a href="https://andrewrix-ctrl.github.io/diego-claw/">andrewrix-ctrl.github.io/diego-claw</a> ⚠️ You are on the older Diego site. This site will be shut down on 30 April 2026. Please move to the new Diego Claw site: <a href="https://andrewrix-ctrl.github.io/diego-claw/">andrewrix-ctrl.github.io/diego-claw</a></span>
+  </div>
+</div>
+
     <div class="container">
         <h1>AI Literacy Hub 🧠💡</h1>
         <p class="intro-text">Welcome to the AI Literacy Hub! Explore different tests designed to gauge your understanding of Artificial Intelligence, tailored to various professional contexts.</p>
@@ -130,32 +170,32 @@
             <div class="test-card">
                 <h3>A. Technical Specialist / Engineer Test</h3>
                 <p>For those in infrastructure, software, platform, data, integration, or cybersecurity. Focuses on technical AI knowledge.</p>
-                <a href="test-technical.html">Start Test</a>
+                <a href="../ai-literacy-quizzes/test-technical.html">Start Test</a>
             </div>
             <div class="test-card">
                 <h3>B. Delivery / Operations Professional Test</h3>
                 <p>For service delivery, support, reliability, release, or operational management roles. Focuses on AI operationalization and lifecycle.</p>
-                <a href="test-delivery.html">Start Test</a>
+                <a href="../ai-literacy-quizzes/test-delivery.html">Start Test</a>
             </div>
             <div class="test-card">
                 <h3>C. Architect / Designer Test</h3>
                 <p>For enterprise, solution, security, systems, or process architecture. Focuses on AI system design, strategy, and integration.</p>
-                <a href="test-architect.html">Start Test</a>
+                <a href="../ai-literacy-quizzes/test-architect.html">Start Test</a>
             </div>
             <div class="test-card">
                 <h3>D. Risk, GRC or Assurance Professional Test</h3>
                 <p>For security, legal, compliance, risk, audit, or privacy roles. Focuses on ethical AI, bias, regulation, and governance.</p>
-                <a href="test-risk.html">Start Test</a>
+                <a href="../ai-literacy-quizzes/test-risk.html">Start Test</a>
             </div>
             <div class="test-card">
                 <h3>E. Leader / Manager Test</h3>
                 <p>For people leadership, portfolio, program, or executive roles. Focuses on AI strategy, adoption, team impact, and business value.</p>
-                <a href="test-leader.html">Start Test</a>
+                <a href="../ai-literacy-quizzes/test-leader.html">Start Test</a>
             </div>
             <div class="test-card">
                 <h3>F. Business / Corporate Professional Test</h3>
                 <p>For finance, HR, procurement, sales, marketing, or corporate services. Focuses on AI business applications, ROI, and market impact.</p>
-                <a href="test-business.html">Start Test</a>
+                <a href="../ai-literacy-quizzes/test-business.html">Start Test</a>
             </div>
         </div>
     </div>
