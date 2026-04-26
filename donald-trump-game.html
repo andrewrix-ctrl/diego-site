@@ -115,6 +115,7 @@
     @media (max-width: 820px) {
       main { grid-template-columns: minmax(0, 1fr); }
       .score-block { text-align: left; }
+      .btn { min-width: 0; width: 100%; } /* Improved mobile UX */
     }
 
     .card {
@@ -235,6 +236,20 @@
       color: #9ca3af;
     }
 
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+
+    .progress-bar div {
+      height: 100%;
+      background: linear-gradient(to right, var(--accent), #ffb703);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
     .tip-card {
       margin-top: .5rem;
       padding: .6rem .7rem;
@@ -284,6 +299,15 @@
       margin-top: .55rem;
       font-size: .82rem;
       color: #9ca3af;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .feedback, .result-visual {
+      animation: fadeIn 0.5s ease-out;
     }
   </style>
 </head>
@@ -366,14 +390,16 @@
           <button class="btn" id="startBtn">Start quiz</button>
           <button class="btn primary" id="btnA" disabled style="display:none">A • Donald Trump</button>
           <button class="btn primary" id="btnB" disabled style="display:none">B • Movie quote</button>
+          <button class="btn" id="nextBtn" style="display:none; margin-top:0.5rem;">Next Question</button>
         </div>
 
-        <div id="feedback" class="feedback" style="display:none"></div>
+        <div id="feedback" class="feedback" style="display:none" aria-live="polite"></div>
         <div class="result-visual" id="resultVisual" style="display:none">
           <span id="resultIcon" class="big-tick">✓</span>
-          <img id="resultImage" src="media/trump-happy.jpg" alt="Result image" />
+          <img id="resultImage" src="media/trump-happy.jpg" alt="Result image" role="img" />
         </div>
         <div class="progress" id="progressText"></div>
+        <div id="progressBar" class="progress-bar"><div id="progressFill"></div></div>
       </section>
 
       <aside class="card" id="sideResultCard" style="min-height:220px;">
@@ -397,6 +423,7 @@
           </div>
           <div style="margin-top:0.75rem; text-align:center;">
             <button id="playAgainBtn" class="btn" style="padding:.5rem 1.1rem; font-size:.9rem;">Play again</button>
+            <button id="shareBtn" class="btn" style="padding:.5rem 1.1rem; font-size:.9rem; margin-left:0.5rem;">Share Score</button>
           </div>
         </div>
       </aside>
@@ -947,6 +974,78 @@
         correct: 'B',
         sourceDetails: 'Movie quote – Terminator 2: Judgment Day, 1991.',
         type: 'recognisable_movie'
+      },
+      {
+        quote: "Donald J. Trump is calling for a total and complete shutdown of Muslims entering the United States until our country's representatives can figure out what the hell is going on.",
+        correct: 'A',
+        sourceDetails: "Rally in Charleston, South Carolina, 2015.",
+        type: 'controversial'
+      },
+      {
+        quote: "Women have one of the great acts of all time. The smart ones act very feminine and needy, but inside they are real killers.",
+        correct: 'A',
+        sourceDetails: "Trump: The Art of the Comeback, 1997.",
+        type: 'controversial'
+      },
+      {
+        quote: "Our great African American President hasn't exactly had a positive impact on the thugs who are so happily and openly destroying Baltimore!",
+        correct: 'A',
+        sourceDetails: "Twitter, April 2015.",
+        type: 'controversial'
+      },
+      {
+        quote: "While @BetteMidler is an extremely unattractive woman, I refuse to say that because I always insist on being politically correct.",
+        correct: 'A',
+        sourceDetails: "Twitter, October 2012.",
+        type: 'controversial'
+      },
+      {
+        quote: "I think apologizing's a great thing, but you have to be wrong. I will absolutely apologize, sometime in the hopefully distant future, if I'm ever wrong.",
+        correct: 'A',
+        sourceDetails: "The Tonight Show with Jimmy Fallon, September 2015.",
+        type: 'controversial'
+      },
+      {
+        quote: "It's like in golf... a lot of people are switching to these really long putters, very unattractive... I am a traditionalist. I have so many fabulous friends who happen to be gay, but I am a traditionalist.",
+        correct: 'A',
+        sourceDetails: "New York Times interview on gay marriage, May 2011.",
+        type: 'controversial'
+      },
+      {
+        quote: "Heidi Klum. Sadly, she's no longer a 10.",
+        correct: 'A',
+        sourceDetails: "New York Times interview, August 2015.",
+        type: 'controversial'
+      },
+      {
+        quote: "I am totally in favor of vaccines. But I want smaller doses over a longer period of time... a beautiful child went to have the vaccine, and came back, and a week later got a tremendous fever, got very, very sick, now is autistic.",
+        correct: 'A',
+        sourceDetails: "CNN GOP debate, September 2015.",
+        type: 'controversial'
+      },
+      {
+        quote: "I only have one regret in the women department -- that I never had the opportunity to court Lady Diana Spencer.",
+        correct: 'A',
+        sourceDetails: "Trump: The Art of the Comeback, 1997.",
+        type: 'controversial'
+      },
+      {
+        quote: "Look at that face! Would anyone vote for that? Can you imagine that, the face of our next president?!",
+        correct: 'A',
+        sourceDetails: "On Carly Fiorina, Rolling Stone article, September 2015.",
+        type: 'controversial'
+      },
+      {
+        quote: "You could see there was blood coming out of her eyes. Blood coming out of her... wherever.",
+        correct: 'A',
+        sourceDetails: "On Megyn Kelly, CNN interview, August 2015.",
+        type: 'controversial'
+      },
+      {
+        quote: "I dealt with Gaddafi. I rented him a piece of land. He paid me more for one night than the land was worth for two years, and then I didn't let him use the land... I screwed him.",
+        correct: 'A',
+        sourceDetails: "Fox and Friends phone interview, March 2011.",
+        type: 'controversial'
       }
     ];    const tips = [
       "Stay neutral: you are judging quotes, not people.",
@@ -981,16 +1080,19 @@
     const qHint = document.getElementById('qHint');
     const feedback = document.getElementById('feedback');
     const progressText = document.getElementById('progressText');
+    const progressFill = document.getElementById('progressFill');
     const btnA = document.getElementById('btnA');
     const btnB = document.getElementById('btnB');
     const startBtn = document.getElementById('startBtn');
+    const nextBtn = document.getElementById('nextBtn');
     const scoreBadge = document.getElementById('scoreBadge');
     const tipBox = document.getElementById('tipBox');
     const tipBtn = document.getElementById('tipBtn');
     const resultsBlock = document.getElementById('resultsBlock');
     const resultsBody = document.getElementById('resultsBody');
     const finalSummary = document.getElementById('finalSummary');
- const playAgainBtn = document.getElementById('playAgainBtn');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const shareBtn = document.getElementById('shareBtn');
 
     function resetQuiz() {
       sequence = shuffle(QUESTIONS);
@@ -1029,6 +1131,8 @@
       btnB.style.display = 'inline-block';
       btnA.disabled = false;
       btnB.disabled = false;
+      nextBtn.style.display = 'none';
+      progressFill.style.width = `${(index / 5 * 100)}%`;
     }
 
     function handleAnswer(ans) {
@@ -1078,15 +1182,12 @@
 
       updateScoreBadge();
 
-      if (index + 1 >= 5) {
-        finishQuiz();
+      if (index + 1 < 5) {
+        nextBtn.textContent = 'Next Question';
       } else {
-        progressText.textContent = 'Press A or B for the next question when you are ready.';
-        setTimeout(() => {
-          index += 1;
-          renderQuestion();
-        }, 2200);
+        nextBtn.textContent = 'See Results';
       }
+      nextBtn.style.display = 'inline-block';
     }
 
     function finishQuiz() {
@@ -1135,7 +1236,32 @@
     if (btnA) btnA.addEventListener('click', () => handleAnswer('A'));
     if (btnB) btnB.addEventListener('click', () => handleAnswer('B'));
 
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextBtn.style.display = 'none';
+        if (index + 1 < 5) {
+          index += 1;
+          renderQuestion();
+        } else {
+          finishQuiz();
+        }
+      });
+    }
+
     if (playAgainBtn) playAgainBtn.addEventListener('click', resetQuiz);
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        const text = `I scored ${score} out of 5 on the 'Did Trump Say This?' quiz! Can you beat my score? https://andrewrix-ctrl.github.io/diego-site/donald-trump-game.html`;
+        if (navigator.share) {
+          navigator.share({text});
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(() => alert('Score copied to clipboard!'));
+        } else {
+          alert('Sharing not supported. Copy this: ' + text);
+        }
+      });
+    }
 
     if (tipBtn) tipBtn.addEventListener('click', showTip);
     if (tipBox) showTip();
